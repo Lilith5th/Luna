@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunar Base Explorer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+            width: 100%;
+            flex-shrink: 0;
+        }
+        .container {
+            display: flex;
+            flex: 1;
+            width: 100%;
+        }
+        .sidebar {
+            width: 15%; /* Adjusted width to be less wide */
+            background-color: #444;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+        .file-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .file-list li {
+            background: #e4e4e4;
+            margin: 0.5em 0;
+            padding: 1em;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .file-list li a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 10px;
+            flex-grow: 1;
+            white-space: normal; /* Enable multiline text */
+        }
+        .file-list li a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            width: 85%; /* Adjusted width to compensate for narrower sidebar */
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+        iframe {
+            width: 100%;
+            height: calc(100vh - 120px);
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                order: 2; /* Sidebar goes below content on small screens */
+            }
+            .content {
+                width: 100%;
+                padding-bottom: 20px;
+            }
+            iframe {
+                height: 300px; /* Adjusted iframe height for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lunar Base Explorer</h1>
+    </header>
+
+    <div class="container">
+        <div class="sidebar">
+            <ul class="file-list" id="file-list">
+                <!-- Links will be added here dynamically -->
+            </ul>
+        </div>
+        <div class="content">
+            <iframe id="file-frame" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        const filesJSON = `
+[
+    "project overview.html",
+    "Architectural Design for Subterranean Lunar Base.html",
+    "materials.html",
+    "Inflatable Structures.html"
+]
+        `;
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const fileList = JSON.parse(filesJSON);
+            const fileListElement = document.getElementById('file-list');
+            const fileFrame = document.getElementById('file-frame');
+
+            fileList.forEach(file => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = '#';
+                a.textContent = file.replace('.html', '');
+                a.onclick = () => {
+                    fileFrame.src = file;
+                    return false;
+                };
+
+                li.appendChild(a);
+                fileListElement.appendChild(li);
+            });
+        });
+    </script>
+</body>
+</html>
