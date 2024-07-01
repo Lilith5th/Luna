@@ -65,7 +65,6 @@
             background-color: #f9f9f9;
             margin-bottom: 1em;
             border-radius: 8px;
-            position: relative;
         }
         section {
             padding: 2em;
@@ -88,19 +87,13 @@
             border-radius: 5px;
         }
         .image-container {
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 200px;
-            height: 200px;
-            overflow: hidden;
-            margin: 10px;
+            float: right;
+            margin: 0 0 10px 10px;
         }
         .image-container img {
-            width: 100%;
+            width: 200px;
             height: auto;
             cursor: pointer;
-            border-radius: 8px;
         }
         .modal {
             display: none;
@@ -118,7 +111,6 @@
             margin: auto;
             display: block;
             max-width: 90%;
-            max-height: 90%;
         }
         .close {
             position: absolute;
@@ -127,14 +119,12 @@
             color: #fff;
             font-size: 40px;
             font-weight: bold;
-            transition: 0.3s;
             cursor: pointer;
         }
         .close:hover,
         .close:focus {
             color: #bbb;
             text-decoration: none;
-            cursor: pointer;
         }
     </style>
 </head>
@@ -158,8 +148,9 @@
         <a href="#selfsufficiency">Long-Term Self-Sufficiency</a>
         <a href="#inflating-balloon">Inflating a Balloon Underground</a>
         <a href="#architectural">Architectural Design</a>
-        <a href="#summary">Summary</a>
         <a href="#population">Population</a>
+        <a href="#use-scenarios">Use Scenarios</a>
+        <a href="#summary">Summary</a>
     </nav>
 
     <div class="container">
@@ -180,7 +171,7 @@
             <section id="habitat-structure">
                 <h2>Habitat Structure</h2>
                 <div class="image-container">
-                    <img src="MidjourneyPNG_07_01/lilith5th_An_overview_of_an_underground_lunar_base_layout_75b8f077-4969-4527-b5ac-4977eb5f972e.png" alt="Illustration for Habitat Structure" onclick="openModal(this)">
+                    <img src="MidjourneyPNG_07_01/lilith5th_An_illustration_of_surface_supply_and_logistics_for_a_72292f2c-54d9-4558-82f8-85026466a73a.png" alt="Illustration for Habitat Structure" onclick="openModal(this)">
                 </div>
                 <h3>Single Large Inflatable Habitat</h3>
                 <ul>
@@ -195,7 +186,7 @@
             <section id="layout-overview">
                 <h2>Layout Overview</h2>
                 <div class="image-container">
-                    <img src="MidjourneyPNG_07_01/lilith5th_An_overview_of_an_underground_lunar_base_layout_725e5759-8029-4a94-9f2f-7d35ba112a14.png" alt="Illustration for Layout Overview" onclick="openModal(this)">
+                    <img src="MidjourneyPNG_07_01/lilith5th_An_overview_of_an_underground_lunar_base_layout_75b8f077-4969-4527-b5ac-4977eb5f972e.png" alt="Illustration for Layout Overview" onclick="openModal(this)">
                 </div>
                 <h3>Central Hub</h3>
                 <ul>
@@ -233,7 +224,7 @@
             <section id="materials">
                 <h2>Materials for Inflatable Lunar Habitat</h2>
                 <div class="image-container">
-                    <img src="MidjourneyPNG_07_01/lilith5th_A_detailed_illustration_of_the_best_materials_for_an__f26e8f6f-c199-47fd-a409-5d0e266df0ca.png" alt="Illustration for Materials" onclick="openModal(this)">
+                    <img src="MidjourneyPNG_07_01/lilith5th_A_detailed_illustration_of_the_best_materials_for_an__92d8010e-2021-465f-b077-1a862e502912.png" alt="Illustration for Materials" onclick="openModal(this)">
                 </div>
                 <h3>Best Materials for the Inflatable Structure</h3>
                 <h4>Vectran</h4>
@@ -281,7 +272,7 @@
             <section id="water">
                 <h2>Water Storage and Treatment</h2>
                 <div class="image-container">
-                    <img src="MidjourneyPNG_07_01/lilith5th_underground_infrastructure_project_of_advanced_filtra_69c04141-89c3-4484-850e-a5694b4a28d0.png" alt="Illustration for Water Storage and Treatment" onclick="openModal(this)">
+                    <img src="MidjourneyPNG_07_01/lilith5th_underground_infrastructure_project_of_advanced_filtra_6f0e8f0d-3dd8-4ca1-9d9a-4c015a7f6cba.png" alt="Illustration for Water Storage and Treatment" onclick="openModal(this)">
                 </div>
                 <h3>Distributed Water Storage</h3>
                 <ul>
@@ -316,7 +307,7 @@
             <section id="supply">
                 <h2>Surface Supply and Logistics</h2>
                 <div class="image-container">
-                    <img src="MidjourneyPNG_07_01/lilith5th_An_illustration_of_surface_supply_and_logistics_for_a_72292f2c-54d9-4558-82f8-85026466a73a.png" alt="Illustration for Surface Supply and Logistics" onclick="openModal(this)">
+                    <img src="MidjourneyPNG_07_01/lilith5th_An_illustration_of_inflating_a_balloon_underground_on_bec727ad-30af-4953-a75f-f186abd099db.png" alt="Illustration for Surface Supply and Logistics" onclick="openModal(this)">
                 </div>
                 <h3>Charging Ports</h3>
                 <ul>
@@ -334,7 +325,7 @@
             <section id="environment">
                 <h2>Environmental Control</h2>
                 <div class="image-container">
-                    <img src="MidjourneyPNG_07_01/lilith5th_underground_infrastructure_project_of_advanced_filtra_6f0e8f0d-3dd8-4ca1-9d9a-4c015a7f6cba.png" alt="Illustration for Environmental Control" onclick="openModal(this)">
+                    <img src="MidjourneyPNG_07_01/lilith5th_underground_infrastructure_project_of_advanced_filt_b3815c2f-9654-427b-8b1f-0a90e0be3ec8_0.png" alt="Illustration for Environmental Control" onclick="openModal(this)">
                 </div>
                 <h3>HVAC Systems</h3>
                 <ul>
@@ -370,7 +361,7 @@
             <section id="safety">
                 <h2>Safety and Redundancy</h2>
                 <div class="image-container">
-                    <img src="MidjourneyPNG_07_01/lilith5th_A_detailed_illustration_of_the_best_materials_for_an__cb17aad3-f42b-48a7-b566-b79a172d9c5b.png" alt="Illustration for Safety and Redundancy" onclick="openModal(this)">
+                    <img src="MidjourneyPNG_07_01/lilith5th_An_illustration_of_inflating_a_balloon_underground_on_bec727ad-30af-4953-a75f-f186abd099db.png" alt="Illustration for Safety and Redundancy" onclick="openModal(this)">
                 </div>
                 <h3>Multiple Storage Tanks</h3>
                 <ul>
@@ -392,7 +383,7 @@
             <section id="governance">
                 <h2>Governance and Management</h2>
                 <div class="image-container">
-                    <img src="MidjourneyPNG_07_01/lilith5th_A_detailed_illustration_of_the_best_materials_for_an__c49437c3-1de5-474d-b071-a5a7668fbafa.png" alt="Illustration for Governance and Management" onclick="openModal(this)">
+                    <img src="MidjourneyPNG_07_01/lilith5th_An_illustration_of_inflating_a_balloon_underground_on_bec727ad-30af-4953-a75f-f186abd099db.png" alt="Illustration for Governance and Management" onclick="openModal(this)">
                 </div>
                 <h3>Governance Structure</h3>
                 <ul>
@@ -410,7 +401,7 @@
             <section id="selfsufficiency">
                 <h2>Long-Term Self-Sufficiency</h2>
                 <div class="image-container">
-                    <img src="MidjourneyPNG_07_01/lilith5th_A_detailed_illustration_of_the_best_materials_for_an__77fe2ce8-21e3-4199-9770-5da56fb92bd6.png" alt="Illustration for Long-Term Self-Sufficiency" onclick="openModal(this)">
+                    <img src="MidjourneyPNG_07_01/lilith5th_An_illustration_of_surface_supply_and_logistics_for_a_72292f2c-54d9-4558-82f8-85026466a73a.png" alt="Illustration for Long-Term Self-Sufficiency" onclick="openModal(this)">
                 </div>
                 <h3>Sustainable Practices</h3>
                 <ul>
@@ -513,7 +504,7 @@
             <section id="architectural">
                 <h2>Architectural Design for Subterranean Lunar Base</h2>
                 <div class="image-container">
-                    <img src="MidjourneyPNG_07_01/lilith5th_An_illustration_of_underground_recreational_facilities_8dd94fbf-7ec6-4f8f-8ec8-fbaff63d5714.png" alt="Illustration for Architectural Design" onclick="openModal(this)">
+                    <img src="MidjourneyPNG_07_01/lilith5th_An_illustration_of_surface_supply_and_logistics_for_a_72292f2c-54d9-4558-82f8-85026466a73a.png" alt="Illustration for Architectural Design" onclick="openModal(this)">
                 </div>
                 <h3>Introduction</h3>
                 <p>Description of the lunar base concept, its significance and challenges, etc.</p>
@@ -540,6 +531,9 @@
         <div class="content">
             <section id="population">
                 <h2>Minimum Population for Self-Sustained Lunar Base</h2>
+                <div class="image-container">
+                    <img src="MidjourneyPNG_07_01/lilith5th_n_illustration_of_underground_recreational_facilities_bd77f6e0-49f6-4519-9072-e33cbc3f886c.png" alt="Illustration for Population" onclick="openModal(this)">
+                </div>
                 <p>The goal of this project is to create a self-sufficient lunar base that requires minimal resupplies and intervention from Earth, supporting long-term stays for its inhabitants. Drawing from Earth-based examples of self-contained systems such as the Amundsen-Scott South Pole Station, submarines, aircraft carriers, and isolated towns in Alaska, we estimate the minimum population for a lunar base considering all redundancies and necessities for its functioning.</p>
                 <h3>Operational Needs</h3>
                 <ul>
@@ -562,23 +556,29 @@
                 </ul>
                 <h3>Estimates</h3>
                 <p>Based on these considerations, NASA and other space agencies typically consider a minimum viable population for initial missions to be around 30-50 people. This number allows for necessary redundancy, social stability, and operational functionality.</p>
-                <h3>Scenarios of Use</h3>
-                <h4>Civil Use</h4>
+            </section>
+        </div>
+
+        <button class="collapsible">Use Scenarios</button>
+        <div class="content">
+            <section id="use-scenarios">
+                <h2>Use Scenarios</h2>
+                <h3>Civil Use</h3>
                 <ul>
                     <li>Long-term habitation for scientists and engineers conducting research and experiments.</li>
                     <li>Development of sustainable living practices that can be applied to Earth.</li>
                 </ul>
-                <h4>Tourism</h4>
+                <h3>Tourism</h3>
                 <ul>
                     <li>Facilities to accommodate space tourists seeking unique experiences.</li>
                     <li>Recreational and educational programs to enhance the tourist experience.</li>
                 </ul>
-                <h4>Exploration</h4>
+                <h3>Exploration</h3>
                 <ul>
                     <li>Base for conducting lunar surface explorations and geological studies.</li>
                     <li>Launching point for missions to further destinations such as Mars.</li>
                 </ul>
-                <h4>Defense</h4>
+                <h3>Defense</h3>
                 <ul>
                     <li>Strategic location for monitoring and protecting space assets.</li>
                     <li>Coordination center for space defense operations.</li>
@@ -591,7 +591,7 @@
             <section id="summary">
                 <h2>Summary</h2>
                 <div class="image-container">
-                    <img src="MidjourneyPNG_07_01/lilith5th_An_illustration_of_underground_recreational_facilities_bd77f6e0-49f6-4519-9072-e33cbc3f886c.png" alt="Illustration for Summary" onclick="openModal(this)">
+                    <img src="MidjourneyPNG_07_01/lilith5th_underground_infrastructure_project_of_advanced_filtra_69c04141-89c3-4484-850e-a5694b4a28d0.png" alt="Illustration for Summary" onclick="openModal(this)">
                 </div>
                 <p>For an inflatable lunar habitat at the specified depth, the best materials combine structural strength, thermal insulation, and resistance to the harsh lunar environment. The multi-layer construction would typically include:</p>
                 <ul>
@@ -607,10 +607,9 @@
     </div>
 
     <footer>
-        <p>Design and Strategy for a Self-Sustained Lunar Base &copy; 2024</p>
+        <p>&copy; 2024 Lunar Habitat Project. All rights reserved.</p>
     </footer>
 
-    <!-- The Modal -->
     <div id="myModal" class="modal">
         <span class="close" onclick="closeModal()">&times;</span>
         <img class="modal-content" id="img01">
@@ -618,9 +617,7 @@
 
     <script>
         var coll = document.getElementsByClassName("collapsible");
-        var i;
-
-        for (i = 0; i < coll.length; i++) {
+        for (var i = 0; i < coll.length; i++) {
             coll[i].addEventListener("click", function() {
                 this.classList.toggle("active");
                 var content = this.nextElementSibling;
@@ -632,11 +629,11 @@
             });
         }
 
-        function openModal(imgElement) {
+        function openModal(img) {
             var modal = document.getElementById("myModal");
             var modalImg = document.getElementById("img01");
             modal.style.display = "block";
-            modalImg.src = imgElement.src;
+            modalImg.src = img.src;
         }
 
         function closeModal() {
