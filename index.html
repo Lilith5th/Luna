@@ -3,96 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Content Loader</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Load Multiple HTML Files</title>
     <style>
-        /* Basic styling for layout */
-        body, html {
-            height: 100%;
-            margin: 0;
-            font-family: Arial, sans-serif;
+        .chapter {
+            margin-bottom: 1em;
         }
-        .container {
-            display: flex;
-            height: 100%;
-        }
-        .left-frame {
-            width: 30%;
-            background-color: #f0f0f0;
-            padding: 20px;
-            overflow-y: auto;
-        }
-        .right-frame {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        a {
-            text-decoration: none;
-            color: #333;
+        .chapter button {
             display: block;
-            padding: 5px;
-            transition: background-color 0.3s ease;
+            width: 100%;
+            text-align: left;
+            background: #f1f1f1;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
         }
-        a:hover {
+        .chapter-content {
+            display: none;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+        .collapsible {
+            background-color: #f1f1f1;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+        .active, .collapsible:hover {
             background-color: #ccc;
+        }
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f9f9f9;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="left-frame">
-            <ul id="fileList">
-                <!-- Links to files in content folder -->
-                <li><a href="content/introduction.html" data-file="introduction.html">Introduction</a></li>
-                <li><a href="content/habitat_structure.html" data-file="habitat_structure.html">Habitat Structure</a></li>
-                <li><a href="content/scenarios_population_design.html" data-file="scenarios_population_design.html">Scenarios for Lunar Base Population and Design</a></li>
-                <!-- Add more files as needed -->
-            </ul>
-        </div>
-        <div class="right-frame" id="contentFrame">
-            <p>Select a file from the left frame to view its content.</p>
-        </div>
-    </div>
+    <div id="loaded-content"></div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const fileList = document.getElementById('fileList');
-            const contentFrame = document.getElementById('contentFrame');
+        // Array of file paths to load
+        const files = [
+            'content/introduction.html', 
+            'content/habitat_structure.html', 
+            'content/scenarios_population_design.html', 
+            'content/layout_overview.html', 
+            'content/materials.html', 
+            'content/water_storage_treatment.html', 
+            'content/control_monitoring.html', 
+            'content/surface_supply_logistics.html', 
+            'content/environmental_control.html', 
+            'content/mental_health_wellbeing.html', 
+            'content/safety_redundancy.html', 
+            'content/governance_management.html', 
+            'content/long_term_self_sufficiency.html', 
+            'content/inflating_balloon.html', 
+            'content/architectural_design.html', 
+            'content/use_scenarios.html', 
+            'content/summary.html'
+        ];
 
-            function fetchAndDisplayContent(href) {
-                fetch(href)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`Failed to fetch ${href}: ${response.status} ${response.statusText}`);
-                        }
-                        return response.text();
-                    })
-                    .then(html => {
-                        // Update content frame with fetched HTML
-                        contentFrame.innerHTML = html;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching content:', error);
-                        contentFrame.innerHTML = `<p>Failed to load content from ${href}. Please check your network connection or file paths.</p>`;
-                    });
-            }
+        // Function to create collapsible chapter
+        const createChapter = (title, content) => {
+            const chapterDiv = document.createElement('div');
+            chapterDiv.className = 'chapter';
 
-            fileList.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent default navigation
-                if (event.target.tagName === 'A') {
-                    const href = event.target.getAttribute('href');
-                    fetchAndDisplayContent(href);
-                }
+            const button = document.createElement('button');
+            button.textContent = title;
+            button.addEventListener('click', () => {
+                const contentDiv = button.nextElementSibling;
+                contentDiv.style.display = contentDiv.style.display === 'block' ? 'none' : 'block';
             });
-        });
+
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'chapter-content';
+            contentDiv.innerHTML = content;
+
+            chapterDiv.appendChild(button);
+            chapterDiv.appendChild(contentDiv);
+
+            return chapterDiv;
+        };
+
+        // Function to fetch and display content
+        const loadFiles = async () => {
+            const contentDiv = document.getElementById('loaded-content');
+
+            for (const file of files) {
+                try {
+                    const response = await fetch(file);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    const data = await response.text();
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = data;
+                    const title = tempDiv.querySelector('h2').textContent;
+                    const chapterDiv = createChapter(title, tempDiv.innerHTML);
+                    contentDiv.appendChild(chapterDiv);
+
+                    // Apply collapsible functionality to nested sections
+                    chapterDiv.querySelectorAll('.collapsible').forEach(button => {
+                        button.addEventListener('click', function() {
+                            this.classList.toggle("active");
+                            var content = this.nextElementSibling;
+                            if (content.style.display === "block") {
+                                content.style.display = "none";
+                            } else {
+                                content.style.display = "block";
+                            }
+                        });
+                    });
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                }
+            }
+        };
+
+        // Call the function to load files
+        loadFiles();
     </script>
 </body>
 </html>
