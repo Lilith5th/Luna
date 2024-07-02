@@ -7,12 +7,19 @@
     <style>
         body {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             height: 100vh;
             margin: 0;
             background-color: #f9f9f9;
             font-family: Arial, sans-serif;
+        }
+        header, footer {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
         }
         .container {
             max-width: 1600px;
@@ -37,6 +44,11 @@
             font-size: 16px;
             cursor: pointer;
             color: #333;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+        .chapter button:hover, .collapsible:hover {
+            background-color: #ccc;
         }
         .chapter-content {
             display: none;
@@ -44,25 +56,19 @@
             border: 1px solid #ccc;
             border-top: none;
         }
-        .collapsible {
-            background-color: #f1f1f1;
-            cursor: pointer;
+        .collapsible-content {
+            display: none;
             padding: 10px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 15px;
-            color: #333;
-        }
-        .active, .collapsible:hover {
-            background-color: #ccc;
+            border: 1px solid #ccc;
+            border-top: none;
+            margin-bottom: 1em;
         }
         .content {
             padding: 0 18px;
             display: none;
             overflow: hidden;
             background-color: #f9f9f9;
+            border-radius: 8px;
         }
         img {
             max-width: 100%;
@@ -145,9 +151,17 @@
     </style>
 </head>
 <body>
+    <header>
+        <h1>Lunar Base Project</h1>
+    </header>
+
     <div class="container">
         <div id="loaded-content"></div>
     </div>
+
+    <footer>
+        <p>Lunar Base Project &copy; 2024</p>
+    </footer>
 
     <!-- The Modal/Lightbox -->
     <div id="lightbox" class="lightbox">
@@ -275,7 +289,7 @@
             document.documentElement.scrollTop = 0;
         }
 
-        // Image Lightbox
+        // Lightbox functions
         function openLightbox(img) {
             var lightbox = document.getElementById("lightbox");
             var lightboxImg = document.getElementById("lightbox-img");
