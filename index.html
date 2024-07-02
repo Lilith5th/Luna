@@ -5,6 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Load Multiple HTML Files</title>
     <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 1600px;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            overflow-y: auto;
+            max-height: 100%;
+        }
         .chapter {
             margin-bottom: 1em;
         }
@@ -46,7 +64,9 @@
     </style>
 </head>
 <body>
-    <div id="loaded-content"></div>
+    <div class="container">
+        <div id="loaded-content"></div>
+    </div>
 
     <script>
         // Array of file paths to load
@@ -70,16 +90,24 @@
             'content/summary.html'
         ];
 
-        // Function to create collapsible chapter
+        /**
+         * Function to create a collapsible chapter.
+         * @param {string} title - The title of the chapter.
+         * @param {string} content - The content of the chapter.
+         * @returns {HTMLDivElement} - The chapter element.
+         */
         const createChapter = (title, content) => {
             const chapterDiv = document.createElement('div');
             chapterDiv.className = 'chapter';
 
             const button = document.createElement('button');
             button.textContent = title;
+            button.setAttribute('aria-expanded', 'false');
             button.addEventListener('click', () => {
                 const contentDiv = button.nextElementSibling;
-                contentDiv.style.display = contentDiv.style.display === 'block' ? 'none' : 'block';
+                const isExpanded = contentDiv.style.display === 'block';
+                contentDiv.style.display = isExpanded ? 'none' : 'block';
+                button.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
             });
 
             const contentDiv = document.createElement('div');
@@ -92,7 +120,9 @@
             return chapterDiv;
         };
 
-        // Function to fetch and display content
+        /**
+         * Function to fetch and display content from the files.
+         */
         const loadFiles = async () => {
             const contentDiv = document.getElementById('loaded-content');
 
@@ -106,6 +136,7 @@
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = data;
                     const title = tempDiv.querySelector('h2').textContent;
+                    tempDiv.querySelector('h2').remove();  // Remove the header
                     const chapterDiv = createChapter(title, tempDiv.innerHTML);
                     contentDiv.appendChild(chapterDiv);
 
@@ -113,16 +144,16 @@
                     chapterDiv.querySelectorAll('.collapsible').forEach(button => {
                         button.addEventListener('click', function() {
                             this.classList.toggle("active");
-                            var content = this.nextElementSibling;
-                            if (content.style.display === "block") {
-                                content.style.display = "none";
-                            } else {
-                                content.style.display = "block";
-                            }
+                            const content = this.nextElementSibling;
+                            content.style.display = content.style.display === "block" ? "none" : "block";
                         });
                     });
                 } catch (error) {
                     console.error('Fetch error:', error);
+                    const errorDiv = document.createElement('div');
+                    errorDiv.textContent = `Failed to load ${file}: ${error.message}`;
+                    errorDiv.style.color = 'red';
+                    contentDiv.appendChild(errorDiv);
                 }
             }
         };
