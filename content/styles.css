@@ -1,0 +1,86 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic styling */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+main {
+    display: flex;
+    flex: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+nav {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.chapter-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.chapter-list li {
+    margin-bottom: 5px;
+}
+
+.collapsible {
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+}
+
+.content {
+    display: none;
+    padding-left: 10px;
+}
+
+.text-frame {
+    flex: 3;
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 20px;
+}
+
+/* Styling for active state of collapsible */
+.collapsible.active {
+    background-color: #777;
+}
+
+.collapsible.active + .content {
+    display: block;
+}

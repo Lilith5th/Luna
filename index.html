@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Load Multiple HTML Files</title>
+    <title>Lunar base project</title>
     <style>
         body {
             display: flex;
@@ -148,11 +148,6 @@
             text-decoration: none;
             cursor: pointer;
         }
-        .error-message {
-            color: red;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
     </style>
 </head>
 <body>
@@ -181,21 +176,22 @@
         // Array of file paths to load
         const files = [
             'content/introduction.html', 
-            'content/habitat_structure.html', 
-            'content/scenarios_population_design.html', 
+			<!-- 'content/use_scenarios.html',  -->
+            'content/use_cases_civilian.html', 
+            'content/use_cases_defence.html', 
+			'content/architectural_design.html', 
+			'content/habitat_structure.html', 
             'content/layout_overview.html', 
             'content/materials.html', 
             'content/water_storage_treatment.html', 
             'content/control_monitoring.html', 
             'content/surface_supply_logistics.html', 
-            'content/environmental_control.html', 
             'content/mental_health_wellbeing.html', 
-            'content/safety_redundancy.html', 
-            'content/governance_management.html', 
             'content/long_term_self_sufficiency.html', 
             'content/inflating_balloon.html', 
-            'content/architectural_design.html', 
-            'content/use_scenarios.html', 
+			'content/governance_management.html', 
+			'content/safety_redundancy.html', 
+			'content/environmental_control.html', 
             'content/summary.html'
         ];
 
@@ -268,7 +264,7 @@
                     console.error('Fetch error:', error);
                     const errorDiv = document.createElement('div');
                     errorDiv.textContent = `Failed to load ${file}: ${error.message}`;
-                    errorDiv.classList.add('error-message');
+                    errorDiv.style.color = 'red';
                     contentDiv.appendChild(errorDiv);
                 }
             }
