@@ -5,6 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Layout Overview</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional styles for demonstration */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            cursor: pointer;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        .legend {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+        }
+    </style>
+    <script>
+        // JavaScript function for lightbox functionality
+        function openLightbox(element) {
+            // Implement your lightbox logic here
+            console.log("Lightbox opened for: " + element.alt);
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -14,35 +48,65 @@
         <section id="layout-overview">
             <h2>Layout Overview</h2>
             <img src="MidjourneyPNG_07_01/lilith5th_A_detailed_illustration_of_the_best_materials_for_an__c49437c3-1de5-474d-b071-a5a7668fbafa.png" alt="Illustration for Layout Overview" onclick="openLightbox(this)">
+            
             <h3>Central Hub</h3>
             <ul>
-                <li><strong>Command center, administrative offices, control room:</strong> The central hub serves as the operational heart of the habitat, ensuring effective coordination and management of all habitat activities, including communication, logistics, and overall base operations.</li>
+                <li><strong>Size:</strong> Medium to large, depending on the complexity of operations and administrative needs.</li>
+                <li><strong>Purpose:</strong> Centralized command center, administrative offices, control room.</li>
+                <li><strong>Function:</strong> Coordination of habitat activities, communication hub, logistics management.</li>
             </ul>
+
             <h3>Living Quarters</h3>
             <ul>
-                <li><strong>Private cabins, shared facilities, recreational areas:</strong> Designed to provide comfort and privacy for the crew with spaces for social interaction and relaxation.</li>
+                <li><strong>Size:</strong> Several small to medium-sized modules.</li>
+                <li><strong>Purpose:</strong> Private cabins, shared facilities, recreational areas.</li>
+                <li><strong>Function:</strong> Provide comfortable living spaces, privacy, and social interaction areas for crew members.</li>
             </ul>
+
             <h3>Laboratories</h3>
             <ul>
-                <li><strong>Specialized labs for various scientific disciplines:</strong> Equipped for research in areas such as biology, chemistry, physics, and materials science with modular workstations and advanced scientific instruments.</li>
+                <li><strong>Size:</strong> Medium-sized specialized modules.</li>
+                <li><strong>Purpose:</strong> Dedicated labs for biology, chemistry, physics, materials science, etc.</li>
+                <li><strong>Function:</strong> Conduct scientific research with modular workstations and advanced instruments.</li>
             </ul>
+
             <h3>Medical Facilities</h3>
             <ul>
-                <li><strong>Clinic, emergency room, quarantine rooms:</strong> Comprehensive medical facilities for routine care, emergency response, and isolation of contagious illnesses.</li>
+                <li><strong>Size:</strong> Medium-sized module.</li>
+                <li><strong>Purpose:</strong> Clinic, emergency room, quarantine rooms.</li>
+                <li><strong>Function:</strong> Provide comprehensive medical care, emergency response, and isolation capabilities.</li>
             </ul>
+
             <h3>Recreational Areas</h3>
             <ul>
-                <li><strong>Gym, sports facilities, central park with hydroponics:</strong> Spaces for physical activity and social interaction to maintain the crew's physical and mental health.</li>
+                <li><strong>Size:</strong> Medium-sized module.</li>
+                <li><strong>Purpose:</strong> Gym, sports facilities, central park with hydroponics.</li>
+                <li><strong>Function:</strong> Support physical activity, relaxation, and mental well-being of crew members.</li>
             </ul>
+
             <h3>Storage and Utility Areas</h3>
             <ul>
-                <li><strong>Water tanks, waste management, technical workshops:</strong> Critical for maintaining infrastructure and operations of the habitat with water supply, waste processing, and equipment maintenance.</li>
+                <li><strong>Size:</strong> Several small to medium-sized modules.</li>
+                <li><strong>Purpose:</strong> Water tanks, waste management, technical workshops.</li>
+                <li><strong>Function:</strong> Maintain habitat infrastructure, manage water supply, process waste, and conduct equipment maintenance.</li>
             </ul>
+
             <h3>Surface Access</h3>
             <ul>
-                <li><strong>Charging ports, docking facilities for lunar rovers:</strong> Efficient surface access points for transfer of supplies and personnel between the habitat and the lunar surface.</li>
+                <li><strong>Size:</strong> Small to medium-sized module(s) integrated with docking facilities.</li>
+                <li><strong>Purpose:</strong> Charging ports, docking for lunar rovers.</li>
+                <li><strong>Function:</strong> Facilitate efficient transfer of supplies, personnel, and equipment between the habitat and lunar surface.</li>
             </ul>
         </section>
+
+        <div class="legend">
+            <h3>Size Legend</h3>
+            <ul>
+                <li><strong>Small Module:</strong> Approx. 6m x 6m (36 sqm)</li>
+                <li><strong>Medium Module:</strong> Approx. 8m x 8m (64 sqm)</li>
+                <li><strong>Large Module:</strong> Approx. 10m x 10m (100 sqm)</li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>
