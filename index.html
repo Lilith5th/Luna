@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lunar base project</title>
+    <title>Lunar Base Project</title>
     <style>
         body {
             display: flex;
@@ -176,11 +176,10 @@
         // Array of file paths to load
         const files = [
             'content/introduction.html', 
-			<!-- 'content/use_scenarios.html',  -->
             'content/use_cases_civilian.html', 
             'content/use_cases_defence.html', 
-			'content/architectural_design.html', 
-			'content/habitat_structure.html', 
+            'content/architectural_concept.html', 
+            'content/habitat_structure.html', 
             'content/layout_overview.html', 
             'content/materials.html', 
             'content/water_storage_treatment.html', 
@@ -189,9 +188,9 @@
             'content/mental_health_wellbeing.html', 
             'content/long_term_self_sufficiency.html', 
             'content/inflating_balloon.html', 
-			'content/governance_management.html', 
-			'content/safety_redundancy.html', 
-			'content/environmental_control.html', 
+            'content/governance_management.html', 
+            'content/safety_redundancy.html', 
+            'content/environmental_control.html', 
             'content/summary.html'
         ];
 
@@ -241,13 +240,9 @@
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = data;
 
-                    // Remove header node if it exists
+                    // Use header content for the chapter title, if available
                     const header = tempDiv.querySelector('header');
-                    if (header) header.remove();
-
-                    // Use h2 for the chapter title, if available
-                    const h2 = tempDiv.querySelector('h2');
-                    const title = h2 ? h2.textContent : 'Untitled Chapter';
+                    const title = header ? header.textContent.trim() : 'Untitled Chapter';
 
                     const chapterDiv = createChapter(title, tempDiv.innerHTML);
                     contentDiv.appendChild(chapterDiv);
