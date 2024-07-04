@@ -293,7 +293,6 @@
                     if (i >= 0 && i <= 2) {
                         introContainer.appendChild(chapterDiv);
                     } else if (i === 3) {
-                        contentDiv.appendChild(chapterDiv);
                         // Create a new gray container for Base Application
                         baseAppContainer = document.createElement('div');
                         baseAppContainer.className = 'gray-container';
@@ -302,6 +301,7 @@
                         baseAppContainer.appendChild(baseAppHeader);
                         
                         contentDiv.appendChild(baseAppContainer);
+                        baseAppContainer.appendChild(chapterDiv);
                     } else if (i > 3 && i <= 7) {
                         baseAppContainer.appendChild(chapterDiv);
                     } else {
