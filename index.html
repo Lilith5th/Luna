@@ -148,6 +148,22 @@
             text-decoration: none;
             cursor: pointer;
         }
+        .header-centered {
+            text-align: center;
+            background-color: #e4e4e4;
+            color: #333;
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        .gray-container {
+            background-color: #e4e4e4;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -178,19 +194,20 @@
             'content/introduction.html', 
             'content/goals.html', 
             'content/population_size.html', 
-            'content/use_cases_civilian.html', 
+            'content/use_cases_civilian-research.html', 
+            'content/use_cases_civilian-resources.html', 
+            'content/use_cases_civilian-health_tourism.html', 
+            'content/use_cases_civilian-stepping_stone.html', 
             'content/use_cases_defence.html', 
             'content/architectural_concept.html', 
             'content/habitat_structure_materials.html',
             'content/inflating_balloon.html', 			
             'content/layout_overview.html', 
-            <!-- 'content/materials.html',  -->
             'content/water_storage_treatment.html', 
             'content/control_monitoring.html', 
             'content/surface_supply_logistics.html', 
             'content/mental_health_wellbeing.html', 
             'content/long_term_self_sufficiency.html', 
-
             'content/governance_management.html', 
             'content/safety_redundancy.html', 
             'content/environmental_control.html', 
@@ -228,14 +245,27 @@
         };
 
         /**
+         * Function to create a header between chapters.
+         * @param {string} title - The title of the header.
+         * @returns {HTMLDivElement} - The header element.
+         */
+        const createHeader = (title) => {
+            const header = document.createElement('div');
+            header.className = 'header-centered';
+            header.textContent = title;
+            return header;
+        };
+
+        /**
          * Function to fetch and display content from the files.
          */
         const loadFiles = async () => {
             const contentDiv = document.getElementById('loaded-content');
+            let baseAppContainer;
 
-            for (const file of files) {
+            for (let i = 0; i < files.length; i++) {
                 try {
-                    const response = await fetch(file);
+                    const response = await fetch(files[i]);
                     if (!response.ok) {
                         throw new Error('Network response was not ok ' + response.statusText);
                     }
@@ -248,7 +278,22 @@
                     const title = header ? header.textContent.trim() : 'Untitled Chapter';
 
                     const chapterDiv = createChapter(title, tempDiv.innerHTML);
-                    contentDiv.appendChild(chapterDiv);
+
+                    if (i === 2) {
+                        contentDiv.appendChild(chapterDiv);
+                        // Create a new gray container
+                        baseAppContainer = document.createElement('div');
+                        baseAppContainer.className = 'gray-container';
+                        
+                        const baseAppHeader = createHeader('Base Application');
+                        baseAppContainer.appendChild(baseAppHeader);
+                        
+                        contentDiv.appendChild(baseAppContainer);
+                    } else if (i > 2 && i <= 7) {
+                        baseAppContainer.appendChild(chapterDiv);
+                    } else {
+                        contentDiv.appendChild(chapterDiv);
+                    }
 
                     // Apply collapsible functionality to nested sections
                     chapterDiv.querySelectorAll('.collapsible').forEach(button => {
@@ -261,7 +306,7 @@
                 } catch (error) {
                     console.error('Fetch error:', error);
                     const errorDiv = document.createElement('div');
-                    errorDiv.textContent = `Failed to load ${file}: ${error.message}`;
+                    errorDiv.textContent = `Failed to load ${files[i]}: ${error.message}`;
                     errorDiv.style.color = 'red';
                     contentDiv.appendChild(errorDiv);
                 }
