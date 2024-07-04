@@ -261,7 +261,7 @@
          */
         const loadFiles = async () => {
             const contentDiv = document.getElementById('loaded-content');
-            let baseAppContainer;
+            let introContainer, baseAppContainer;
 
             for (let i = 0; i < files.length; i++) {
                 try {
@@ -279,9 +279,22 @@
 
                     const chapterDiv = createChapter(title, tempDiv.innerHTML);
 
-                    if (i === 2) {
+                    if (i === 0) {
+                        // Create a new gray container for Introduction
+                        introContainer = document.createElement('div');
+                        introContainer.className = 'gray-container';
+                        
+                        const introHeader = createHeader('Introduction');
+                        introContainer.appendChild(introHeader);
+                        
+                        contentDiv.appendChild(introContainer);
+                    } 
+
+                    if (i >= 0 && i <= 2) {
+                        introContainer.appendChild(chapterDiv);
+                    } else if (i === 3) {
                         contentDiv.appendChild(chapterDiv);
-                        // Create a new gray container
+                        // Create a new gray container for Base Application
                         baseAppContainer = document.createElement('div');
                         baseAppContainer.className = 'gray-container';
                         
@@ -289,7 +302,7 @@
                         baseAppContainer.appendChild(baseAppHeader);
                         
                         contentDiv.appendChild(baseAppContainer);
-                    } else if (i > 2 && i <= 7) {
+                    } else if (i > 3 && i <= 7) {
                         baseAppContainer.appendChild(chapterDiv);
                     } else {
                         contentDiv.appendChild(chapterDiv);
