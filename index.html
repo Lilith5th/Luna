@@ -200,9 +200,10 @@
             'content/use_cases_civilian-stepping_stone.html', 
             'content/use_cases_defence.html', 
             'content/architectural_concept.html', 
-            'content/habitat_structure_materials.html',
-            'content/inflating_balloon.html', 			
+            'content/habitat_layout.html',
             'content/layout_overview.html', 
+            'content/habitat_materials.html',
+            'content/inflating_balloon.html', 			
             'content/water_storage_treatment.html', 
             'content/control_monitoring.html', 
             'content/surface_supply_logistics.html', 
@@ -262,7 +263,7 @@
          */
         const loadFiles = async () => {
             const contentDiv = document.getElementById('loaded-content');
-            let introContainer, baseAppContainer;
+            let introContainer, baseAppContainer, conceptOverviewContainer;
 
             for (let i = 0; i < files.length; i++) {
                 try {
@@ -305,6 +306,18 @@
                         baseAppContainer.appendChild(chapterDiv);
                     } else if (i > 3 && i <= 7) {
                         baseAppContainer.appendChild(chapterDiv);
+                    } else if (i === 8) {
+                        // Create a new gray container for Concept Overview
+                        conceptOverviewContainer = document.createElement('div');
+                        conceptOverviewContainer.className = 'gray-container';
+                        
+                        const conceptOverviewHeader = createHeader('Concept Overview');
+                        conceptOverviewContainer.appendChild(conceptOverviewHeader);
+                        
+                        contentDiv.appendChild(conceptOverviewContainer);
+                        conceptOverviewContainer.appendChild(chapterDiv);
+                    } else if (i > 8 && i <= 12) {
+                        conceptOverviewContainer.appendChild(chapterDiv);
                     } else {
                         contentDiv.appendChild(chapterDiv);
                     }
