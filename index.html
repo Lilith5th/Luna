@@ -372,6 +372,23 @@
         // Call the function to load files
         loadFiles();
 
+        // Back to Top Button
+        var topButton = document.getElementById("back-to-top");
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            var container = document.querySelector('.container');
+            if (container.scrollTop > 20) {
+                topButton.style.display = "block";
+            } else {
+                topButton.style.display = "none";
+            }
+        }
+
+        function topFunction() {
+            var container = document.querySelector('.container');
+            container.scrollTop = 0;
+        }
 
         // Lightbox functions
         function openLightbox(img) {
