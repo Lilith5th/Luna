@@ -56,9 +56,9 @@
             color: #fff;
             padding: 10px;
             text-align: center;
-            position: fixed;
-            bottom: 0;
+            position: relative; /* Change position from fixed to relative */
             width: 100%;
+            margin-top: 20px; /* Add some space at the top */
         }
         .grouped-container {
             border: 1px solid #ddd;
@@ -70,6 +70,18 @@
         .grouped-container h2 {
             margin-top: 0;
             margin-bottom: 10px;
+        }
+        @media only screen and (max-width: 600px) {
+            body {
+                margin: 10px;
+            }
+            .collapsible {
+                font-size: 14px;
+                padding: 8px;
+            }
+            .grouped-container {
+                padding: 5px;
+            }
         }
     </style>
 </head>
