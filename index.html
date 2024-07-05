@@ -22,7 +22,6 @@
         .collapsible-container {
             width: 100%;
         }
-		
         .collapsible {
             cursor: pointer;
             border: none;
@@ -61,6 +60,17 @@
             bottom: 0;
             width: 100%;
         }
+        .grouped-container {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .grouped-container h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -80,23 +90,5 @@
 
     <!-- Include your JavaScript file to handle dynamic content loading -->
     <script src="loadContent.js"></script>
-    <script>
-        // Add event listeners for collapsible functionality
-        document.addEventListener('DOMContentLoaded', function () {
-            const coll = document.getElementsByClassName('collapsible');
-            
-            Array.from(coll).forEach(function (item) {
-                item.addEventListener('click', function () {
-                    this.classList.toggle('active');
-                    const content = this.nextElementSibling;
-                    if (content.style.display === 'block') {
-                        content.style.display = 'none';
-                    } else {
-                        content.style.display = 'block';
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>

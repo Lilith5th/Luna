@@ -28,6 +28,45 @@ const files = [
 async function fetchAndDisplayContent() {
     const container = document.getElementById('content-container');
 
+    // Create a new container for the first three sections
+    const firstThreeContainer = document.createElement('div');
+    firstThreeContainer.classList.add('content-section', 'grouped-container');
+
+    // Add a title to the first three sections container
+    const firstThreeTitle = document.createElement('h2');
+    firstThreeTitle.textContent = 'Introduction';
+    firstThreeContainer.appendChild(firstThreeTitle);
+
+    // Create a new container for the next five sections
+    const nextFiveContainer = document.createElement('div');
+    nextFiveContainer.classList.add('content-section', 'grouped-container');
+
+    // Add a title to the next five sections container
+    const nextFiveTitle = document.createElement('h2');
+    nextFiveTitle.textContent = 'Application';
+    nextFiveContainer.appendChild(nextFiveTitle);
+
+    // Create a new container for the following five sections
+    const followingFiveContainer = document.createElement('div');
+    followingFiveContainer.classList.add('content-section', 'grouped-container');
+
+    // Add a title to the following five sections container
+    const followingFiveTitle = document.createElement('h2');
+    followingFiveTitle.textContent = 'Lunar Base Concept';
+    followingFiveContainer.appendChild(followingFiveTitle);
+
+    // Create a new container for the following eight sections
+    const followingEightContainer = document.createElement('div');
+    followingEightContainer.classList.add('content-section', 'grouped-container');
+
+    // Add a title to the following eight sections container
+    const followingEightTitle = document.createElement('h2');
+    followingEightTitle.textContent = 'Logistics and Technology';
+    followingEightContainer.appendChild(followingEightTitle);
+
+    // Track the number of sections added
+    let sectionCount = 0;
+
     for (const file of files) {
         try {
             const response = await fetch(file);
@@ -53,12 +92,30 @@ async function fetchAndDisplayContent() {
 
             section.innerHTML = `<button class="collapsible">${buttonText}</button><div class="content">${html}</div>`;
 
-            // Append the content to the container
-            container.appendChild(section);
+            // Append the section to the appropriate container
+            if (sectionCount < 3) {
+                firstThreeContainer.appendChild(section);
+            } else if (sectionCount < 8) {  // Next five chapters
+                nextFiveContainer.appendChild(section);
+            } else if (sectionCount < 13) {  // Following five chapters
+                followingFiveContainer.appendChild(section);
+            } else if (sectionCount < 21) {  // Following eight chapters
+                followingEightContainer.appendChild(section);
+            } else {
+                container.appendChild(section);
+            }
+
+            sectionCount++;
         } catch (error) {
             console.error(error);
         }
     }
+
+    // Append the containers to the main container
+    container.insertBefore(firstThreeContainer, container.firstChild);
+    container.insertBefore(nextFiveContainer, firstThreeContainer.nextSibling);
+    container.insertBefore(followingFiveContainer, nextFiveContainer.nextSibling);
+    container.insertBefore(followingEightContainer, followingFiveContainer.nextSibling);
 
     // Trigger the collapsible functionality after all content is loaded
     triggerCollapsible();
