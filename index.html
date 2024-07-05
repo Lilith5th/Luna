@@ -21,6 +21,12 @@
             text-align: center;
             padding: 1em 0;
         }
+        header {
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            transition: top 0.3s;
+        }
         .container {
             max-width: 1600px;
             width: 100%;
@@ -29,7 +35,8 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
             overflow-y: auto;
-            max-height: 100%;
+            flex: 1;
+            margin-top: 60px; /* Adjusted for the fixed header */
         }
         .chapter {
             margin-bottom: 1em;
@@ -167,7 +174,7 @@
     </style>
 </head>
 <body>
-    <header>
+    <header id="main-header">
         <h1>Lunar Base Project</h1>
     </header>
 
@@ -362,8 +369,10 @@
         function scrollFunction() {
             if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
                 topButton.style.display = "block";
+                document.getElementById('main-header').style.top = '-60px'; // Adjust to your header height
             } else {
                 topButton.style.display = "none";
+                document.getElementById('main-header').style.top = '0';
             }
         }
 
