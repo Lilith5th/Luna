@@ -9,7 +9,7 @@ const files = [
     'content/use_cases_defence.html', 
     'content/architectural_concept.html', 
     'content/habitat_layout.html',
-    'content/habitat modules.html', 
+    'content/habitat_modules.html', 
     'content/habitat_materials.html',
     'content/inflatable_habitat.html', 			
     'content/water_storage_treatment.html', 
@@ -28,41 +28,12 @@ const files = [
 async function fetchAndDisplayContent() {
     const container = document.getElementById('content-container');
 
-    // Create a new container for the first three sections
-    const firstThreeContainer = document.createElement('div');
-    firstThreeContainer.classList.add('content-section', 'grouped-container');
-
-    // Add a title to the first three sections container
-    const firstThreeTitle = document.createElement('h2');
-    firstThreeTitle.textContent = 'Introduction';
-    firstThreeContainer.appendChild(firstThreeTitle);
-
-    // Create a new container for the next five sections
-    const nextFiveContainer = document.createElement('div');
-    nextFiveContainer.classList.add('content-section', 'grouped-container');
-
-    // Add a title to the next five sections container
-    const nextFiveTitle = document.createElement('h2');
-    nextFiveTitle.textContent = 'Application';
-    nextFiveContainer.appendChild(nextFiveTitle);
-
-    // Create a new container for the following five sections
-    const followingFiveContainer = document.createElement('div');
-    followingFiveContainer.classList.add('content-section', 'grouped-container');
-
-    // Add a title to the following five sections container
-    const followingFiveTitle = document.createElement('h2');
-    followingFiveTitle.textContent = 'Lunar Base Concept';
-    followingFiveContainer.appendChild(followingFiveTitle);
-
-    // Create a new container for the following eight sections
-    const followingEightContainer = document.createElement('div');
-    followingEightContainer.classList.add('content-section', 'grouped-container');
-
-    // Add a title to the following eight sections container
-    const followingEightTitle = document.createElement('h2');
-    followingEightTitle.textContent = 'Logistics and Technology';
-    followingEightContainer.appendChild(followingEightTitle);
+    // Create containers for each group of sections
+    const firstThreeContainer = createSectionContainer('Introduction');
+    const nextFiveContainer = createSectionContainer('Application');
+    const followingFiveContainer = createSectionContainer('Lunar Base Concept');
+    const followingEightContainer = createSectionContainer('Logistics and Technology');
+    const lastTwoContainer = createSectionContainer('Final Sections');
 
     // Track the number of sections added
     let sectionCount = 0;
@@ -101,8 +72,8 @@ async function fetchAndDisplayContent() {
                 followingFiveContainer.appendChild(section);
             } else if (sectionCount < 21) {  // Following eight chapters
                 followingEightContainer.appendChild(section);
-            } else {
-                container.appendChild(section);
+            } else {  // Last two chapters
+                lastTwoContainer.appendChild(section);
             }
 
             sectionCount++;
@@ -112,13 +83,26 @@ async function fetchAndDisplayContent() {
     }
 
     // Append the containers to the main container
-    container.insertBefore(firstThreeContainer, container.firstChild);
-    container.insertBefore(nextFiveContainer, firstThreeContainer.nextSibling);
-    container.insertBefore(followingFiveContainer, nextFiveContainer.nextSibling);
-    container.insertBefore(followingEightContainer, followingFiveContainer.nextSibling);
+    container.appendChild(firstThreeContainer);
+    container.appendChild(nextFiveContainer);
+    container.appendChild(followingFiveContainer);
+    container.appendChild(followingEightContainer);
+    container.appendChild(lastTwoContainer);
 
     // Trigger the collapsible functionality after all content is loaded
     triggerCollapsible();
+}
+
+// Function to create a container with a title
+function createSectionContainer(title) {
+    const container = document.createElement('div');
+    container.classList.add('content-section', 'grouped-container');
+
+    const header = document.createElement('h2');
+    header.textContent = title;
+    container.appendChild(header);
+
+    return container;
 }
 
 // Function to initialize collapsible elements
