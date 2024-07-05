@@ -9,12 +9,14 @@
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 20px;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
         }
         .content-container {
             max-width: 1200px;
             width: 100%;
-            margin: 0 auto; /* Center align the container */
+            margin: 20px auto; /* Center align the container with margin */
+            padding: 0 10px; /* Add padding for small devices */
         }
         .content-section {
             margin-bottom: 10px; /* Reduce bottom margin */
@@ -45,19 +47,16 @@
         .content.active {
             display: block;
         }
-        header {
+        header, footer {
             background-color: #333;
             color: #fff;
             padding: 10px;
             text-align: center;
+            width: 100%;
+            box-sizing: border-box;
         }
         footer {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
             position: relative; /* Change position from fixed to relative */
-            width: 100%;
             margin-top: 20px; /* Add some space at the top */
         }
         .grouped-container {
@@ -73,7 +72,12 @@
         }
         @media only screen and (max-width: 600px) {
             body {
+                margin: 0;
+                padding: 0;
+            }
+            .content-container {
                 margin: 10px;
+                padding: 0 5px;
             }
             .collapsible {
                 font-size: 14px;
