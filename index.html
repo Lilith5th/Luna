@@ -201,7 +201,7 @@
             'content/use_cases_defence.html', 
             'content/architectural_concept.html', 
             'content/habitat_layout.html',
-            'content/layout_overview.html', 
+            'content/functional_layout.html', 
             'content/habitat_materials.html',
             'content/inflating_balloon.html', 			
             'content/water_storage_treatment.html', 
@@ -263,7 +263,7 @@
          */
         const loadFiles = async () => {
             const contentDiv = document.getElementById('loaded-content');
-            let introContainer, baseAppContainer, conceptOverviewContainer;
+            let introContainer, baseAppContainer, conceptOverviewContainer, technologyContainer;
 
             for (let i = 0; i < files.length; i++) {
                 try {
@@ -318,6 +318,18 @@
                         conceptOverviewContainer.appendChild(chapterDiv);
                     } else if (i > 8 && i <= 12) {
                         conceptOverviewContainer.appendChild(chapterDiv);
+                    } else if (i === 13) {
+                        // Create a new gray container for Technology
+                        technologyContainer = document.createElement('div');
+                        technologyContainer.className = 'gray-container';
+                        
+                        const technologyHeader = createHeader('Technology');
+                        technologyContainer.appendChild(technologyHeader);
+                        
+                        contentDiv.appendChild(technologyContainer);
+                        technologyContainer.appendChild(chapterDiv);
+                    } else if (i > 13 && i <= 20) {
+                        technologyContainer.appendChild(chapterDiv);
                     } else {
                         contentDiv.appendChild(chapterDiv);
                     }
