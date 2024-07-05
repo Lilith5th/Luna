@@ -2,422 +2,101 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Lunar Base Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collapsible Content</title>
     <style>
-        /* Resetting default margin and padding */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Basic styling for demonstration purposes */
         body {
-            width: 100vw; /* Adjusted to viewport width */
-            background-color: #f9f9f9;
             font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden; /* Prevent horizontal scrolling */
+            line-height: 1.6;
+            margin: 20px;
         }
-
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            width: 100%; /* Adjusted to take full width of the viewport */
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1em 0;
-        }
-
-        .container {
-            width: 100%; /* Adjusted to take full width of the viewport */
-            max-width: 100%; /* Ensure no element exceeds viewport width */
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            box-sizing: border-box;
-            overflow-y: auto;
-            flex: 1;
-            margin-top: 60px;
-            position: relative;
-        }
-
-        footer {
+        .content-container {
+            max-width: 1200px;
             width: 100%;
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1em 0;
-            position: fixed;
-            bottom: 0;
-            left: 0;
+            margin: 0 auto; /* Center align the container */
         }
-
-        #back-to-top {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 30px;
-            z-index: 1001;
-            font-size: 18px;
+        .content-section {
+            margin-bottom: 10px; /* Reduce bottom margin */
+        }
+        .collapsible-container {
+            width: 100%;
+        }
+		
+        .collapsible {
+            cursor: pointer;
             border: none;
             outline: none;
-            background-color: #333;
-            color: white;
-            cursor: pointer;
-            padding: 15px;
-            border-radius: 4px;
-        }
-
-        #back-to-top:hover {
-            background-color: #555;
-        }
-
-        .chapter {
-            margin-bottom: 1em;
-        }
-
-        .chapter button, .collapsible {
-            display: block;
-            width: 100%;
+            background-color: #f0f0f0;
             text-align: left;
-            background: #f1f1f1;
-            border: none;
             padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            color: #333;
-            margin-top: 5px;
-            border-radius: 5px;
-        }
-
-        .chapter button:hover, .collapsible:hover {
-            background-color: #ccc;
-        }
-
-        .chapter-content {
-            display: none;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-top: none;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto 20px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        ul li {
-            background: #e4e4e4;
-            margin: 0.5em 0;
-            padding: 1em;
-            border-radius: 5px;
-        }
-
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            padding-top: 60px;
-            left: 0;
-            top: 0;
             width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.9);
-        }
-
-        .lightbox-content {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
-        }
-
-        .lightbox-content, #caption {
-            animation-name: zoom;
-            animation-duration: 0.6s;
-        }
-
-        @keyframes zoom {
-            from {transform: scale(0)}
-            to {transform: scale(1)}
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .lightbox-close:hover,
-        .lightbox-close:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .header-centered {
-            text-align: center;
-            background-color: #e4e4e4;
-            color: #333;
-            padding: 10px;
-            font-size: 16px;
-            margin: 5px 0;
+            transition: background-color 0.3s;
             border-radius: 5px;
+            margin-bottom: 0; /* Remove margin bottom */
         }
-
-        .gray-container {
-            background-color: #e4e4e4;
+        .collapsible.active {
+            background-color: #ddd;
+        }
+        .content {
+            display: none;
+            padding: 0 10px;
+            overflow: hidden;
+        }
+        .content.active {
+            display: block;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
             padding: 10px;
-            border-radius: 8px;
-            margin: 20px 0;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>
 <body>
-    <header id="main-header">
+    <header>
         <h1>Lunar Base Project</h1>
     </header>
 
-    <div class="container">
-        <div id="loaded-content"></div>
+    <div class="content-container">
+        <div id="content-container" class="collapsible-container">
+            <!-- Content will be dynamically loaded here -->
+        </div>
     </div>
 
     <footer>
-        <p>Lunar Base Project &copy; 2024</p>
+        <p>&copy; 2024 Lucano Deskovic. lucano.deskovic@gmail.com All rights reserved.</p>
     </footer>
 
-    <button onclick="topFunction()" id="back-to-top" title="Go to top">Top</button>
-
-    <!-- The Modal/Lightbox -->
-    <div id="lightbox" class="lightbox">
-        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <img class="lightbox-content" id="lightbox-img">
-        <div id="caption"></div>
-    </div>
-
+    <!-- Include your JavaScript file to handle dynamic content loading -->
+    <script src="loadContent.js"></script>
     <script>
-        // Array of file paths to load
-        const files = [
-            'content/introduction.html', 
-            'content/goals.html', 
-            'content/population_size.html', 
-            'content/use_cases_civilian-research.html', 
-            'content/use_cases_civilian-resources.html', 
-            'content/use_cases_civilian-health_tourism.html', 
-            'content/use_cases_civilian-stepping_stone.html', 
-            'content/use_cases_defence.html', 
-            'content/architectural_concept.html', 
-            'content/habitat_layout.html',
-            'content/habitat modules.html', 
-            'content/habitat_materials.html',
-            'content/inflatable_habitat.html', 			
-            'content/water_storage_treatment.html', 
-            'content/control_monitoring.html', 
-            'content/surface_supply_logistics.html', 
-            'content/mental_health_wellbeing.html', 
-            'content/long_term_self_sufficiency.html', 
-            'content/governance_management.html', 
-            'content/safety_redundancy.html', 
-            'content/environmental_control.html', 
-            'content/list_of_disruptive_technologies.html', 
-            'content/summary.html'
-        ];
-
-        /**
-         * Function to create a collapsible chapter.
-         * @param {string} title - The title of the chapter.
-         * @param {string} content - The content of the chapter.
-         * @returns {HTMLDivElement} - The chapter element.
-         */
-        const createChapter = (title, content) => {
-            const chapterDiv = document.createElement('div');
-            chapterDiv.className = 'chapter';
-
-            const button = document.createElement('button');
-            button.textContent = title;
-            button.setAttribute('aria-expanded', 'false');
-            button.addEventListener('click', () => {
-                const contentDiv = button.nextElementSibling;
-                const isExpanded = contentDiv.style.display === 'block';
-                contentDiv.style.display = isExpanded ? 'none' : 'block';
-                button.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
-            });
-
-            const contentDiv = document.createElement('div');
-            contentDiv.className = 'chapter-content';
-            contentDiv.innerHTML = content;
-
-            chapterDiv.appendChild(button);
-            chapterDiv.appendChild(contentDiv);
-
-            return chapterDiv;
-        };
-
-        /**
-         * Function to create a header between chapters.
-         * @param {string} title - The title of the header.
-         * @returns {HTMLDivElement} - The header element.
-         */
-        const createHeader = (title) => {
-            const header = document.createElement('div');
-            header.className = 'header-centered';
-            header.textContent = title;
-            return header;
-        };
-
-        /**
-         * Function to fetch and display content from files.
-         */
-        const loadFiles = async () => {
-            const contentDiv = document.getElementById('loaded-content');
-
-            let introContainer, baseAppContainer, conceptOverviewContainer, technologyContainer;
-
-            for (let i = 0; i < files.length; i++) {
-                try {
-                    const response = await fetch(files[i]);
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    const data = await response.text();
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = data;
-
-                    // Use header content for the chapter title, if available
-                    const header = tempDiv.querySelector('header');
-                    const title = header ? header.textContent.trim() : 'Untitled Chapter';
-
-                    const chapterDiv = createChapter(title, tempDiv.innerHTML);
-
-                    if (i === 0) {
-                        // Create a new gray container for Introduction
-                        introContainer = document.createElement('div');
-                        introContainer.className = 'gray-container';
-
-                        const introHeader = createHeader('Introduction');
-                        introContainer.appendChild(introHeader);
-
-                        contentDiv.appendChild(introContainer);
-                    } 
-
-                    if (i >= 0 && i <= 2) {
-                        introContainer.appendChild(chapterDiv);
-                    } else if (i === 3) {
-                        // Create a new gray container for Base Application
-                        baseAppContainer = document.createElement('div');
-                        baseAppContainer.className = 'gray-container';
-
-                        const baseAppHeader = createHeader('Base Application');
-                        baseAppContainer.appendChild(baseAppHeader);
-
-                        contentDiv.appendChild(baseAppContainer);
-                        baseAppContainer.appendChild(chapterDiv);
-                    } else if (i > 3 && i <= 7) {
-                        baseAppContainer.appendChild(chapterDiv);
-                    } else if (i === 8) {
-                        // Create a new gray container for Concept Overview
-                        conceptOverviewContainer = document.createElement('div');
-                        conceptOverviewContainer.className = 'gray-container';
-
-                        const conceptOverviewHeader = createHeader('Concept Overview');
-                        conceptOverviewContainer.appendChild(conceptOverviewHeader);
-
-                        contentDiv.appendChild(conceptOverviewContainer);
-                        conceptOverviewContainer.appendChild(chapterDiv);
-                    } else if (i > 8 && i <= 12) {
-                        conceptOverviewContainer.appendChild(chapterDiv);
-                    } else if (i === 13) {
-                        // Create a new gray container for Technology and Logistics
-                        technologyContainer = document.createElement('div');
-                        technologyContainer.className = 'gray-container';
-
-                        const technologyHeader = createHeader('Technology and Logistics');
-                        technologyContainer.appendChild(technologyHeader);
-
-                        contentDiv.appendChild(technologyContainer);
-                        technologyContainer.appendChild(chapterDiv);
-                    } else if (i > 13 && i <= 20) {
-                        technologyContainer.appendChild(chapterDiv);
+        // Add event listeners for collapsible functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const coll = document.getElementsByClassName('collapsible');
+            
+            Array.from(coll).forEach(function (item) {
+                item.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                    const content = this.nextElementSibling;
+                    if (content.style.display === 'block') {
+                        content.style.display = 'none';
                     } else {
-                        contentDiv.appendChild(chapterDiv);
+                        content.style.display = 'block';
                     }
-
-                    // Apply collapsible functionality to nested sections
-                    chapterDiv.querySelectorAll('.collapsible').forEach(button => {
-                        button.addEventListener('click', function() {
-                            this.classList.toggle("active");
-                            const content = this.nextElementSibling;
-                            content.style.display = content.style.display === "block" ? "none" : "block";
-                        });
-                    });
-                } catch (error) {
-                    console.error('Fetch error:', error);
-                    const errorDiv = document.createElement('div');
-                    errorDiv.textContent = `Failed to load ${files[i]}: ${error.message}`;
-                    errorDiv.style.color = 'red';
-                    contentDiv.appendChild(errorDiv);
-                }
-            }
-        };
-
-        // Call the function to load files
-        loadFiles();
-
-        // Back to Top Button
-        var topButton = document.getElementById("back-to-top");
-        window.onscroll = function() {scrollFunction()};
-
-        function scrollFunction() {
-            var container = document.querySelector('.container');
-            if (container.scrollTop > 20) {
-                topButton.style.display = "block";
-            } else {
-                topButton.style.display = "none";
-            }
-        }
-
-        function topFunction() {
-            var container = document.querySelector('.container');
-            container.scrollTop = 0;
-        }
-
-        // Lightbox functions
-        function openLightbox(img) {
-            var lightbox = document.getElementById("lightbox");
-            var lightboxImg = document.getElementById("lightbox-img");
-            lightbox.style.display = "block";
-            lightboxImg.src = img.src;
-            var captionText = document.getElementById("caption");
-            captionText.innerHTML = img.alt;
-        }
-
-        function closeLightbox() {
-            var lightbox = document.getElementById("lightbox");
-            lightbox.style.display = "none";
-        }
+                });
+            });
+        });
     </script>
 </body>
 </html>
