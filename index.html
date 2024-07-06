@@ -17,7 +17,7 @@
         }
         .banner {
             background-color: #333;
-            padding: 20px;
+            padding: 0px;
             width: 100%;
             position: fixed;
             top: 0;
@@ -116,6 +116,7 @@
         }
     </style>
     <script>
+        // List of files with titles and corresponding file paths
         const files = [
             { title: "Introduction", file: "content/introduction.html" },
             { title: "Economical Factors", file: "content/introduction_economical_factors.html" },
@@ -143,6 +144,7 @@
             { title: "Summary", file: "content/summary.html" }
         ];
 
+        // Function to load content into the page
         function loadContent(contentHTML) {
             document.getElementById('content').innerHTML = contentHTML;
             document.title = 'Lunar Base Project';
@@ -152,12 +154,14 @@
         document.addEventListener('DOMContentLoaded', () => {
             const dropdownContent = document.querySelector('.dropdown-content');
 
+            // Generate dropdown menu links
             files.forEach((item, index) => {
                 const link = document.createElement('a');
                 link.href = '#';
                 link.textContent = item.title;
                 link.setAttribute('aria-label', item.title);
                 link.onclick = () => {
+                    // Fetch and load the content when a link is clicked
                     fetch(item.file)
                         .then(response => {
                             if (!response.ok) {
@@ -174,11 +178,12 @@
                             alert('An error occurred while loading the content. Please try again later.');
                         });
 
-                    return false;
+                    return false; // Prevent default link behavior
                 };
 
                 dropdownContent.appendChild(link);
 
+                // Add dividers between certain sections
                 if (index === 3 || index === 8 || index === 13 || index === 21) {
                     const divider = document.createElement('div');
                     divider.className = 'divider';
@@ -186,7 +191,7 @@
                 }
             });
 
-            // Load Introduction by default
+            // Load Introduction by default on page load
             fetch(files[0].file)
                 .then(response => {
                     if (!response.ok) {
@@ -204,15 +209,18 @@
                 });
         });
 
+        // Update the state of the footer navigation buttons
         function updateFooterLinks(currentIndex) {
             const prevButton = document.getElementById('prev-chapter');
             const nextButton = document.getElementById('next-chapter');
 
+            // Check if an index corresponds to a divider
             function isDivider(index) {
                 const element = document.querySelector(`.dropdown-content a:nth-child(${index + 1})`);
                 return element && element.classList.contains('divider');
             }
 
+            // Functionality for the previous chapter button
             prevButton.onclick = () => {
                 let newIndex = currentIndex - 1;
                 while (newIndex >= 0 && (isDivider(newIndex) || newIndex < 0)) {
@@ -223,6 +231,7 @@
                 }
             };
 
+            // Functionality for the next chapter button
             nextButton.onclick = () => {
                 let newIndex = currentIndex + 1;
                 while (newIndex < files.length && isDivider(newIndex)) {
@@ -233,12 +242,14 @@
                 }
             };
 
+            // Disable buttons if at the start or end of the list
             prevButton.disabled = currentIndex === 0;
             nextButton.disabled = currentIndex === files.length - 1;
         }
     </script>
 </head>
 <body>
+    <!-- Banner section -->
     <div class="banner">
         <div class="banner-content">
             <h1>Lunar Base Project</h1>
@@ -250,11 +261,14 @@
             </div>
         </div>
     </div>
+    
+    <!-- Main content section -->
     <div class="content" id="content">
         <!-- Content will be loaded here -->
         <p>Select a file from the dropdown menu to display its content here.</p>
     </div>
 
+    <!-- Footer navigation buttons -->
     <div class="footer">
         <button id="prev-chapter" disabled aria-label="Previous chapter"><<<</button>
         <button id="next-chapter" aria-label="Next chapter">>>></button>
