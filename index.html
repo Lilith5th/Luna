@@ -196,20 +196,30 @@
             const prevButton = document.getElementById('prev-chapter');
             const nextButton = document.getElementById('next-chapter');
 
+            const validIndexes = keysArray.filter((key, index) => {
+                const isDivider = document.querySelector(`.dropdown-content a:nth-child(${index + 1})`) === null;
+                return !isDivider;
+            });
+
             prevButton.onclick = () => {
-                if (currentIndex > 0) {
-                    document.querySelector(`.dropdown-content a:nth-child(${currentIndex + 1})`).click();
+                const prevIndex = validIndexes.indexOf(keysArray[currentIndex]) - 1;
+                if (prevIndex >= 0) {
+                    const prevValidIndex = keysArray.indexOf(validIndexes[prevIndex]);
+                    document.querySelector(`.dropdown-content a:nth-child(${prevValidIndex + 1})`).click();
                 }
             };
 
             nextButton.onclick = () => {
-                if (currentIndex < keysArray.length - 1) {
-                    document.querySelector(`.dropdown-content a:nth-child(${currentIndex + 2})`).click();
+                const nextIndex = validIndexes.indexOf(keysArray[currentIndex]) + 1;
+                if (nextIndex < validIndexes.length) {
+                    const nextValidIndex = keysArray.indexOf(validIndexes[nextIndex]);
+                    document.querySelector(`.dropdown-content a:nth-child(${nextValidIndex + 1})`).click();
                 }
             };
 
-            prevButton.disabled = currentIndex === 0;
-            nextButton.disabled = currentIndex === keysArray.length - 1;
+            const currentValidIndex = validIndexes.indexOf(keysArray[currentIndex]);
+            prevButton.disabled = currentValidIndex === 0;
+            nextButton.disabled = currentValidIndex === validIndexes.length - 1;
         }
     </script>
 </head>
