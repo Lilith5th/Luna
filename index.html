@@ -75,12 +75,13 @@
             height: auto;
         }
         .dropbtn {
-            background: url('https://cdn-icons-png.flaticon.com/512/1828/1828859.png') no-repeat center;
+            background: url('dropdown.png') no-repeat center;
             background-size: contain;
             border: none;
             cursor: pointer;
             height: 40px;
             width: 40px;
+            aria-label: "Dropdown menu button";
         }
         .footer {
             background-color: #333;
@@ -104,6 +105,10 @@
         .footer button:hover {
             background-color: #555;
         }
+        .footer button:disabled {
+            background-color: #666;
+            cursor: not-allowed;
+        }
         .divider {
             height: 1px;
             background-color: #555;
@@ -111,45 +116,46 @@
         }
     </style>
     <script>
+        const files = [
+            { title: "Introduction", file: "content/introduction.html" },
+            { title: "Economical Factors", file: "content/introduction_economical_factors.html" },
+            { title: "Goals", file: "content/goals.html" },
+            { title: "Population Size", file: "content/population_size.html" },
+            { title: "Civilian Research", file: "content/use_cases_civilian-research.html" },
+            { title: "Civilian Resources", file: "content/use_cases_civilian-resources.html" },
+            { title: "Civilian Health Tourism", file: "content/use_cases_civilian-health_tourism.html" },
+            { title: "Civilian Stepping Stone", file: "content/use_cases_civilian-stepping_stone.html" },
+            { title: "Defence", file: "content/use_cases_defence.html" },
+            { title: "Architectural Concept", file: "content/architectural_concept.html" },
+            { title: "General Layout", file: "content/habitat_layout.html" },
+            { title: "Modules", file: "content/habitat_modules.html" },
+            { title: "Materials", file: "content/habitat_materials.html" },
+            { title: "Inflatable Habitat", file: "content/inflatable_habitat.html" },
+            { title: "Water Storage and Treatment", file: "content/water_storage_treatment.html" },
+            { title: "Control and Monitoring", file: "content/control_monitoring.html" },
+            { title: "Surface Supply Logistics", file: "content/surface_supply_logistics.html" },
+            { title: "Mental Health and Wellbeing", file: "content/mental_health_wellbeing.html" },
+            { title: "Long Term Self Sufficiency", file: "content/long_term_self_sufficiency.html" },
+            { title: "Governance and Management", file: "content/governance_management.html" },
+            { title: "Safety and Redundancy", file: "content/safety_redundancy.html" },
+            { title: "Environmental Control", file: "content/environmental_control.html" },
+            { title: "List of Disruptive Technologies", file: "content/list_of_disruptive_technologies.html" },
+            { title: "Summary", file: "content/summary.html" }
+        ];
+
         function loadContent(contentHTML) {
             document.getElementById('content').innerHTML = contentHTML;
             document.title = 'Lunar Base Project';
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const files = [
-                { title: "Introduction", file: "content/introduction.html" },
-                { title: "Economical Factors", file: "content/introduction_economical_factors.html" },
-                { title: "Goals", file: "content/goals.html" },
-                { title: "Population Size", file: "content/population_size.html" },
-                { title: "Civilian Research", file: "content/use_cases_civilian-research.html" },
-                { title: "Civilian Resources", file: "content/use_cases_civilian-resources.html" },
-                { title: "Civilian Health Tourism", file: "content/use_cases_civilian-health_tourism.html" },
-                { title: "Civilian Stepping Stone", file: "content/use_cases_civilian-stepping_stone.html" },
-                { title: "Defence", file: "content/use_cases_defence.html" },
-                { title: "Architectural Concept", file: "content/architectural_concept.html" },
-                { title: "General Layout", file: "content/habitat_layout.html" },
-                { title: "Modules", file: "content/habitat_modules.html" },
-                { title: "Materials", file: "content/habitat_materials.html" },
-                { title: "Inflatable Habitat", file: "content/inflatable_habitat.html" },
-                { title: "Water Storage and Treatment", file: "content/water_storage_treatment.html" },
-                { title: "Control and Monitoring", file: "content/control_monitoring.html" },
-                { title: "Surface Supply Logistics", file: "content/surface_supply_logistics.html" },
-                { title: "Mental Health and Wellbeing", file: "content/mental_health_wellbeing.html" },
-                { title: "Long Term Self Sufficiency", file: "content/long_term_self_sufficiency.html" },
-                { title: "Governance and Management", file: "content/governance_management.html" },
-                { title: "Safety and Redundancy", file: "content/safety_redundancy.html" },
-                { title: "Environmental Control", file: "content/environmental_control.html" },
-                { title: "List of Disruptive Technologies", file: "content/list_of_disruptive_technologies.html" },
-                { title: "Summary", file: "content/summary.html" }
-            ];
-
             const dropdownContent = document.querySelector('.dropdown-content');
 
             files.forEach((item, index) => {
                 const link = document.createElement('a');
                 link.href = '#';
                 link.textContent = item.title;
+                link.setAttribute('aria-label', item.title);
                 link.onclick = () => {
                     fetch(item.file)
                         .then(response => {
@@ -160,10 +166,13 @@
                         })
                         .then(data => {
                             loadContent(data);
+                            updateFooterLinks(index);
                         })
-                        .catch(error => console.error('Error loading content:', error));
+                        .catch(error => {
+                            console.error('Error loading content:', error);
+                            alert('An error occurred while loading the content. Please try again later.');
+                        });
 
-                    updateFooterLinks(index);
                     return false;
                 };
 
@@ -186,45 +195,21 @@
                 })
                 .then(data => {
                     loadContent(data);
+                    updateFooterLinks(0);
                 })
-                .catch(error => console.error('Error loading content:', error));
-
-            updateFooterLinks(0);
+                .catch(error => {
+                    console.error('Error loading content:', error);
+                    alert('An error occurred while loading the initial content. Please try again later.');
+                });
         });
 
         function updateFooterLinks(currentIndex) {
             const prevButton = document.getElementById('prev-chapter');
             const nextButton = document.getElementById('next-chapter');
-            const files = [
-                "Introduction",
-                "Economical Factors",
-                "Goals",
-                "Population Size",
-                "Civilian Research",
-                "Civilian Resources",
-                "Civilian Health Tourism",
-                "Civilian Stepping Stone",
-                "Defence",
-                "Architectural Concept",
-                "General Layout",
-                "Modules",
-                "Materials",
-                "Inflatable Habitat",
-                "Water Storage and Treatment",
-                "Control and Monitoring",
-                "Surface Supply Logistics",
-                "Mental Health and Wellbeing",
-                "Long Term Self Sufficiency",
-                "Governance and Management",
-                "Safety and Redundancy",
-                "Environmental Control",
-                "List of Disruptive Technologies",
-                "Summary"
-            ];
 
             prevButton.onclick = () => {
                 if (currentIndex > 0) {
-                    document.querySelector(`.dropdown-content a:nth-child(${currentIndex})`).click();
+					document.querySelector(`.dropdown-content a:nth-child(${currentIndex})`).click();
                 }
             };
 
@@ -244,7 +229,7 @@
         <div class="banner-content">
             <h1>Lunar Base Project</h1>
             <div class="dropdown">
-                <button class="dropbtn"></button>
+                <button class="dropbtn" aria-label="Open dropdown menu"></button>
                 <div class="dropdown-content">
                     <!-- Links generated from file list will be inserted here -->
                 </div>
@@ -257,8 +242,8 @@
     </div>
 
     <div class="footer">
-        <button id="prev-chapter"><<<</button>
-        <button id="next-chapter">>>></button>
+        <button id="prev-chapter" disabled aria-label="Previous chapter"><<<</button>
+        <button id="next-chapter" aria-label="Next chapter">>>></button>
     </div>
 </body>
 </html>
