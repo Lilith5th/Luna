@@ -46,8 +46,8 @@
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1;
             right: 0;
-            max-height: 80vh; /* Adjust this value as necessary */
-            overflow-y: auto; /* Enables vertical scrolling */
+            max-height: 80vh;
+            overflow-y: auto;
         }
         .dropdown-content a {
             color: white;
@@ -66,7 +66,7 @@
             background-color: #222;
             width: 90%;
             max-width: var(--container-width);
-            margin: 120px auto 20px auto; /* Adjusted margin to ensure content is below the fixed header */
+            margin: 120px auto 20px auto;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
@@ -113,71 +113,62 @@
     <script>
         function loadContent(contentHTML) {
             document.getElementById('content').innerHTML = contentHTML;
-            // Update the title if necessary
-            document.title = 'Base Layout - Lunar Base Project';
+            document.title = 'Lunar Base Project';
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const files = {
-                "Introduction": "content/introduction.html",
-                "Economical Factors": "content/introduction_economical_factors.html",
-                "Goals": "content/goals.html",
-                "Population Size": "content/population_size.html",
-                "Civilian Research": "content/use_cases_civilian-research.html",
-                "Civilian Resources": "content/use_cases_civilian-resources.html",
-                "Civilian Health Tourism": "content/use_cases_civilian-health_tourism.html",
-                "Civilian Stepping Stone": "content/use_cases_civilian-stepping_stone.html",
-                "Defence": "content/use_cases_defence.html",
-                "Architectural Concept": "content/architectural_concept.html",
-                "General Layout": "content/habitat_layout.html",
-                "Modules": "content/habitat_modules.html",
-                "Materials": "content/habitat_materials.html",
-                "Inflatable Habitat": "content/inflatable_habitat.html",
-                "Water Storage and Treatment": "content/water_storage_treatment.html",
-                "Control and Monitoring": "content/control_monitoring.html",
-                "Surface Supply Logistics": "content/surface_supply_logistics.html",
-                "Mental Health and Wellbeing": "content/mental_health_wellbeing.html",
-                "Long Term Self Sufficiency": "content/long_term_self_sufficiency.html",
-                "Governance and Management": "content/governance_management.html",
-                "Safety and Redundancy": "content/safety_redundancy.html",
-                "Environmental Control": "content/environmental_control.html",
-                "List of Disruptive Technologies": "content/list_of_disruptive_technologies.html",
-                "Summary": "content/summary.html"
-            };
+            const files = [
+                { title: "Introduction", file: "content/introduction.html" },
+                { title: "Economical Factors", file: "content/introduction_economical_factors.html" },
+                { title: "Goals", file: "content/goals.html" },
+                { title: "Population Size", file: "content/population_size.html" },
+                { title: "Civilian Research", file: "content/use_cases_civilian-research.html" },
+                { title: "Civilian Resources", file: "content/use_cases_civilian-resources.html" },
+                { title: "Civilian Health Tourism", file: "content/use_cases_civilian-health_tourism.html" },
+                { title: "Civilian Stepping Stone", file: "content/use_cases_civilian-stepping_stone.html" },
+                { title: "Defence", file: "content/use_cases_defence.html" },
+                { title: "Architectural Concept", file: "content/architectural_concept.html" },
+                { title: "General Layout", file: "content/habitat_layout.html" },
+                { title: "Modules", file: "content/habitat_modules.html" },
+                { title: "Materials", file: "content/habitat_materials.html" },
+                { title: "Inflatable Habitat", file: "content/inflatable_habitat.html" },
+                { title: "Water Storage and Treatment", file: "content/water_storage_treatment.html" },
+                { title: "Control and Monitoring", file: "content/control_monitoring.html" },
+                { title: "Surface Supply Logistics", file: "content/surface_supply_logistics.html" },
+                { title: "Mental Health and Wellbeing", file: "content/mental_health_wellbeing.html" },
+                { title: "Long Term Self Sufficiency", file: "content/long_term_self_sufficiency.html" },
+                { title: "Governance and Management", file: "content/governance_management.html" },
+                { title: "Safety and Redundancy", file: "content/safety_redundancy.html" },
+                { title: "Environmental Control", file: "content/environmental_control.html" },
+                { title: "List of Disruptive Technologies", file: "content/list_of_disruptive_technologies.html" },
+                { title: "Summary", file: "content/summary.html" }
+            ];
 
             const dropdownContent = document.querySelector('.dropdown-content');
 
-            Object.keys(files).forEach((key, index, array) => {
-                const value = files[key];
-
+            files.forEach((item, index) => {
                 const link = document.createElement('a');
                 link.href = '#';
-                link.textContent = key;
+                link.textContent = item.title;
                 link.onclick = () => {
-                    // Check if the content is the Base Layout
-                    if (key === 'General Layout') {
-                        loadContent(document.getElementById('base-layout').innerHTML);
-                    } else {
-                        // Load content from external file
-                        fetch(value)
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error('Network response was not ok ' + response.statusText);
-                                }
-                                return response.text();
-                            })
-                            .then(data => {
-                                loadContent(data);
-                            })
-                            .catch(error => console.error('Error loading content:', error));
-                    }
-                    updateFooterLinks(index, array);
+                    fetch(item.file)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok ' + response.statusText);
+                            }
+                            return response.text();
+                        })
+                        .then(data => {
+                            loadContent(data);
+                        })
+                        .catch(error => console.error('Error loading content:', error));
+
+                    updateFooterLinks(index);
                     return false;
                 };
 
                 dropdownContent.appendChild(link);
 
-                // Add dividers after specific chapters
                 if (index === 3 || index === 9 || index === 14 || index === 20) {
                     const divider = document.createElement('div');
                     divider.className = 'divider';
@@ -185,41 +176,66 @@
                 }
             });
 
-            // Load introduction file by default
-            loadContent(document.getElementById('base-layout').innerHTML);
+            // Load Introduction by default
+            fetch(files[0].file)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    loadContent(data);
+                })
+                .catch(error => console.error('Error loading content:', error));
 
-            // Initialize footer links
-            updateFooterLinks(0, Object.keys(files));
+            updateFooterLinks(0);
         });
 
-        function updateFooterLinks(currentIndex, keysArray) {
+        function updateFooterLinks(currentIndex) {
             const prevButton = document.getElementById('prev-chapter');
             const nextButton = document.getElementById('next-chapter');
-
-            const validIndexes = keysArray.filter((key, index) => {
-                const isDivider = document.querySelector(`.dropdown-content a:nth-child(${index + 1})`) === null;
-                return !isDivider;
-            });
+            const files = [
+                "Introduction",
+                "Economical Factors",
+                "Goals",
+                "Population Size",
+                "Civilian Research",
+                "Civilian Resources",
+                "Civilian Health Tourism",
+                "Civilian Stepping Stone",
+                "Defence",
+                "Architectural Concept",
+                "General Layout",
+                "Modules",
+                "Materials",
+                "Inflatable Habitat",
+                "Water Storage and Treatment",
+                "Control and Monitoring",
+                "Surface Supply Logistics",
+                "Mental Health and Wellbeing",
+                "Long Term Self Sufficiency",
+                "Governance and Management",
+                "Safety and Redundancy",
+                "Environmental Control",
+                "List of Disruptive Technologies",
+                "Summary"
+            ];
 
             prevButton.onclick = () => {
-                const prevIndex = validIndexes.indexOf(keysArray[currentIndex]) - 1;
-                if (prevIndex >= 0) {
-                    const prevValidIndex = keysArray.indexOf(validIndexes[prevIndex]);
-                    document.querySelector(`.dropdown-content a:nth-child(${prevValidIndex + 1})`).click();
+                if (currentIndex > 0) {
+                    document.querySelector(`.dropdown-content a:nth-child(${currentIndex})`).click();
                 }
             };
 
             nextButton.onclick = () => {
-                const nextIndex = validIndexes.indexOf(keysArray[currentIndex]) + 1;
-                if (nextIndex < validIndexes.length) {
-                    const nextValidIndex = keysArray.indexOf(validIndexes[nextIndex]);
-                    document.querySelector(`.dropdown-content a:nth-child(${nextValidIndex + 1})`).click();
+                if (currentIndex < files.length - 1) {
+                    document.querySelector(`.dropdown-content a:nth-child(${currentIndex + 2})`).click();
                 }
             };
 
-            const currentValidIndex = validIndexes.indexOf(keysArray[currentIndex]);
-            prevButton.disabled = currentValidIndex === 0;
-            nextButton.disabled = currentValidIndex === validIndexes.length - 1;
+            prevButton.disabled = currentIndex === 0;
+            nextButton.disabled = currentIndex === files.length - 1;
         }
     </script>
 </head>
@@ -243,41 +259,6 @@
     <div class="footer">
         <button id="prev-chapter"><<<</button>
         <button id="next-chapter">>>></button>
-    </div>
-
-    <!-- Base Layout content -->
-    <div id="base-layout" style="display: none;">
-        <header>
-            <h1>Base Layout</h1>
-        </header>
-        <div class="container">
-            <section id="habitat-layout">
-                <h2>Base Layout</h2>
-                <img src="MidjourneyPNG_07_01/lilith5th_A_detailed_illustration_of_the_best_materials_for_an__b5e0b696-0aa9-4edd-86d7-ce0edf423b2c.png" alt="Illustration for Habitat Structure" onclick="openLightbox(this)">
-                <h3>Base Layout</h3>
-                
-                <h4>Above-Ground Portion</h4>
-                <ul>
-                    <li><strong>Technology:</strong> Utilizes both pre-made deployable structures and 3D-printed structures.</li>
-                    <li><strong>Advantages:</strong> Offers flexibility in design and construction speed, adapting to mission-specific needs and environmental conditions.</li>
-                </ul>
-
-                <h4>Underground Portion</h4>
-                <ul>
-                    <li><strong>Preferred Technology:</strong> Inflatable structures combined with traditional construction techniques and 3D printing.</li>
-                    <li><strong>Advantages:</strong> Provides enhanced radiation protection and thermal insulation, crucial for long-term human habitation. Additionally, it maximizes available space for essential functions and living quarters.</li>
-                </ul>
-
-                <h3>Key Features</h3>
-                <ul>
-                    <li><strong>Radiation Protection:</strong> Integrates materials and design strategies to shield inhabitants from harmful cosmic radiation and solar particles.</li>
-                    <li><strong>Thermal Control:</strong> Utilizes advanced insulation techniques to maintain stable internal temperatures despite extreme external conditions.</li>
-                    <li><strong>Modular Design:</strong> Allows for scalability and adaptability, accommodating future expansion and technological upgrades.</li>
-                    <li><strong>Integration of Systems:</strong> Ensures seamless operation of life support systems, energy production, waste management, and communication infrastructure.</li>
-                    <li><strong>Safety and Emergency Preparedness:</strong> Incorporates redundant systems and emergency protocols to safeguard crew members during unforeseen events.</li>
-                </ul>
-            </section>
-        </div>
     </div>
 </body>
 </html>
