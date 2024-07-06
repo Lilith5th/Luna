@@ -1,22 +1,23 @@
 <header>
-    <h1>Population Planning and Precedents for the Lunar Base</h1>
+    <h1>Strategic Population Planning for the Lunar Base</h1>
 </header>
 <div class="container">
     <section id="population-size">
-        <h2>Population Strategy</h2>
-        <img src="MidjourneyPNG_07_01/amundsen-scott-base.jpg" alt="Illustration for Introduction">
-        <p>At this stage of the design, establishing baseline population sizes is crucial for ensuring the long-term success and sustainability of the lunar base. A carefully planned population will support the base's operational needs, growth potential, and social structure. Here are the projected phases of population growth:</p>
+        <h2>Strategic Growth Phases</h2>
+        <img src="MidjourneyPNG_07_01/amundsen-scott-base.jpg" alt="Visual Representation for Strategic Growth">
+        <p>Defining initial population sizes is essential for the lunar base's sustainability and operational success. A well-calculated population will bolster the base’s functionality, expansion capabilities, and societal structure. The proposed growth phases include:</p>
         <ul>
-            <li><strong>Initial Phase:</strong> 30-50 people - Focused on setup and initial operations of the base.</li>
-            <li><strong>Expansion Phase:</strong> 100-200 people - Aimed at developing a fully functional and sustainable base.</li>
-            <li><strong>Long-Term Phase:</strong> 500-1000 people - Designed to ensure a stable, self-sustaining community with comprehensive role fulfillment and built-in redundancy.</li>
+            <li><strong>Initial Phase:</strong> 30-50 residents focused on establishing and commencing operations.</li>
+            <li><strong>Expansion Phase:</strong> 100-200 residents aimed at achieving a self-sustaining status.</li>
+            <li><strong>Long-Term Phase:</strong> 500-1000 residents to maintain a stable, self-reliant community that supports diverse roles and ensures redundancy.</li>
         </ul>
-        <p>This strategic population planning allows for the development of a robust community capable of supporting itself through multiple generations. The phased growth approach ensures that each stage of development is manageable and that infrastructure and resources evolve in step with population increases.</p>
+        <p>This phased approach to population growth ensures controlled development, with infrastructure and resources scaling appropriately with population increases, thereby facilitating a thriving community capable of enduring multiple generations.</p>
     </section>
-    <button class="collapsible">View Precedents of Isolated Communities</button>
+	
     <div class="content">
-        <section id="precedents">
-            <p>Here's a look at some isolated communities that serve as precedents for planning a lunar base:</p>
+        <button onclick="toggleVisibility('precedents')">Toggle Precedents</button>
+        <section id="precedents" style="display: none;">
+            <p>Examining similar isolated communities offers valuable insights for lunar base planning:</p>
             <ul>
                 <li><strong>Amundsen-Scott South Pole Station:</strong> Extreme isolation in Antarctica, supporting self-sufficient scientific research in harsh conditions. <br>Population: Approximately 150 in summer, 50 in winter.</li>
                 <li><strong>Submarines:</strong> Extended missions under the sea, entirely self-contained with recycled life support systems. <br>Population: Ranges from 15 to over 150 crew members, depending on the type of submarine.</li>
@@ -30,3 +31,14 @@
         </section>
     </div>
 </div>
+
+<script>
+function toggleVisibility(sectionId) {
+    var section = document.getElementById(sectionId);
+    if (section.style.display === 'none') {
+        section.style.display = 'block';
+    } else {
+        section.style.display = 'none';
+    }
+}
+</script>
