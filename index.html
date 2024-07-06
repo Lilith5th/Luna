@@ -26,6 +26,9 @@
         .collapsible-container {
             width: 100%;
         }
+        .collapsible, .content {
+            border-radius: 5px;
+        }
         .collapsible {
             cursor: pointer;
             border: none;
@@ -36,7 +39,6 @@
             padding: 15px; /* Increased padding for better touch targets */
             width: 100%;
             transition: background-color 0.3s;
-            border-radius: 5px;
             margin-bottom: 10px; /* Add margin bottom */
             font-size: 1rem; /* Standardize font size */
         }
@@ -48,7 +50,6 @@
             padding: 15px; /* Add padding inside the content */
             overflow: hidden;
             background-color: #222; /* Dark background for content */
-            border-radius: 5px;
             margin-top: -10px; /* Adjust margin to align with button */
             color: #000; /* Black text color */
         }
@@ -182,7 +183,7 @@
                         nextFiveContainer.appendChild(section);
                     } else if (sectionCount < 13) {  // Following five chapters
                         followingFiveContainer.appendChild(section);
-                    } else if (sectionCount < 21) {  // Following eight chapters
+                    } else if (sectionCount < 20) {  // Following seven chapters
                         followingEightContainer.appendChild(section);
                     } else {  // Last two chapters
                         lastTwoContainer.appendChild(section);
