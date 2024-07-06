@@ -107,7 +107,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2024 Lucano Deskovic. lucano.deskovic@gmail.com All rights reserved.</p>
+        <p>&copy; 2024 Lucano Deskovic / lucano.deskovic@gmail.com / V 1.01 All rights reserved.</p>
     </footer>
 
     <script>
@@ -141,6 +141,24 @@
         async function fetchAndDisplayContent() {
             const container = document.getElementById('content-container');
 
+            // Array to store all fetch promises
+            const fetchPromises = files.map(async file => {
+                try {
+                    const response = await fetch(file);
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch ${file}: ${response.status} ${response.statusText}`);
+                    }
+                    const html = await response.text();
+                    return { file, html };
+                } catch (error) {
+                    console.error(error);
+                    return { file, html: `<div>Error loading ${file}</div>` };
+                }
+            });
+
+            // Wait for all promises to resolve
+            const results = await Promise.all(fetchPromises);
+
             // Create containers for each group of sections
             const firstThreeContainer = createSectionContainer('Introduction');
             const nextFiveContainer = createSectionContainer('Application');
@@ -151,49 +169,38 @@
             // Track the number of sections added
             let sectionCount = 0;
 
-            for (const file of files) {
-                try {
-                    const response = await fetch(file);
-                    if (!response.ok) {
-                        throw new Error(`Failed to fetch ${file}: ${response.status} ${response.statusText}`);
-                    }
+            // Process each fetched result
+            results.forEach(({ file, html }) => {
+                // Create a temporary div to parse the HTML and find the title
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
 
-                    const html = await response.text();
+                // Find the header element (assuming it's the first h1 or h2)
+                const headerElement = tempDiv.querySelector('h1, h2');
 
-                    // Create a temporary div to parse the HTML and find the title
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = html;
+                // Use header text as button text
+                const buttonText = headerElement ? headerElement.textContent : 'Untitled';
 
-                    // Find the header element (assuming it's the first h1 or h2)
-                    const headerElement = tempDiv.querySelector('h1, h2');
+                // Create a section for each file's content
+                const section = document.createElement('div');
+                section.classList.add('content-section');
+                section.innerHTML = `<button class="collapsible">${buttonText}</button><div class="content">${html}</div>`;
 
-                    // Use header text as button text
-                    const buttonText = headerElement ? headerElement.textContent : 'Untitled';
-
-                    // Create a section for each file's content
-                    const section = document.createElement('div');
-                    section.classList.add('content-section');
-
-                    section.innerHTML = `<button class="collapsible">${buttonText}</button><div class="content">${html}</div>`;
-
-                    // Append the section to the appropriate container
-                    if (sectionCount < 3) {
-                        firstThreeContainer.appendChild(section);
-                    } else if (sectionCount < 8) {  // Next five chapters
-                        nextFiveContainer.appendChild(section);
-                    } else if (sectionCount < 13) {  // Following five chapters
-                        followingFiveContainer.appendChild(section);
-                    } else if (sectionCount < 20) {  // Following seven chapters
-                        followingEightContainer.appendChild(section);
-                    } else {  // Last two chapters
-                        lastTwoContainer.appendChild(section);
-                    }
-
-                    sectionCount++;
-                } catch (error) {
-                    console.error(error);
+                // Append the section to the appropriate container
+                if (sectionCount < 3) {
+                    firstThreeContainer.appendChild(section);
+                } else if (sectionCount < 8) {  // Next five chapters
+                    nextFiveContainer.appendChild(section);
+                } else if (sectionCount < 13) {  // Following five chapters
+                    followingFiveContainer.appendChild(section);
+                } else if (sectionCount < 20) {  // Following seven chapters
+                    followingEightContainer.appendChild(section);
+                } else {  // Last two chapters
+                    lastTwoContainer.appendChild(section);
                 }
-            }
+
+                sectionCount++;
+            });
 
             // Append the containers to the main container
             container.appendChild(firstThreeContainer);
