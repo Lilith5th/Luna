@@ -3,17 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Black Themed Page with Dropdown Menu</title>
+    <title>Lunar Base Project</title>
     <style>
+        :root {
+            --container-width: 800px;
+        }
         body {
             background-color: #000;
             color: #fff;
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
         .banner {
             background-color: #333;
             padding: 20px;
-            text-align: center;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .banner-content {
+            width: 90%;
+            max-width: var(--container-width);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .dropdown {
             position: relative;
@@ -26,6 +45,7 @@
             min-width: 200px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1;
+            right: 0;
         }
         .dropdown-content a {
             color: white;
@@ -41,78 +61,147 @@
         }
         .content {
             padding: 20px;
+            background-color: #222;
+            width: 90%;
+            max-width: var(--container-width);
+            margin: 120px auto 20px auto; /* Adjusted margin to ensure content is below the fixed header */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        .content img {
+            width: 100%;
+            height: auto;
+        }
+        .dropbtn {
+            background: url('https://cdn-icons-png.flaticon.com/512/1828/1828859.png') no-repeat center;
+            background-size: contain;
+            border: none;
+            cursor: pointer;
+            height: 40px;
+            width: 40px;
         }
     </style>
     <script>
-        function loadContent(file) {
-            fetch(file)
-                .then(response => {
-                    console.log('Fetching:', file, 'Status:', response.status);
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    document.getElementById('content').innerHTML = data;
-                })
-                .catch(error => console.error('Error loading content:', error));
+        function loadContent(contentHTML) {
+            document.getElementById('content').innerHTML = contentHTML;
+            // Update the title if necessary
+            document.title = 'Base Layout - Lunar Base Project';
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const files = [
-                'content/introduction.html', 
-                'content/goals.html', 
-                'content/population_size.html', 
-                'content/use_cases_civilian-research.html', 
-                'content/use_cases_civilian-resources.html', 
-                'content/use_cases_civilian-health_tourism.html', 
-                'content/use_cases_civilian-stepping_stone.html', 
-                'content/use_cases_defence.html', 
-                'content/architectural_concept.html', 
-                'content/habitat_layout.html',
-                'content/habitat_modules.html', 
-                'content/habitat_materials.html',
-                'content/inflatable_habitat.html', 			
-                'content/water_storage_treatment.html', 
-                'content/control_monitoring.html', 
-                'content/surface_supply_logistics.html', 
-                'content/mental_health_wellbeing.html', 
-                'content/long_term_self_sufficiency.html', 
-                'content/governance_management.html', 
-                'content/safety_redundancy.html', 
-                'content/environmental_control.html', 
-                'content/list_of_disruptive_technologies.html', 
-                'content/summary.html'
-            ];
+            const files = {
+                "Introduction": "content/introduction.html",
+                "Goals": "content/goals.html",
+                "Population Size": "content/population_size.html",
+                "Civilian Research": "content/use_cases_civilian-research.html",
+                "Civilian Resources": "content/use_cases_civilian-resources.html",
+                "Civilian Health Tourism": "content/use_cases_civilian-health_tourism.html",
+                "Civilian Stepping Stone": "content/use_cases_civilian-stepping_stone.html",
+                "Defence": "content/use_cases_defence.html",
+                "Architectural Concept": "content/architectural_concept.html",
+                "General Layout": "content/habitat_layout.html",
+                "Modules": "content/habitat_modules.html",
+                "Materials": "content/habitat_materials.html",
+                "Inflatable Habitat": "content/inflatable_habitat.html",
+                "Water Storage and Treatment": "content/water_storage_treatment.html",
+                "Control and Monitoring": "content/control_monitoring.html",
+                "Surface Supply Logistics": "content/surface_supply_logistics.html",
+                "Mental Health and Wellbeing": "content/mental_health_wellbeing.html",
+                "Long Term Self Sufficiency": "content/long_term_self_sufficiency.html",
+                "Governance and Management": "content/governance_management.html",
+                "Safety and Redundancy": "content/safety_redundancy.html",
+                "Environmental Control": "content/environmental_control.html",
+                "List of Disruptive Technologies": "content/list_of_disruptive_technologies.html",
+                "Summary": "content/summary.html"
+            };
 
             const dropdownContent = document.querySelector('.dropdown-content');
-            files.forEach(file => {
+
+            Object.keys(files).forEach(key => {
+                const value = files[key];
+
                 const link = document.createElement('a');
                 link.href = '#';
-                link.textContent = file.split('/').pop().replace('.html', '').replace(/_/g, ' ');
+                link.textContent = key;
                 link.onclick = () => {
-                    loadContent(file);
+                    // Check if the content is the Base Layout
+                    if (key === 'General Layout') {
+                        loadContent(document.getElementById('base-layout').innerHTML);
+                    } else {
+                        // Load content from external file
+                        fetch(value)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok ' + response.statusText);
+                                }
+                                return response.text();
+                            })
+                            .then(data => {
+                                loadContent(data);
+                            })
+                            .catch(error => console.error('Error loading content:', error));
+                    }
                     return false;
                 };
+
                 dropdownContent.appendChild(link);
             });
+
+            // Load introduction file by default
+            loadContent(document.getElementById('base-layout').innerHTML);
         });
     </script>
 </head>
 <body>
     <div class="banner">
-        <h1>Black Themed Page</h1>
-        <div class="dropdown">
-            <button class="dropbtn">Select File</button>
-            <div class="dropdown-content">
-                <!-- Links generated from file list will be inserted here -->
+        <div class="banner-content">
+            <h1>Lunar Base Project</h1>
+            <div class="dropdown">
+                <button class="dropbtn"></button>
+                <div class="dropdown-content">
+                    <!-- Links generated from file list will be inserted here -->
+                </div>
             </div>
         </div>
     </div>
     <div class="content" id="content">
         <!-- Content will be loaded here -->
         <p>Select a file from the dropdown menu to display its content here.</p>
+    </div>
+
+    <!-- Base Layout content -->
+    <div id="base-layout" style="display: none;">
+        <header>
+            <h1>Base Layout</h1>
+        </header>
+        <div class="container">
+            <section id="habitat-layout">
+                <h2>Base Layout</h2>
+                <img src="MidjourneyPNG_07_01/lilith5th_A_detailed_illustration_of_the_best_materials_for_an__b5e0b696-0aa9-4edd-86d7-ce0edf423b2c.png" alt="Illustration for Habitat Structure" onclick="openLightbox(this)">
+                <h3>Base Layout</h3>
+                
+                <h4>Above-Ground Portion</h4>
+                <ul>
+                    <li><strong>Technology:</strong> Utilizes both pre-made deployable structures and 3D-printed structures.</li>
+                    <li><strong>Advantages:</strong> Offers flexibility in design and construction speed, adapting to mission-specific needs and environmental conditions.</li>
+                </ul>
+
+                <h4>Underground Portion</h4>
+                <ul>
+                    <li><strong>Preferred Technology:</strong> Inflatable structures combined with traditional construction techniques and 3D printing.</li>
+                    <li><strong>Advantages:</strong> Provides enhanced radiation protection and thermal insulation, crucial for long-term human habitation. Additionally, it maximizes available space for essential functions and living quarters.</li>
+                </ul>
+
+                <h3>Key Features</h3>
+                <ul>
+                    <li><strong>Radiation Protection:</strong> Integrates materials and design strategies to shield inhabitants from harmful cosmic radiation and solar particles.</li>
+                    <li><strong>Thermal Control:</strong> Utilizes advanced insulation techniques to maintain stable internal temperatures despite extreme external conditions.</li>
+                    <li><strong>Modular Design:</strong> Allows for scalability and adaptability, accommodating future expansion and technological upgrades.</li>
+                    <li><strong>Integration of Systems:</strong> Ensures seamless operation of life support systems, energy production, waste management, and communication infrastructure.</li>
+                    <li><strong>Safety and Emergency Preparedness:</strong> Incorporates redundant systems and emergency protocols to safeguard crew members during unforeseen events.</li>
+                </ul>
+            </section>
+        </div>
     </div>
 </body>
 </html>
