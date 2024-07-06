@@ -3,267 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collapsible Content</title>
+    <title>Black Themed Page with Dropdown Menu</title>
     <style>
-        /* Basic styling for demonstration purposes */
         body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #121212; /* Dark background */
-            color: #E0E0E0; /* Light text color */
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
         }
-        .content-container {
-            max-width: 1200px;
-            width: 100%;
-            margin: 20px auto; /* Center align the container with margin */
-            padding: 0 10px; /* Add padding for small devices */
+        .banner {
+            background-color: #333;
+            padding: 20px;
+            text-align: center;
         }
-        .content-section {
-            margin-bottom: 20px; /* Add more margin to separate sections */
+        .dropdown {
+            position: relative;
+            display: inline-block;
         }
-        .collapsible-container {
-            width: 100%;
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #444;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
         }
-        .collapsible, .content {
-            border-radius: 5px;
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
         }
-        .collapsible {
-            cursor: pointer;
-            border: none;
-            outline: none;
-            background-color: #1F1F1F; /* Darker background for buttons */
-            color: #E0E0E0; /* Light text color */
-            text-align: left;
-            padding: 15px; /* Increased padding for better touch targets */
-            width: 100%;
-            font-size: 1rem; /* Standardize font size */
-            transition: background-color 0.3s;
-            margin-bottom: 10px; /* Add margin bottom */
+        .dropdown-content a:hover {
+            background-color: #555;
         }
-        .collapsible.active {
-            background-color: #333; /* Slightly lighter background when active */
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
         .content {
-            display: none;
-            padding: 15px; /* Add padding inside the content */
-            overflow: hidden;
-            background-color: #222; /* Dark background for content */
-            margin-top: -10px; /* Adjust margin to align with button */
-            color: #000; /* Black text color */
-        }
-        header, footer {
-            background-color: #1F1F1F; /* Dark background */
-            color: #E0E0E0; /* Light text color */
-            padding: 15px; /* Increased padding for better appearance */
-            text-align: center;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        footer {
-            margin-top: 20px; /* Add some space at the top */
-        }
-        .grouped-container {
-            border: 1px solid #333; /* Light gray border */
-            padding: 10px;
-            margin-bottom: 20px; /* Add margin bottom */
-            border-radius: 5px;
-            background-color: #1A1A1A; /* Slightly lighter dark background */
-        }
-        .grouped-container h2 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            color: #888888; /* Mid-gray text color */
-        }
-        .bullet-container {
-            background-color: #E6E6E6; /* Slightly different background color */
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            color: #000; /* Black text color */
-        }
-        @media only screen and (max-width: 600px) {
-            .content-container {
-                margin: 10px auto; /* Center the container */
-                padding: 0 10px;
-                box-sizing: border-box;
-            }
-            .collapsible {
-                font-size: 0.9rem; /* Slightly smaller font size */
-                padding: 10px;
-            }
-            .grouped-container {
-                padding: 5px;
-            }
+            padding: 20px;
         }
     </style>
+    <script>
+        function loadContent(file) {
+            fetch(file)
+                .then(response => {
+                    console.log('Fetching:', file, 'Status:', response.status);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById('content').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading content:', error));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const files = [
+                'content/introduction.html', 
+                'content/goals.html', 
+                'content/population_size.html', 
+                'content/use_cases_civilian-research.html', 
+                'content/use_cases_civilian-resources.html', 
+                'content/use_cases_civilian-health_tourism.html', 
+                'content/use_cases_civilian-stepping_stone.html', 
+                'content/use_cases_defence.html', 
+                'content/architectural_concept.html', 
+                'content/habitat_layout.html',
+                'content/habitat_modules.html', 
+                'content/habitat_materials.html',
+                'content/inflatable_habitat.html', 			
+                'content/water_storage_treatment.html', 
+                'content/control_monitoring.html', 
+                'content/surface_supply_logistics.html', 
+                'content/mental_health_wellbeing.html', 
+                'content/long_term_self_sufficiency.html', 
+                'content/governance_management.html', 
+                'content/safety_redundancy.html', 
+                'content/environmental_control.html', 
+                'content/list_of_disruptive_technologies.html', 
+                'content/summary.html'
+            ];
+
+            const dropdownContent = document.querySelector('.dropdown-content');
+            files.forEach(file => {
+                const link = document.createElement('a');
+                link.href = '#';
+                link.textContent = file.split('/').pop().replace('.html', '').replace(/_/g, ' ');
+                link.onclick = () => {
+                    loadContent(file);
+                    return false;
+                };
+                dropdownContent.appendChild(link);
+            });
+        });
+    </script>
 </head>
 <body>
-    <header>
-        <h1>Lunar Base Project</h1>
-    </header>
-
-    <div class="content-container">
-        <div id="content-container" class="collapsible-container">
-            <!-- Content will be dynamically loaded here -->
+    <div class="banner">
+        <h1>Black Themed Page</h1>
+        <div class="dropdown">
+            <button class="dropbtn">Select File</button>
+            <div class="dropdown-content">
+                <!-- Links generated from file list will be inserted here -->
+            </div>
         </div>
     </div>
-
-    <footer>
-        <p>&copy; 2024 Lucano Deskovic / lucano.deskovic@gmail.com / V 1.01 All rights reserved.</p>
-    </footer>
-
-    <script>
-        const files = [
-            'content/introduction.html', 
-            'content/goals.html', 
-            'content/population_size.html', 
-            'content/use_cases_civilian-research.html', 
-            'content/use_cases_civilian-resources.html', 
-            'content/use_cases_civilian-health_tourism.html', 
-            'content/use_cases_civilian-stepping_stone.html', 
-            'content/use_cases_defence.html', 
-            'content/architectural_concept.html', 
-            'content/habitat_layout.html',
-            'content/habitat_modules.html', 
-            'content/habitat_materials.html',
-            'content/inflatable_habitat.html', 			
-            'content/water_storage_treatment.html', 
-            'content/control_monitoring.html', 
-            'content/surface_supply_logistics.html', 
-            'content/mental_health_wellbeing.html', 
-            'content/long_term_self_sufficiency.html', 
-            'content/governance_management.html', 
-            'content/safety_redundancy.html', 
-            'content/environmental_control.html', 
-            'content/list_of_disruptive_technologies.html', 
-            'content/summary.html'
-        ];
-
-        // Function to fetch content and append to the DOM
-        async function fetchAndDisplayContent() {
-            const container = document.getElementById('content-container');
-
-            // Array to store all fetch promises
-            const fetchPromises = files.map(async file => {
-                try {
-                    const response = await fetch(file);
-                    if (!response.ok) {
-                        throw new Error(`Failed to fetch ${file}: ${response.status} ${response.statusText}`);
-                    }
-                    const html = await response.text();
-                    return { file, html };
-                } catch (error) {
-                    console.error(error);
-                    return { file, html: `<div>Error loading ${file}</div>` };
-                }
-            });
-
-            // Wait for all promises to resolve
-            const results = await Promise.all(fetchPromises);
-
-            // Create containers for each group of sections
-            const firstThreeContainer = createSectionContainer('Introduction');
-            const nextFiveContainer = createSectionContainer('Application');
-            const followingFiveContainer = createSectionContainer('Lunar Base Concept');
-            const followingEightContainer = createSectionContainer('Logistics and Technology');
-            const lastTwoContainer = createSectionContainer('Final Sections');
-
-            // Track the number of sections added
-            let sectionCount = 0;
-
-            // Process each fetched result
-            results.forEach(({ file, html }) => {
-                // Create a temporary div to parse the HTML and find the title
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = html;
-
-                // Find the header element (assuming it's the first h1 or h2)
-                const headerElement = tempDiv.querySelector('h1, h2');
-
-                // Use header text as button text
-                const buttonText = headerElement ? headerElement.textContent : 'Untitled';
-
-                // Create a section for each file's content
-                const section = document.createElement('div');
-                section.classList.add('content-section');
-                section.innerHTML = `<button class="collapsible">${buttonText}</button><div class="content">${processContent(html)}</div>`;
-
-                // Append the section to the appropriate container
-                if (sectionCount < 3) {
-                    firstThreeContainer.appendChild(section);
-                } else if (sectionCount < 8) {  // Next five chapters
-                    nextFiveContainer.appendChild(section);
-                } else if (sectionCount < 13) {  // Following five chapters
-                    followingFiveContainer.appendChild(section);
-                } else if (sectionCount < 21) {  // Following seven chapters
-                    followingEightContainer.appendChild(section);
-                } else {  // Last two chapters
-                    lastTwoContainer.appendChild(section);
-                }
-
-                sectionCount++;
-            });
-
-            // Append the containers to the main container
-            container.appendChild(firstThreeContainer);
-            container.appendChild(nextFiveContainer);
-            container.appendChild(followingFiveContainer);
-            container.appendChild(followingEightContainer);
-            container.appendChild(lastTwoContainer);
-
-            // Trigger the collapsible functionality after all content is loaded
-            triggerCollapsible();
-        }
-
-        // Function to create a container with a title
-        function createSectionContainer(title) {
-            const container = document.createElement('div');
-            container.classList.add('content-section', 'grouped-container');
-
-            const header = document.createElement('h2');
-            header.textContent = title;
-            container.appendChild(header);
-
-            return container;
-        }
-
-        // Function to process content and wrap bullet points in their own containers
-        function processContent(html) {
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = html;
-
-            const bulletPoints = tempDiv.querySelectorAll('ul li');
-            bulletPoints.forEach(bullet => {
-                const bulletContainer = document.createElement('div');
-                bulletContainer.classList.add('bullet-container');
-                bulletContainer.innerHTML = bullet.innerHTML;
-                bullet.replaceWith(bulletContainer);
-            });
-
-            return tempDiv.innerHTML;
-        }
-
-        // Function to initialize collapsible elements
-        function triggerCollapsible() {
-            const coll = document.getElementsByClassName('collapsible');
-                    
-            Array.from(coll).forEach(function (item) {
-                item.addEventListener('click', function () {
-                    this.classList.toggle('active');
-                    const content = this.nextElementSibling;
-                    if (content.style.display === 'block') {
-                        content.style.display = 'none';
-                    } else {
-                        content.style.display = 'block';
-                    }
-                });
-            });
-        }
-
-        // Call the function to fetch and display content
-        fetchAndDisplayContent();
-    </script>
+    <div class="content" id="content">
+        <!-- Content will be loaded here -->
+        <p>Select a file from the dropdown menu to display its content here.</p>
+    </div>
 </body>
 </html>
