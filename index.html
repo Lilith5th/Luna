@@ -12,7 +12,7 @@
             margin: 0;
             padding: 0;
             background-color: #121212; /* Dark background */
-            color: #000; /* Black text color */
+            color: #E0E0E0; /* Light text color */
         }
         .content-container {
             max-width: 1200px;
@@ -75,6 +75,13 @@
             margin-top: 0;
             margin-bottom: 10px;
             color: #888888; /* Mid-gray text color */
+        }
+        .bullet-container {
+            background-color: #E6E6E6; /* Slightly different background color */
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            color: #000; /* Black text color */
         }
         @media only screen and (max-width: 600px) {
             .content-container {
@@ -181,7 +188,7 @@
                 // Create a section for each file's content
                 const section = document.createElement('div');
                 section.classList.add('content-section');
-                section.innerHTML = `<button class="collapsible">${buttonText}</button><div class="content">${html}</div>`;
+                section.innerHTML = `<button class="collapsible">${buttonText}</button><div class="content">${processContent(html)}</div>`;
 
                 // Append the section to the appropriate container
                 if (sectionCount < 3) {
@@ -220,6 +227,22 @@
             container.appendChild(header);
 
             return container;
+        }
+
+        // Function to process content and wrap bullet points in their own containers
+        function processContent(html) {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html;
+
+            const bulletPoints = tempDiv.querySelectorAll('ul li');
+            bulletPoints.forEach(bullet => {
+                const bulletContainer = document.createElement('div');
+                bulletContainer.classList.add('bullet-container');
+                bulletContainer.innerHTML = bullet.innerHTML;
+                bullet.replaceWith(bulletContainer);
+            });
+
+            return tempDiv.innerHTML;
         }
 
         // Function to initialize collapsible elements
