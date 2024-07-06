@@ -1,9 +1,37 @@
-<header>
-    <h1>Strategic Population Planning for the Lunar Base</h1>
-</header>
-<div class="container">
-    <section id="population-size">
-        <h2>Strategic Growth Phases</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Page with Collapsible Sections</title>
+    <style>
+        .collapsible {
+            margin-bottom: 12px;
+            background-color: #444; /* Match index.html background color */
+            border-radius: 4px;
+        }
+        .collapsible-header {
+            background-color: #555; /* Match index.html dropdown background color */
+            padding: 12px 20px;
+            cursor: pointer;
+        }
+        .collapsible-content {
+            display: none;
+            padding: 0 20px 10px 20px;
+            background-color: #333; /* Match index.html dropdown content background color */
+            color: #fff; /* Match index.html dropdown content text color */
+        }
+        .collapsible.active .collapsible-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Population</h1>
+    </header>
+    <div class="container">
+        <h2>Population estimates and planning</h2>
         <img src="MidjourneyPNG_07_01/amundsen-scott-base.jpg" alt="Visual Representation for Strategic Growth">
         <p>Defining initial population sizes is essential for the lunar base's sustainability and operational success. A well-calculated population will bolster the base’s functionality, expansion capabilities, and societal structure. The proposed growth phases include:</p>
         <ul>
@@ -12,33 +40,38 @@
             <li><strong>Long-Term Phase:</strong> 500-1000 residents to maintain a stable, self-reliant community that supports diverse roles and ensures redundancy.</li>
         </ul>
         <p>This phased approach to population growth ensures controlled development, with infrastructure and resources scaling appropriately with population increases, thereby facilitating a thriving community capable of enduring multiple generations.</p>
-    </section>
-	
-    <div class="content">
-        <button onclick="toggleVisibility('precedents')">Toggle Precedents</button>
-        <section id="precedents" style="display: none;">
-            <p>Examining similar isolated communities offers valuable insights for lunar base planning:</p>
-            <ul>
-                <li><strong>Amundsen-Scott South Pole Station:</strong> Extreme isolation in Antarctica, supporting self-sufficient scientific research in harsh conditions. <br>Population: Approximately 150 in summer, 50 in winter.</li>
-                <li><strong>Submarines:</strong> Extended missions under the sea, entirely self-contained with recycled life support systems. <br>Population: Ranges from 15 to over 150 crew members, depending on the type of submarine.</li>
-                <li><strong>Aircraft Carriers:</strong> Floating cities with their own infrastructure, hosting thousands for months at sea. <br>Population: Typically up to 5,000 personnel including naval and air crew.</li>
-                <li><strong>International Space Station (ISS):</strong> Direct analog for space habitats, international crews living and working in space. <br>Population: Usually 6 astronauts, up to 10 during crew changeovers.</li>
-                <li><strong>Antarctic Research Stations:</strong> Other year-round stations providing data on living in extreme cold and isolation. <br>Population: McMurdo Station can host over 1,000 personnel during peak summer season.</li>
-                <li><strong>Biosphere 2:</strong> Closed ecological systems on Earth to test space colonization technologies. <br>Population: Supported 8 researchers when fully operational.</li>
-                <li><strong>Offshore Oil Platforms:</strong> Remote, self-sufficient communities working on resource extraction in isolation. <br>Population: Varies widely, from dozens to over 200 people depending on the platform size and function.</li>
-            </ul>
-            <p>Each example provides valuable lessons in managing small, isolated communities which are directly applicable to lunar base planning.</p>
-        </section>
-    </div>
-</div>
 
-<script>
-function toggleVisibility(sectionId) {
-    var section = document.getElementById(sectionId);
-    if (section.style.display === 'none') {
-        section.style.display = 'block';
-    } else {
-        section.style.display = 'none';
-    }
-}
-</script>
+        <div class="collapsible">
+            <div class="collapsible-header">Precedents</div>
+            <div class="collapsible-content">
+                <p>Examining similar isolated communities offers valuable insights for lunar base planning:</p>
+                <ul>
+                    <li><strong>Amundsen-Scott South Pole Station:</strong> Extreme isolation in Antarctica, supporting self-sufficient scientific research in harsh conditions. <br>Population: Approximately 150 in summer, 50 in winter.</li>
+                    <li><strong>Submarines:</strong> Extended missions under the sea, entirely self-contained with recycled life support systems. <br>Population: Ranges from 15 to over 150 crew members, depending on the type of submarine.</li>
+                    <li><strong>Aircraft Carriers:</strong> Floating cities with their own infrastructure, hosting thousands for months at sea. <br>Population: Typically up to 5,000 personnel including naval and air crew.</li>
+                    <li><strong>International Space Station (ISS):</strong> Direct analog for space habitats, international crews living and working in space. <br>Population: Usually 6 astronauts, up to 10 during crew changeovers.</li>
+                    <li><strong>Antarctic Research Stations:</strong> Other year-round stations providing data on living in extreme cold and isolation. <br>Population: McMurdo Station can host over 1,000 personnel during peak summer season.</li>
+                    <li><strong>Biosphere 2:</strong> Closed ecological systems on Earth to test space colonization technologies. <br>Population: Supported 8 researchers when fully operational.</li>
+                    <li><strong>Offshore Oil Platforms:</strong> Remote, self-sufficient communities working on resource extraction in isolation. <br>Population: Varies widely, from dozens to over 200 people depending on the platform size and function.</li>
+                </ul>
+                <p>Each example provides valuable lessons in managing small, isolated communities which are directly applicable to lunar base planning.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const collapsibles = document.querySelectorAll('.collapsible');
+
+            collapsibles.forEach(collapsible => {
+                const header = collapsible.querySelector('.collapsible-header');
+
+                header.addEventListener('click', () => {
+                    collapsible.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
