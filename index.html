@@ -38,9 +38,9 @@
             text-align: left;
             padding: 15px; /* Increased padding for better touch targets */
             width: 100%;
+            font-size: 1rem; /* Standardize font size */
             transition: background-color 0.3s;
             margin-bottom: 10px; /* Add margin bottom */
-            font-size: 1rem; /* Standardize font size */
         }
         .collapsible.active {
             background-color: #333; /* Slightly lighter background when active */
@@ -52,9 +52,6 @@
             background-color: #222; /* Dark background for content */
             margin-top: -10px; /* Adjust margin to align with button */
             color: #000; /* Black text color */
-        }
-        .content.active {
-            display: block;
         }
         header, footer {
             background-color: #1F1F1F; /* Dark background */
@@ -193,7 +190,7 @@
                     nextFiveContainer.appendChild(section);
                 } else if (sectionCount < 13) {  // Following five chapters
                     followingFiveContainer.appendChild(section);
-                } else if (sectionCount < 20) {  // Following seven chapters
+                } else if (sectionCount < 21) {  // Following seven chapters
                     followingEightContainer.appendChild(section);
                 } else {  // Last two chapters
                     lastTwoContainer.appendChild(section);
