@@ -104,6 +104,11 @@
         .footer button:hover {
             background-color: #555;
         }
+        .divider {
+            height: 1px;
+            background-color: #555;
+            margin: 8px 0;
+        }
     </style>
     <script>
         function loadContent(contentHTML) {
@@ -115,7 +120,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const files = {
                 "Introduction": "content/introduction.html",
-                "Introduction-Economy": "content/introduction_economical_factors.html",
+                "Economical Factors": "content/introduction_economical_factors.html",
                 "Goals": "content/goals.html",
                 "Population Size": "content/population_size.html",
                 "Civilian Research": "content/use_cases_civilian-research.html",
@@ -171,6 +176,13 @@
                 };
 
                 dropdownContent.appendChild(link);
+
+                // Add dividers after specific chapters
+                if (index === 3 || index === 9 || index === 14 || index === 20) {
+                    const divider = document.createElement('div');
+                    divider.className = 'divider';
+                    dropdownContent.appendChild(divider);
+                }
             });
 
             // Load introduction file by default
@@ -186,7 +198,7 @@
 
             prevButton.onclick = () => {
                 if (currentIndex > 0) {
-                    document.querySelector(`.dropdown-content a:nth-child(${currentIndex})`).click();
+                    document.querySelector(`.dropdown-content a:nth-child(${currentIndex + 1})`).click();
                 }
             };
 
@@ -219,8 +231,8 @@
     </div>
 
     <div class="footer">
-        <button id="prev-chapter">⬅️ Previous Chapter</button>
-        <button id="next-chapter">Next Chapter ➡️</button>
+        <button id="prev-chapter"><<<</button>
+        <button id="next-chapter">>>></button>
     </div>
 
     <!-- Base Layout content -->
