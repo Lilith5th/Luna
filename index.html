@@ -161,6 +161,11 @@
                 link.textContent = item.title;
                 link.setAttribute('aria-label', item.title);
                 link.onclick = () => {
+                    // Check if the file path is empty
+                    if (item.file === "") {
+                        return false; // Do nothing if the link is empty
+                    }
+
                     // Fetch and load the content when a link is clicked
                     fetch(item.file)
                         .then(response => {
@@ -214,37 +219,52 @@
             const prevButton = document.getElementById('prev-chapter');
             const nextButton = document.getElementById('next-chapter');
 
-            // Check if an index corresponds to a divider
-            function isDivider(index) {
-                const element = document.querySelector(`.dropdown-content a:nth-child(${index + 1})`);
-                return element && element.classList.contains('divider');
-            }
-
             // Functionality for the previous chapter button
             prevButton.onclick = () => {
                 let newIndex = currentIndex - 1;
-                while (newIndex >= 0 && (isDivider(newIndex) || newIndex < 0)) {
+                while (newIndex >= 0) {
+                    if (files[newIndex].file !== "" && files[newIndex].title !== "") {
+                        loadContentFromFile(newIndex);
+                        break;
+                    }
                     newIndex--;
-                }
-                if (newIndex >= 0) {
-                    document.querySelector(`.dropdown-content a:nth-child(${newIndex + 1})`).click();
                 }
             };
 
             // Functionality for the next chapter button
             nextButton.onclick = () => {
                 let newIndex = currentIndex + 1;
-                while (newIndex < files.length && isDivider(newIndex)) {
+                while (newIndex < files.length) {
+                    if (files[newIndex].file !== "" && files[newIndex].title !== "") {
+                        loadContentFromFile(newIndex);
+                        break;
+                    }
                     newIndex++;
-                }
-                if (newIndex < files.length) {
-                    document.querySelector(`.dropdown-content a:nth-child(${newIndex + 1})`).click();
                 }
             };
 
             // Disable buttons if at the start or end of the list
-            prevButton.disabled = currentIndex === 0;
-            nextButton.disabled = currentIndex === files.length - 1;
+            prevButton.disabled = currentIndex === 0 || files[currentIndex - 1].file === "" || files[currentIndex - 1].title === "";
+            nextButton.disabled = currentIndex === files.length - 1 || files[currentIndex + 1].file === "" || files[currentIndex + 1].title === "";
+        }
+
+        // Function to fetch and load content from a specific index in files array
+        function loadContentFromFile(index) {
+            fetch(files[index].file)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    loadContent(data);
+                    updateFooterLinks(index);
+                })
+                .catch(error => {
+                    console.error('Error loading content:', error);
+                    alert('An error occurred while loading the content. Please try again later.');
+                });
         }
     </script>
 </head>
