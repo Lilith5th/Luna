@@ -82,6 +82,28 @@
             height: 40px;
             width: 40px;
         }
+        .footer {
+            background-color: #333;
+            padding: 10px;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer button {
+            background-color: #444;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .footer button:hover {
+            background-color: #555;
+        }
     </style>
     <script>
         function loadContent(contentHTML) {
@@ -93,6 +115,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const files = {
                 "Introduction": "content/introduction.html",
+                "Introduction-Economy": "content/introduction_economical_factors.html",
                 "Goals": "content/goals.html",
                 "Population Size": "content/population_size.html",
                 "Civilian Research": "content/use_cases_civilian-research.html",
@@ -119,7 +142,7 @@
 
             const dropdownContent = document.querySelector('.dropdown-content');
 
-            Object.keys(files).forEach(key => {
+            Object.keys(files).forEach((key, index, array) => {
                 const value = files[key];
 
                 const link = document.createElement('a');
@@ -143,6 +166,7 @@
                             })
                             .catch(error => console.error('Error loading content:', error));
                     }
+                    updateFooterLinks(index, array);
                     return false;
                 };
 
@@ -151,7 +175,30 @@
 
             // Load introduction file by default
             loadContent(document.getElementById('base-layout').innerHTML);
+
+            // Initialize footer links
+            updateFooterLinks(0, Object.keys(files));
         });
+
+        function updateFooterLinks(currentIndex, keysArray) {
+            const prevButton = document.getElementById('prev-chapter');
+            const nextButton = document.getElementById('next-chapter');
+
+            prevButton.onclick = () => {
+                if (currentIndex > 0) {
+                    document.querySelector(`.dropdown-content a:nth-child(${currentIndex})`).click();
+                }
+            };
+
+            nextButton.onclick = () => {
+                if (currentIndex < keysArray.length - 1) {
+                    document.querySelector(`.dropdown-content a:nth-child(${currentIndex + 2})`).click();
+                }
+            };
+
+            prevButton.disabled = currentIndex === 0;
+            nextButton.disabled = currentIndex === keysArray.length - 1;
+        }
     </script>
 </head>
 <body>
@@ -169,6 +216,11 @@
     <div class="content" id="content">
         <!-- Content will be loaded here -->
         <p>Select a file from the dropdown menu to display its content here.</p>
+    </div>
+
+    <div class="footer">
+        <button id="prev-chapter">⬅️ Previous Chapter</button>
+        <button id="next-chapter">Next Chapter ➡️</button>
     </div>
 
     <!-- Base Layout content -->
