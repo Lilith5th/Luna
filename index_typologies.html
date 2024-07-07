@@ -118,10 +118,8 @@
             text-align: center; /* Ensure proper alignment of footer signature */
             margin-top: 5px; /* Adjust top margin if needed */
         }
-        .divider {
-            height: 1px;
-            background-color: #555;
-            margin: 8px 0;
+        .spacer {
+            height: 20px; /* Adjust the height as needed */
         }
         /* Media query to hide arrows on mobile devices */
         @media (max-width: 768px) {
@@ -262,11 +260,11 @@
 
                 dropdownContent.appendChild(link);
 
-                // Add dividers between certain sections
-                if (index === 3 || index === 8 || index === 13 || index === 21) {
-                    const divider = document.createElement('div');
-                    divider.className = 'divider';
-                    dropdownContent.appendChild(divider);
+                // Add empty space after certain sections
+                if (index === 2 || index === 7 || index === 12) {
+                    const spacer = document.createElement('div');
+                    spacer.className = 'spacer';
+                    dropdownContent.appendChild(spacer);
                 }
             });
 
