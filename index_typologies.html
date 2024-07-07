@@ -33,10 +33,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-left: 20px; /* Add padding to the left */
         }
         .dropdown {
             position: relative;
             display: inline-block;
+            margin-right: 20px; /* Move the dropdown button 10 pixels to the left */
         }
         .dropdown-content {
             display: none;
@@ -88,7 +90,8 @@
             background-color: #333;
             padding: 0; /* Remove padding to reduce unnecessary space */
             width: 100%;
-            margin-top: auto; /* Push footer to the bottom */
+            position: fixed;
+            bottom: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -120,13 +123,19 @@
             background-color: #555;
             margin: 8px 0;
         }
+        /* Media query to hide arrows on mobile devices */
+        @media (max-width: 768px) {
+            .footer-top {
+                display: none;
+            }
+        }
     </style>
     <script>
         // List of files with titles and corresponding file paths
         const files = [
             { title: "Introduction", file: "typologies/introduction.html" },
             { title: "Function", file: "typologies/typologies_function.html" },
-            { title: "Structure", file: "typologies/typologies_structure.html" },
+            { title: "Structure", file: "typologies/typologies_form.html" },
             { title: "Premade Structures", file: "typologies/premade.html" }, //deployable
             { title: "In situ", file: "typologies/in_situ.html" },
             { title: "3D printed", file: "typologies/3d_printed.html" },
@@ -136,7 +145,7 @@
             { title: "Centrifugal 2", file: "typologies/centrifugal_mid.html" },
             { title: "Centrifugal 3", file: "typologies/large.html" },
             { title: "Custom built", file: "content/custom_built.html" }, //infrastructure, railguns, centrifugal launchers, telescopes, landing pads
-            { title: "Custom built", file: "content/surface_requirements.html" }, 
+            { title: "Custom built", file: "content/surface_requirements.html" },
             { title: "Summary", file: "content/summary.html" }
         ];
 
@@ -254,7 +263,7 @@
                 dropdownContent.appendChild(link);
 
                 // Add dividers between certain sections
-                if (index === 2 || index === 7 || index === 13) {
+                if (index === 3 || index === 8 || index === 13 || index === 21) {
                     const divider = document.createElement('div');
                     divider.className = 'divider';
                     dropdownContent.appendChild(divider);
@@ -323,7 +332,7 @@
             <button id="next-chapter" aria-label="Next chapter">>>></button>
         </div>
         <div class="footer-bottom">
-            <p>Lucano Deskovic 2024 lucano.deskovic@gmail.com</p>
+            <p>&copy;Lucano Deskovic 2024 lucano.deskovic@gmail.com +385 98 170 25 24</p>
         </div>
     </div>
 </body>
