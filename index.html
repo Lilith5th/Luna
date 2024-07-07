@@ -85,7 +85,7 @@
         }
         .footer {
             background-color: #333;
-            padding: 0px;
+            padding: 0; /* Remove padding to reduce unnecessary space */
             width: 100%;
             position: fixed;
             bottom: 0;
@@ -94,24 +94,14 @@
             flex-direction: column;
             align-items: center;
         }
-		.footer-top {
-			margin-bottom: 5px; /* Adjusted margin for closer spacing */
-		}
-
-		.footer-bottom {
-			/* Ensure proper alignment of footer signature */
-			text-align: center; /* Adjust alignment as per your design */
-		}
-
         .footer-top {
-            margin-bottom: 10px; /* Adjust spacing between top and bottom sections */
+            margin-bottom: 5px; /* Adjusted margin for closer spacing */
         }
-
         .footer button {
             background-color: #444;
             border: none;
             color: #fff;
-            padding: 5px 40px;
+            padding: 5px 20px; /* Adjust padding as needed */
             cursor: pointer;
             font-size: 18px;
         }
@@ -121,6 +111,10 @@
         .footer button:disabled {
             background-color: #666;
             cursor: not-allowed;
+        }
+        .footer-bottom {
+            text-align: center; /* Ensure proper alignment of footer signature */
+            margin-top: 5px; /* Adjust top margin if needed */
         }
         .divider {
             height: 1px;
