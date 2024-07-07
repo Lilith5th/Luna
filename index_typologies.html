@@ -118,8 +118,10 @@
             text-align: center; /* Ensure proper alignment of footer signature */
             margin-top: 5px; /* Adjust top margin if needed */
         }
-        .spacer {
-            height: 20px; /* Adjust the height as needed */
+        hr {
+            border: none;
+            border-top: 1px solid #555;
+            margin: 8px 0;
         }
         /* Media query to hide arrows on mobile devices */
         @media (max-width: 768px) {
@@ -260,11 +262,10 @@
 
                 dropdownContent.appendChild(link);
 
-                // Add empty space after certain sections
+                // Add a horizontal line after certain sections
                 if (index === 2 || index === 7 || index === 12) {
-                    const spacer = document.createElement('div');
-                    spacer.className = 'spacer';
-                    dropdownContent.appendChild(spacer);
+                    const hr = document.createElement('hr');
+                    dropdownContent.appendChild(hr);
                 }
             });
 

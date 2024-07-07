@@ -118,9 +118,9 @@
             text-align: center; /* Ensure proper alignment of footer signature */
             margin-top: 5px; /* Adjust top margin if needed */
         }
-        .divider {
-            height: 1px;
-            background-color: #555;
+        hr {
+            border: none;
+            border-top: 1px solid #555;
             margin: 8px 0;
         }
         /* Media query to hide arrows on mobile devices */
@@ -272,11 +272,10 @@
 
                 dropdownContent.appendChild(link);
 
-                // Add dividers between certain sections
+                // Add horizontal lines between certain sections
                 if (index === 3 || index === 8 || index === 13 || index === 21) {
-                    const divider = document.createElement('div');
-                    divider.className = 'divider';
-                    dropdownContent.appendChild(divider);
+                    const hr = document.createElement('hr');
+                    dropdownContent.appendChild(hr);
                 }
             });
 
