@@ -5,22 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Child Page with Collapsible Sections</title>
     <style>
-        /* CSS styles for collapsible sections */
+        /* General styles for collapsible sections */
         .collapsible {
             margin-bottom: 12px;
-            background-color: #444; /* Match index.html background color */
+            background-color: #444;
             border-radius: 4px;
         }
         .collapsible-header {
-            background-color: #555; /* Match index.html dropdown background color */
+            background-color: #555;
             padding: 12px 20px;
             cursor: pointer;
         }
         .collapsible-content {
             display: none;
             padding: 0 20px 10px 20px;
-            background-color: #333; /* Match index.html dropdown content background color */
-            color: #fff; /* Match index.html dropdown content text color */
+            color: #fff;
+            background-color: #333;
         }
         .collapsible.active .collapsible-content {
             display: block;
@@ -36,226 +36,249 @@
         <img src="MidjourneyPNG_07_01/amundsen-scott-base.jpg" alt="Visual Representation for Strategic Growth">
         <p>Defining initial population sizes is essential for the lunar base's sustainability and operational success. A well-calculated population will bolster the base’s functionality, expansion capabilities, and societal structure. The proposed growth phases include:</p>
         <ul>
-            <li><strong>Initial Phase:</strong> 30-50 residents focused on establishing and commencing operations.</li>
-            <li><strong>Expansion Phase:</strong> 100-200 residents aimed at achieving a self-sustaining status.</li>
-            <li><strong>Long-Term Phase:</strong> 500-1000 residents to maintain a stable, self-reliant community that supports diverse roles and ensures redundancy.</li>
+            <li>
+                <div class="collapsible">
+                    <div class="collapsible-header">Initial Phase: 30-50 residents focused on establishing and commencing operations.</div>
+                    <div class="collapsible-content">
+                        <p><strong>Objective:</strong> Establishing and commencing operations.</p>
+                        <p><strong>Key Focus:</strong> Setting up essential infrastructure, testing systems, and initial resource utilization. This phase is crucial for laying the foundation and ensuring basic functionality for the base.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible">
+                    <div class="collapsible-header">Expansion Phase: 100-200 residents aimed at achieving a self-sustaining status.</div>
+                    <div class="collapsible-content">
+                        <p><strong>Objective:</strong> Achieving self-sustaining status.</p>
+                        <p><strong>Key Focus:</strong> Scaling up operations to support a larger population and increasing resource production. This phase involves enhancing life support systems, food production, and energy generation to reduce reliance on Earth.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible">
+                    <div class="collapsible-header">Long-Term Phase: 500-1000 residents to maintain a stable, self-reliant community that supports diverse roles and ensures redundancy.</div>
+                    <div class="collapsible-content">
+                        <p><strong>Objective:</strong> Maintaining a stable, self-reliant community.</p>
+                        <p><strong>Key Focus:</strong> Supporting diverse roles and ensuring redundancy in critical systems. This phase aims for a fully developed lunar community capable of sustaining itself independently for extended periods. It involves developing advanced infrastructure, fostering economic activities, and accommodating a larger and more varied population.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <!-- Collapsible section for "Precedents" -->
+                <div class="collapsible">
+                    <div class="collapsible-header">Precedents</div>
+                    <div class="collapsible-content">
+                        <p>Examining similar isolated communities offers valuable insights for lunar base planning:</p>
+                        <ul>
+                            <li><strong>Amundsen-Scott South Pole Station:</strong> Extreme isolation in Antarctica, supporting self-sufficient scientific research in harsh conditions. Population: Approximately 150 in summer, 50 in winter.</li>
+                            <li><strong>Submarines:</strong> Extended missions under the sea, entirely self-contained with recycled life support systems. Population: Ranges from 15 to over 150 crew members, depending on the type of submarine.</li>
+                            <li><strong>Aircraft Carriers:</strong> Floating cities with their own infrastructure, hosting thousands for months at sea. Population: Typically up to 5,000 personnel including naval and air crew.</li>
+                            <li><strong>International Space Station (ISS):</strong> Direct analog for space habitats, international crews living and working in space. Population: Usually 6 astronauts, up to 10 during crew changeovers.</li>
+                            <li><strong>Antarctic Research Stations:</strong> Other year-round stations providing data on living in extreme cold and isolation. Population: McMurdo Station can host over 1,000 personnel during peak summer season.</li>
+                            <li><strong>Biosphere 2:</strong> Closed ecological systems on Earth to test space colonization technologies. Population: Supported 8 researchers when fully operational.</li>
+                            <li><strong>Offshore Oil Platforms:</strong> Remote, self-sufficient communities working on resource extraction in isolation. Population: Varies widely, from dozens to over 200 people depending on the platform size and function.</li>
+                        </ul>
+                        <p>Each example provides valuable lessons in managing small, isolated communities which are directly applicable to lunar base planning.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <!-- Collapsible section for "Population Composition for Small Lunar Base" -->
+                <div class="collapsible">
+                    <div class="collapsible-header">Population Composition for Small Lunar Base</div>
+                    <div class="collapsible-content">
+                        <ul>
+                            <li><strong>Scientific Researchers and Engineers:</strong>
+                                <ul>
+                                    <li>Astronomers and Astrophysicists: 1-2</li>
+                                    <li>Geologists: 1-2</li>
+                                    <li>Biologists: 1-2</li>
+                                    <li>Engineers (Various Disciplines): 6-8</li>
+                                </ul>
+                            </li>
+                            <li><strong>Medical Staff:</strong>
+                                <ul>
+                                    <li>Doctors and Nurses: 1-2</li>
+                                    <li>Biomedical Engineers: 1</li>
+                                </ul>
+                            </li>
+                            <li><strong>Technicians and Maintenance Crew:</strong>
+                                <ul>
+                                    <li>Technicians (HVAC, Electricians, IT): 3-5</li>
+                                    <li>Maintenance Crew: 2-3</li>
+                                </ul>
+                            </li>
+                            <li><strong>Logistics and Supply Management:</strong>
+                                <ul>
+                                    <li>Supply Chain Managers: 1</li>
+                                    <li>Inventory Specialists: 1</li>
+                                </ul>
+                            </li>
+                            <li><strong>Pilots and Astronauts:</strong>
+                                <ul>
+                                    <li>Mission Pilots: 1-2</li>
+                                    <li>Astronauts: 3-5</li>
+                                </ul>
+                            </li>
+                            <li><strong>Administration and Operations:</strong>
+                                <ul>
+                                    <li>Base Administrators: 1-2</li>
+                                    <li>Legal and Policy Advisors: 1</li>
+                                    <li>Finance and Budget Managers: 1</li>
+                                </ul>
+                            </li>
+                            <li><strong>Psychologists and Social Scientists:</strong>
+                                <ul>
+                                    <li>Psychologists: 1</li>
+                                    <li>Social Scientists: 1</li>
+                                </ul>
+                            </li>
+                            <li><strong>Educators and Outreach Specialists:</strong>
+                                <ul>
+                                    <li>Teachers and Trainers: 1-2</li>
+                                    <li>Outreach Specialists: 1</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <!-- Population Composition for Medium Lunar Base -->
+                <div class="collapsible">
+                    <div class="collapsible-header">Population Composition for Medium Lunar Base</div>
+                    <div class="collapsible-content">
+                        <ul>
+                            <li><strong>Scientific Researchers and Engineers:</strong>
+                                <ul>
+                                    <li>Astronomers and Astrophysicists: 2-3</li>
+                                    <li>Geologists: 2-3</li>
+                                    <li>Biologists: 2-3</li>
+                                    <li>Engineers (Various Disciplines): 8-10</li>
+                                </ul>
+                            </li>
+                            <li><strong>Medical Staff:</strong>
+                                <ul>
+                                    <li>Doctors and Nurses: 2-3</li>
+                                    <li>Biomedical Engineers: 2</li>
+                                </ul>
+                            </li>
+                            <li><strong>Technicians and Maintenance Crew:</strong>
+                                <ul>
+                                    <li>Technicians (HVAC, Electricians, IT): 5-7</li>
+                                    <li>Maintenance Crew: 3-4</li>
+                                </ul>
+                            </li>
+                            <li><strong>Logistics and Supply Management:</strong>
+                                <ul>
+                                    <li>Supply Chain Managers: 2</li>
+                                    <li>Inventory Specialists: 2</li>
+                                </ul>
+                            </li>
+                            <li><strong>Pilots and Astronauts:</strong>
+                                <ul>
+                                    <li>Mission Pilots: 2-3</li>
+                                    <li>Astronauts: 5-7</li>
+                                </ul>
+                            </li>
+                            <li><strong>Administration and Operations:</strong>
+                                <ul>
+                                    <li>Base Administrators: 2-3</li>
+                                    <li>Legal and Policy Advisors: 2</li>
+                                    <li>Finance and Budget Managers: 2</li>
+                                </ul>
+                            </li>
+                            <li><strong>Psychologists and Social Scientists:</strong>
+                                <ul>
+                                    <li>Psychologists: 2</li>
+                                    <li>Social Scientists: 2</li>
+                                </ul>
+                            </li>
+                            <li><strong>Educators and Outreach Specialists:</strong>
+                                <ul>
+                                    <li>Teachers and Trainers: 2-3</li>
+                                    <li>Outreach Specialists: 2</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <!-- Population Composition for Large Lunar Base -->
+                <div class="collapsible">
+                    <div class="collapsible-header">Population Composition for Large Lunar Base</div>
+                    <div class="collapsible-content">
+                        <ul>
+                            <li><strong>Scientific Researchers and Engineers:</strong>
+                                <ul>
+                                    <li>Astronomers and Astrophysicists: 4-6</li>
+                                    <li>Geologists: 4-6</li>
+                                    <li>Biologists: 4-6</li>
+                                    <li>Engineers (Various Disciplines): 12-15</li>
+                                </ul>
+                            </li>
+                            <li><strong>Medical Staff:</strong>
+                                <ul>
+                                    <li>Doctors and Nurses: 4-6</li>
+                                    <li>Biomedical Engineers: 3</li>
+                                </ul>
+                            </li>
+                            <li><strong>Technicians and Maintenance Crew:</strong>
+                                <ul>
+                                    <li>Technicians (HVAC, Electricians, IT): 8-10</li>
+                                    <li>Maintenance Crew: 5-7</li>
+                                </ul>
+                            </li>
+                            <li><strong>Logistics and Supply Management:</strong>
+                                <ul>
+                                    <li>Supply Chain Managers: 3</li>
+                                    <li>Inventory Specialists: 3</li>
+                                </ul>
+                            </li>
+                            <li><strong>Pilots and Astronauts:</strong>
+                                <ul>
+                                    <li>Mission Pilots: 4-6</li>
+                                    <li>Astronauts: 8-10</li>
+                                </ul>
+                            </li>
+                            <li><strong>Administration and Operations:</strong>
+                                <ul>
+                                    <li>Base Administrators: 3-4</li>
+                                    <li>Legal and Policy Advisors: 3</li>
+                                    <li>Finance and Budget Managers: 3</li>
+                                </ul>
+                            </li>
+                            <li><strong>Psychologists and Social Scientists:</strong>
+                                <ul>
+                                    <li>Psychologists: 3</li>
+                                    <li>Social Scientists: 3</li>
+                                </ul>
+                            </li>
+                            <li><strong>Educators and Outreach Specialists:</strong>
+                                <ul>
+                                    <li>Teachers and Trainers: 4-6</li>
+                                    <li>Outreach Specialists: 3</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
         </ul>
-        <p>This phased approach to population growth ensures controlled development, with infrastructure and resources scaling appropriately with population increases, thereby facilitating a thriving community capable of enduring multiple generations.</p>
-
-        <!-- Collapsible section for "Precedents" -->
-        <div class="collapsible">
-            <div class="collapsible-header">Precedents</div>
-            <div class="collapsible-content">
-                <p>Examining similar isolated communities offers valuable insights for lunar base planning:</p>
-                <ul>
-                    <li><strong>Amundsen-Scott South Pole Station:</strong> Extreme isolation in Antarctica, supporting self-sufficient scientific research in harsh conditions. <br>Population: Approximately 150 in summer, 50 in winter.</li>
-                    <li><strong>Submarines:</strong> Extended missions under the sea, entirely self-contained with recycled life support systems. <br>Population: Ranges from 15 to over 150 crew members, depending on the type of submarine.</li>
-                    <li><strong>Aircraft Carriers:</strong> Floating cities with their own infrastructure, hosting thousands for months at sea. <br>Population: Typically up to 5,000 personnel including naval and air crew.</li>
-                    <li><strong>International Space Station (ISS):</strong> Direct analog for space habitats, international crews living and working in space. <br>Population: Usually 6 astronauts, up to 10 during crew changeovers.</li>
-                    <li><strong>Antarctic Research Stations:</strong> Other year-round stations providing data on living in extreme cold and isolation. <br>Population: McMurdo Station can host over 1,000 personnel during peak summer season.</li>
-                    <li><strong>Biosphere 2:</strong> Closed ecological systems on Earth to test space colonization technologies. <br>Population: Supported 8 researchers when fully operational.</li>
-                    <li><strong>Offshore Oil Platforms:</strong> Remote, self-sufficient communities working on resource extraction in isolation. <br>Population: Varies widely, from dozens to over 200 people depending on the platform size and function.</li>
-                </ul>
-                <p>Each example provides valuable lessons in managing small, isolated communities which are directly applicable to lunar base planning.</p>
-            </div>
-        </div>
-
-        <!-- Collapsible section for "Population Composition for Small Lunar Base" -->
-        <div class="collapsible">
-            <div class="collapsible-header">Population Composition for Small Lunar Base</div>
-            <div class="collapsible-content">
-                <ul>
-                    <li><strong>Scientific Researchers and Engineers:</strong>
-                        <ul>
-                            <li>Astronomers and Astrophysicists: 1-2</li>
-                            <li>Geologists: 1-2</li>
-                            <li>Biologists: 1-2</li>
-                            <li>Engineers (Various Disciplines): 5-7</li>
-                        </ul>
-                    </li>
-                    <li><strong>Medical Staff:</strong>
-                        <ul>
-                            <li>Doctors and Nurses: 1-2</li>
-                            <li>Biomedical Engineers: 1</li>
-                        </ul>
-                    </li>
-                    <li><strong>Technicians and Maintenance Crew:</strong>
-                        <ul>
-                            <li>Technicians (HVAC, Electricians, IT): 3-5</li>
-                            <li>Maintenance Crew: 2-3</li>
-                        </ul>
-                    </li>
-                    <li><strong>Logistics and Supply Management:</strong>
-                        <ul>
-                            <li>Supply Chain Managers: 1</li>
-                            <li>Inventory Specialists: 1</li>
-                        </ul>
-                    </li>
-                    <li><strong>Pilots and Astronauts:</strong>
-                        <ul>
-                            <li>Mission Pilots: 1-2</li>
-                            <li>Astronauts: 3-5</li>
-                        </ul>
-                    </li>
-                    <li><strong>Administration and Operations:</strong>
-                        <ul>
-                            <li>Base Administrators: 1-2</li>
-                            <li>Legal and Policy Advisors: 1</li>
-                            <li>Finance and Budget Managers: 1</li>
-                        </ul>
-                    </li>
-                    <li><strong>Psychologists and Social Scientists:</strong>
-                        <ul>
-                            <li>Psychologists: 1</li>
-                            <li>Social Scientists: 1</li>
-                        </ul>
-                    </li>
-                    <li><strong>Educators and Outreach Specialists:</strong>
-                        <ul>
-                            <li>Teachers and Trainers: 1-2</li>
-                            <li>Outreach Specialists: 1</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Collapsible section for "Population Composition for Medium Lunar Base" -->
-        <div class="collapsible">
-            <div class="collapsible-header">Population Composition for Medium Lunar Base</div>
-            <div class="collapsible-content">
-                <ul>
-                    <li><strong>Scientific Researchers and Engineers:</strong>
-                        <ul>
-                            <li>Astronomers and Astrophysicists: 2-3</li>
-                            <li>Geologists: 2-3</li>
-                            <li>Biologists: 2-3</li>
-                            <li>Engineers (Various Disciplines): 8-10</li>
-                        </ul>
-                    </li>
-                    <li><strong>Medical Staff:</strong>
-                        <ul>
-                            <li>Doctors and Nurses: 2-3</li>
-                            <li>Biomedical Engineers: 2</li>
-                        </ul>
-                    </li>
-                    <li><strong>Technicians and Maintenance Crew:</strong>
-                        <ul>
-                            <li>Technicians (HVAC, Electricians, IT): 5-7</li>
-                            <li>Maintenance Crew: 3-4</li>
-                        </ul>
-                    </li>
-                    <li><strong>Logistics and Supply Management:</strong>
-                        <ul>
-                            <li>Supply Chain Managers: 2</li>
-                            <li>Inventory Specialists: 2</li>
-                        </ul>
-                    </li>
-                    <li><strong>Pilots and Astronauts:</strong>
-                        <ul>
-                            <li>Mission Pilots: 2-3</li>
-                            <li>Astronauts: 5-7</li>
-                        </ul>
-                    </li>
-                    <li><strong>Administration and Operations:</strong>
-                        <ul>
-                            <li>Base Administrators: 2-3</li>
-                            <li>Legal and Policy Advisors: 2</li>
-                            <li>Finance and Budget Managers: 2</li>
-                        </ul>
-                    </li>
-                    <li><strong>Psychologists and Social Scientists:</strong>
-                        <ul>
-                            <li>Psychologists: 2</li>
-                            <li>Social Scientists: 2</li>
-                        </ul>
-                    </li>
-                    <li><strong>Educators and Outreach Specialists:</strong>
-                        <ul>
-                            <li>Teachers and Trainers: 2-3</li>
-                            <li>Outreach Specialists: 2</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Collapsible section for "Population Composition for Large Lunar Base" -->
-        <div class="collapsible">
-            <div class="collapsible-header">Population Composition for Large Lunar Base</div>
-            <div class="collapsible-content">
-                <ul>
-                    <li><strong>Scientific Researchers and Engineers:</strong>
-                        <ul>
-                            <li>Astronomers and Astrophysicists: 4-6</li>
-                            <li>Geologists: 4-6</li>
-                            <li>Biologists: 4-6</li>
-                            <li>Engineers (Various Disciplines): 12-15</li>
-                        </ul>
-                    </li>
-                    <li><strong>Medical Staff:</strong>
-                        <ul>
-                            <li>Doctors and Nurses: 4-6</li>
-                            <li>Biomedical Engineers: 3</li>
-                        </ul>
-                    </li>
-                    <li><strong>Technicians and Maintenance Crew:</strong>
-                        <ul>
-                            <li>Technicians (HVAC, Electricians, IT): 8-10</li>
-                            <li>Maintenance Crew: 5-7</li>
-                        </ul>
-                    </li>
-                    <li><strong>Logistics and Supply Management:</strong>
-                        <ul>
-                            <li>Supply Chain Managers: 3</li>
-                            <li>Inventory Specialists: 3</li>
-                        </ul>
-                    </li>
-                    <li><strong>Pilots and Astronauts:</strong>
-                        <ul>
-                            <li>Mission Pilots: 4-6</li>
-                            <li>Astronauts: 8-10</li>
-                        </ul>
-                    </li>
-                    <li><strong>Administration and Operations:</strong>
-                        <ul>
-                            <li>Base Administrators: 3-4</li>
-                            <li>Legal and Policy Advisors: 3</li>
-                            <li>Finance and Budget Managers: 3</li>
-                        </ul>
-                    </li>
-                    <li><strong>Psychologists and Social Scientists:</strong>
-                        <ul>
-                            <li>Psychologists: 3</li>
-                            <li>Social Scientists: 3</li>
-                        </ul>
-                    </li>
-                    <li><strong>Educators and Outreach Specialists:</strong>
-                        <ul>
-                            <li>Teachers and Trainers: 4-6</li>
-                            <li>Outreach Specialists: 3</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
     </div>
 
-    <!-- JavaScript for collapsible functionality -->
     <script>
+        // JavaScript to handle collapsible sections
         document.addEventListener('DOMContentLoaded', function () {
-            const collapsibles = document.querySelectorAll('.collapsible');
-
-            collapsibles.forEach(collapsible => {
-                const header = collapsible.querySelector('.collapsible-header');
-
-                header.addEventListener('click', () => {
-                    collapsible.classList.toggle('active');
+            const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
+            
+            collapsibleHeaders.forEach(header => {
+                header.addEventListener('click', function () {
+                    this.parentElement.classList.toggle('active');
                 });
             });
         });
     </script>
-
 </body>
 </html>
