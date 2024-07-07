@@ -17,7 +17,7 @@
         }
         .banner {
             background-color: #333;
-            padding: 0px;
+            padding: 0;
             width: 100%;
             position: fixed;
             top: 0;
@@ -85,20 +85,33 @@
         }
         .footer {
             background-color: #333;
-            padding: 10px;
+            padding: 0px;
             width: 100%;
             position: fixed;
             bottom: 0;
             z-index: 1000;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
         }
+		.footer-top {
+			margin-bottom: 5px; /* Adjusted margin for closer spacing */
+		}
+
+		.footer-bottom {
+			/* Ensure proper alignment of footer signature */
+			text-align: center; /* Adjust alignment as per your design */
+		}
+
+        .footer-top {
+            margin-bottom: 10px; /* Adjust spacing between top and bottom sections */
+        }
+
         .footer button {
             background-color: #444;
             border: none;
             color: #fff;
-            padding: 10px 20px;
+            padding: 5px 40px;
             cursor: pointer;
             font-size: 18px;
         }
@@ -302,14 +315,11 @@
     <div class="banner">
         <div class="banner-content">
             <h1>Lunar Base Framework</h1>
-            <h5>Lucano Deskovic<br>
-            lucano.deskovic@gmail.com<br>
-            +385 98 170 25 24</h5>
-            <div class="dropdown">
-                <button class="dropbtn" aria-label="Open dropdown menu"></button>
-                <div class="dropdown-content">
-                    <!-- Links generated from file list will be inserted here -->
-                </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn" aria-label="Open dropdown menu"></button>
+            <div class="dropdown-content">
+                <!-- Links generated from file list will be inserted here -->
             </div>
         </div>
     </div>
@@ -322,8 +332,13 @@
 
     <!-- Footer navigation buttons -->
     <div class="footer">
-        <button id="prev-chapter" disabled aria-label="Previous chapter"><<<</button>
-        <button id="next-chapter" aria-label="Next chapter">>>></button>
+        <div class="footer-top">
+            <button id="prev-chapter" disabled aria-label="Previous chapter"><<<</button>
+            <button id="next-chapter" aria-label="Next chapter">>>></button>
+        </div>
+        <div class="footer-bottom">
+            <p> Lucano Deskovic  2024  lucano.deskovic@gmail.com</p>
+        </div>
     </div>
 </body>
 </html>
