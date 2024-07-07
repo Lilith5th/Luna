@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lunar Base Framework</title>
     <style>
+        /* Base styles for the entire document */
         body {
             display: flex;
             flex-direction: column;
@@ -15,6 +16,8 @@
             margin: 0;
             padding: 0;
         }
+
+        /* Styling for the banner section */
         .banner {
             background-color: #333;
             padding: 0;
@@ -35,6 +38,8 @@
             align-items: center;
             padding-left: 20px; /* Add padding to the left */
         }
+
+        /* Styling for the dropdown menu */
         .dropdown {
             position: relative;
             display: inline-block;
@@ -63,6 +68,8 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+
+        /* Styling for the main content section */
         .content {
             padding: 20px;
             background-color: #222;
@@ -77,6 +84,8 @@
             width: 100%;
             height: auto;
         }
+
+        /* Styling for the dropdown button */
         .dropbtn {
             background: url('dropdown.png') no-repeat center;
             background-size: contain;
@@ -86,6 +95,8 @@
             width: 40px;
             aria-label: "Dropdown menu button";
         }
+
+        /* Styling for the footer section */
         .footer {
             background-color: #333;
             padding: 0; /* Remove padding to reduce unnecessary space */
@@ -123,6 +134,7 @@
             border-top: 1px solid #555;
             margin: 8px 0;
         }
+
         /* Media query to hide arrows on mobile devices */
         @media (max-width: 768px) {
             .footer-top {
@@ -130,6 +142,18 @@
             }
         }
     </style>
+
+    <!-- Google Analytics Script (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5TDQ0YG5K5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5TDQ0YG5K5');
+    </script>
+
+    <!-- JavaScript for handling content loading and navigation -->
     <script>
         // List of files with titles and corresponding file paths
         const files = [
@@ -236,6 +260,7 @@
             nextButton.disabled = currentIndex === files.length - 1 || files[currentIndex + 1].file === "" || files[currentIndex + 1].title === "";
         }
 
+        // Event listener when DOM is fully loaded
         document.addEventListener('DOMContentLoaded', () => {
             const dropdownContent = document.querySelector('.dropdown-content');
 
