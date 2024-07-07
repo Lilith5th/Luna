@@ -127,7 +127,7 @@
             { title: "Economical Factors", file: "content/introduction_economical_factors.html" },
             { title: "Goals", file: "content/goals.html" },
             { title: "Population Size", file: "content/population_size.html" },
-			{ title: "Civilian Research", file: "content/use_cases_civilian-research.html" },
+            { title: "Civilian Research", file: "content/use_cases_civilian-research.html" },
             { title: "Civilian Resources", file: "content/use_cases_civilian-resources.html" },
             { title: "Civilian Health Tourism", file: "content/use_cases_civilian-health_tourism.html" },
             { title: "Civilian Stepping Stone", file: "content/use_cases_civilian-stepping_stone.html" },
@@ -272,38 +272,37 @@
 
             // Load Introduction by default on page load
             loadContentFromFile(0);
+
+            // Swipe detection for touch devices
+            const contentArea = document.getElementById('content');
+            let touchstartX = 0;
+            let touchendX = 0;
+
+            contentArea.addEventListener('touchstart', function(event) {
+                touchstartX = event.changedTouches[0].screenX;
+            }, false);
+
+            contentArea.addEventListener('touchend', function(event) {
+                touchendX = event.changedTouches[0].screenX;
+                handleGesture();
+            }, false);
+
+            function handleGesture() {
+                if (touchendX < touchstartX) {
+                    // Swiped left
+                    if (currentIndex < files.length - 1) {
+                        loadContentFromFile(currentIndex + 1);
+                    }
+                }
+
+                if (touchendX > touchstartX) {
+                    // Swiped right
+                    if (currentIndex > 0) {
+                        loadContentFromFile(currentIndex - 1);
+                    }
+                }
+            }
         });
-
-        // Swipe detection for touch devices
-        let touchstartX = 0;
-        let touchendX = 0;
-
-        const contentArea = document.getElementById('content');
-
-        contentArea.addEventListener('touchstart', function(event) {
-            touchstartX = event.changedTouches[0].screenX;
-        }, false);
-
-        contentArea.addEventListener('touchend', function(event) {
-            touchendX = event.changedTouches[0].screenX;
-            handleGesture();
-        }, false);
-
-        function handleGesture() {
-            if (touchendX < touchstartX) {
-                // Swiped left
-                if (currentIndex < files.length - 1) {
-                    loadContentFromFile(currentIndex + 1);
-                }
-            }
-
-            if (touchendX > touchstartX) {
-                // Swiped right
-                if (currentIndex > 0) {
-                    loadContentFromFile(currentIndex - 1);
-                }
-            }
-        }
     </script>
 </head>
 <body>
@@ -338,4 +337,3 @@
     </div>
 </body>
 </html>
-	
