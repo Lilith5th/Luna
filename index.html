@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lunar Base Framework</title>
     <style>
-        :root {
-            --container-width: 800px;
-        }
         body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure body covers the entire viewport height */
             background-color: #000;
             color: #fff;
             font-family: Arial, sans-serif;
@@ -29,7 +29,7 @@
         }
         .banner-content {
             width: 90%;
-            max-width: var(--container-width);
+            max-width: 800px; /* Adjust container width */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -65,7 +65,7 @@
             padding: 20px;
             background-color: #222;
             width: 90%;
-            max-width: var(--container-width);
+            max-width: 800px; /* Adjust container width */
             margin: 120px auto 20px auto;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.5);
@@ -87,9 +87,7 @@
             background-color: #333;
             padding: 0; /* Remove padding to reduce unnecessary space */
             width: 100%;
-            position: fixed;
-            bottom: 0;
-            z-index: 1000;
+            margin-top: auto; /* Push footer to the bottom */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -331,7 +329,7 @@
             <button id="next-chapter" aria-label="Next chapter">>>></button>
         </div>
         <div class="footer-bottom">
-            <p> Lucano Deskovic  2024  lucano.deskovic@gmail.com</p>
+            <p>Lucano Deskovic 2024 lucano.deskovic@gmail.com</p>
         </div>
     </div>
 </body>
