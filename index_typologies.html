@@ -146,10 +146,10 @@
             { title: "Artificial gravity", file: "typologies/artificial_gravity.html" },
             { title: "Centrifugal 1", file: "typologies/centrifugal_small.html" },
             { title: "Centrifugal 2", file: "typologies/centrifugal_mid.html" },
-            { title: "Centrifugal 3", file: "typologies/large.html" },
-            { title: "Custom built", file: "content/custom_built.html" }, //infrastructure, railguns, centrifugal launchers, telescopes, landing pads
-            { title: "Custom built", file: "content/surface_requirements.html" },
-            { title: "Summary", file: "content/summary.html" }
+            { title: "Centrifugal 3", file: "typologies/centrifugal_large.html" },
+            { title: "Custom built", file: "typologies/custom_built.html" }, //infrastructure, railguns, centrifugal launchers, telescopes, landing pads
+            { title: "Surface infrastructure", file: "typologies/surface_requirements.html" },//surface infrastructure
+            { title: "Summary", file: "typologies/summary.html" }
         ];
 
         let currentIndex = 0; // Track the current index of loaded content
@@ -266,7 +266,7 @@
                 dropdownContent.appendChild(link);
 
                 // Add a horizontal line after certain sections
-                if (index === 2 || index === 7 || index === 12) {
+                if (index === 2 || index === 9 || index === 13) {
                     const hr = document.createElement('hr');
                     dropdownContent.appendChild(hr);
                 }
