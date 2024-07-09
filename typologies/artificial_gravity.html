@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artificial Gravity on the Moon</title>
     <style>
-        <!-- body { -->
-            <!-- font-family: Arial, sans-serif; -->
-            <!-- line-height: 1.6; -->
-            <!-- max-width: 800px; -->
-            <!-- margin: 0 auto; -->
-            <!-- padding: 20px; -->
-        <!-- } -->
-        <!-- h1, h2 { -->
-            <!-- text-align: center; -->
-            <!-- color: #333; -->
-        <!-- } -->
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -47,10 +47,48 @@
         .collapsible.active .collapsible-content {
             display: block;
         }
+
+        /* Responsive table styles */
+        @media screen and (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr { border: 1px solid #ccc; }
+            td {
+                /* Behave like a "row" */
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+            td:before {
+                /* Now like a table header */
+                position: absolute;
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                /* Label the data */
+                content: attr(data-label);
+                text-align: left;
+                font-weight: bold;
+            }
+        }
     </style>
 </head>
 <body>
     <h1>Artificial Gravity on the Moon</h1>
+	
+	<img src="MidjourneyPNG_07_01/lilith5th_a_maglev_train_on_a_circular_rail_on_the_moon_surfa_0e20c869-f03e-47ea-bb65-951da597b0ba_3.png.png" alt="Illustration for Summary">
+	
+	
     <p>Artificial gravity on the moon is paramount for long-term exposure to its inhospitable environment. Establishing sustainable artificial gravity modules is essential to mitigate the adverse effects of low gravity on human health. To achieve this, we must plan artificial gravity modules and investigate the minimum daily exposure to Earth-like gravity required to achieve physiological homeostasis.</p>
     
     <table>
@@ -66,32 +104,32 @@
         </thead>
         <tbody>
             <tr>
-                <td>5</td>
-                <td>4.48</td>
-                <td>13.39</td>
-                <td>7.00</td>
-                <td>63.4</td>
+                <td data-label="Radius (meters)">5</td>
+                <td data-label="Rotation Interval (seconds)">4.48</td>
+                <td data-label="RPM">13.39</td>
+                <td data-label="Speed of Rotation (m/s)">7.00</td>
+                <td data-label="Angle to Surface (degrees)">63.4</td>
             </tr>
             <tr>
-                <td>15</td>
-                <td>9.43</td>
-                <td>6.36</td>
-                <td>12.53</td>
-                <td>36.4</td>
+                <td data-label="Radius (meters)">15</td>
+                <td data-label="Rotation Interval (seconds)">9.43</td>
+                <td data-label="RPM">6.36</td>
+                <td data-label="Speed of Rotation (m/s)">12.53</td>
+                <td data-label="Angle to Surface (degrees)">36.4</td>
             </tr>
             <tr>
-                <td>35</td>
-                <td>11.21</td>
-                <td>5.35</td>
-                <td>18.69</td>
-                <td>29.1</td>
+                <td data-label="Radius (meters)">35</td>
+                <td data-label="Rotation Interval (seconds)">11.21</td>
+                <td data-label="RPM">5.35</td>
+                <td data-label="Speed of Rotation (m/s)">18.69</td>
+                <td data-label="Angle to Surface (degrees)">29.1</td>
             </tr>
             <tr>
-                <td>70</td>
-                <td>16.74</td>
-                <td>3.58</td>
-                <td>26.45</td>
-                <td>20.0</td>
+                <td data-label="Radius (meters)">70</td>
+                <td data-label="Rotation Interval (seconds)">16.74</td>
+                <td data-label="RPM">3.58</td>
+                <td data-label="Speed of Rotation (m/s)">26.45</td>
+                <td data-label="Angle to Surface (degrees)">20.0</td>
             </tr>
         </tbody>
     </table>
@@ -102,15 +140,10 @@
             <h2>Common Health Issues Related to Low Gravity Exposure</h2>
             <ul>
                 <li><strong>Muscle Atrophy and Weakness:</strong> Reduced gravity leads to decreased muscle use, causing muscle atrophy and weakness. Astronauts may experience difficulty with movement and tasks upon return to Earth's gravity.</li>
-    
                 <li><strong>Bone Density Loss:</strong> Low gravity reduces the load on bones, leading to accelerated bone density loss. This condition, known as spaceflight osteopenia, increases the risk of fractures and skeletal problems.</li>
-    
                 <li><strong>Cardiovascular Deconditioning:</strong> In microgravity, the heart doesn't have to work as hard to pump blood. This can lead to cardiovascular deconditioning, including a decrease in blood volume and changes in blood circulation.</li>
-    
                 <li><strong>Fluid Redistribution:</strong> Fluids shift upwards in microgravity, causing facial puffiness and congestion while reducing leg fluid volume. This redistribution can affect vision and kidney function.</li>
-    
                 <li><strong>Balance and Coordination Issues:</strong> Adaptation to low gravity alters sensory inputs, affecting balance and coordination. Astronauts often experience difficulties with spatial orientation and motion sickness.</li>
-    
                 <li><strong>Immune System Suppression:</strong> Space travel may suppress the immune system, making astronauts more susceptible to infections and illnesses.</li>
             </ul>
         </div>
