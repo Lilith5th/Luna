@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lunar Base Framework</title>
     <style>
+        /* Base styles for the entire document */
         body {
             display: flex;
             flex-direction: column;
@@ -15,6 +16,8 @@
             margin: 0;
             padding: 0;
         }
+
+        /* Styling for the banner section */
         .banner {
             background-color: #333;
             padding: 0;
@@ -35,6 +38,8 @@
             align-items: center;
             padding-left: 20px; /* Add padding to the left */
         }
+
+        /* Styling for the dropdown menu */
         .dropdown {
             position: relative;
             display: inline-block;
@@ -63,6 +68,13 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+        .dropdown-content hr {
+            border: none;
+            border-top: 1px solid #555;
+            margin: 8px 0;
+        }
+
+        /* Styling for the main content section */
         .content {
             padding: 20px;
             background-color: #222;
@@ -77,6 +89,8 @@
             width: 100%;
             height: auto;
         }
+
+        /* Styling for the dropdown button */
         .dropbtn {
             background: url('dropdown.png') no-repeat center;
             background-size: contain;
@@ -86,6 +100,8 @@
             width: 40px;
             aria-label: "Dropdown menu button";
         }
+
+        /* Styling for the footer section */
         .footer {
             background-color: #333;
             padding: 0; /* Remove padding to reduce unnecessary space */
@@ -123,6 +139,7 @@
             border-top: 1px solid #555;
             margin: 8px 0;
         }
+
         /* Media query to hide arrows on mobile devices */
         @media (max-width: 768px) {
             .footer-top {
@@ -130,6 +147,18 @@
             }
         }
     </style>
+
+    <!-- Google Analytics Script (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5TDQ0YG5K5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5TDQ0YG5K5');
+    </script>
+
+    <!-- JavaScript for handling content loading and navigation -->
     <script>
         // List of files with titles and corresponding file paths
         const files = [
@@ -167,20 +196,32 @@
 
         // Function to fetch and load content from a specific index in files array
         function loadContentFromFile(index) {
-            fetch(files[index].file)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    loadContent(data, index);
-                })
-                .catch(error => {
-                    console.error('Error loading content:', error);
-                    alert('An error occurred while loading the content. Please try again later.');
-                });
+            // Skip empty entries by adjusting the index
+            while (index >= 0 && index < files.length) {
+                if (files[index].file !== "" && files[index].title !== "") {
+                    fetch(files[index].file)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok ' + response.statusText);
+                            }
+                            return response.text();
+                        })
+                        .then(data => {
+                            loadContent(data, index);
+                        })
+                        .catch(error => {
+                            console.error('Error loading content:', error);
+                            alert('An error occurred while loading the content. Please try again later.');
+                        });
+                    break; // Exit loop once valid file is found and loaded
+                }
+                // Increment or decrement index based on direction of navigation
+                if (index > currentIndex) {
+                    index++;
+                } else {
+                    index--;
+                }
+            }
         }
 
         // Function to initialize collapsible sections after content is loaded
@@ -226,10 +267,11 @@
             };
 
             // Disable buttons if at the start or end of the list
-            prevButton.disabled = currentIndex === 0 || files[currentIndex - 1].file === "" || files[currentIndex - 1].title === "";
-            nextButton.disabled = currentIndex === files.length - 1 || files[currentIndex + 1].file === "" || files[currentIndex + 1].title === "";
+            prevButton.disabled = currentIndex === 0 ;
+            nextButton.disabled = currentIndex === files.length - 1 ;
         }
 
+        // Event listener when DOM is fully loaded
         document.addEventListener('DOMContentLoaded', () => {
             const dropdownContent = document.querySelector('.dropdown-content');
             const dropbtn = document.querySelector('.dropbtn');
@@ -248,39 +290,34 @@
 
             // Generate dropdown menu links
             files.forEach((item, index) => {
-                const link = document.createElement('a');
-                link.href = '#';
-                link.textContent = item.title;
-                link.setAttribute('aria-label', item.title);
-                link.onclick = () => {
-                    // Check if the file path is empty
-                    if (item.file === "") {
-                        return false; // Do nothing if the link is empty
-                    }
+                if (item.title !== "" && item.file !== "") {
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.textContent = item.title;
+                    link.setAttribute('aria-label', item.title);
+                    link.onclick = () => {
+                        // Fetch and load the content when a link is clicked
+                        fetch(item.file)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok ' + response.statusText);
+                                }
+                                return response.text();
+                            })
+                            .then(data => {
+                                loadContent(data, index);
+                            })
+                            .catch(error => {
+                                console.error('Error loading content:', error);
+                                alert('An error occurred while loading the content. Please try again later.');
+                            });
 
-                    // Fetch and load the content when a link is clicked
-                    fetch(item.file)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok ' + response.statusText);
-                            }
-                            return response.text();
-                        })
-                        .then(data => {
-                            loadContent(data, index);
-                        })
-                        .catch(error => {
-                            console.error('Error loading content:', error);
-                            alert('An error occurred while loading the content. Please try again later.');
-                        });
+                        return false; // Prevent default link behavior
+                    };
 
-                    return false; // Prevent default link behavior
-                };
-
-                dropdownContent.appendChild(link);
-
-                // Add a horizontal line after certain sections
-                if (index === 3 || index === 10 || index === 14) {
+                    dropdownContent.appendChild(link);
+                } else {
+                    // If title or file is empty, add a horizontal line
                     const hr = document.createElement('hr');
                     dropdownContent.appendChild(hr);
                 }
@@ -293,7 +330,7 @@
             const contentArea = document.getElementById('content');
             let touchstartX = 0;
             let touchendX = 0;
-            const swipeThreshold = 100; // Adjust this value as needed
+            const swipeThreshold = 50; // Adjust this value as needed
 
             contentArea.addEventListener('touchstart', function(event) {
                 touchstartX = event.changedTouches[0].screenX;
@@ -332,8 +369,8 @@
         </div>
         <div class="dropdown">
             <button class="dropbtn" aria-label="Open dropdown menu"></button>
-            <div class="dropdown-content">
-                <!-- Links generated from file list will be inserted here -->
+            <div class="dropdown-content" id="dropdown-content">
+                <!-- Links and horizontal lines generated from file list will be inserted here -->
             </div>
         </div>
     </div>
