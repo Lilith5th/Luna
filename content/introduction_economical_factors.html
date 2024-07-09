@@ -1,4 +1,26 @@
-
+    <style>
+        /* General styles for collapsible sections */
+        .collapsible {
+            margin-bottom: 12px;
+            background-color: #333;
+            border-radius: 4px;
+        }
+        .collapsible-header {
+            background-color: #555;
+            padding: 12px 20px;
+            cursor: pointer;
+        }
+        .collapsible-content {
+            display: none;
+            padding: 0 20px 10px 20px;
+            color: #fff;
+            background-color: #333;
+        }
+        .collapsible.active .collapsible-content {
+            display: block;
+        }
+    </style>
+	
 <body>
     <div class="container">
 	    <header>
@@ -34,5 +56,55 @@
 			<li>Our calculations show a more conservative estimate of $1000/kg by 2040, considering an annual drop in prices of 5%.</li>
         </ul>
         </div>
+		
+	
+    <div class="collapsible">
+        <div class="collapsible-header">Lunar Resources Overview</div>
+        <div class="collapsible-content">
+    <ul>
+        <li>
+            <h3>Helium-3</h3>
+            <ul>
+                <li><strong>Amount:</strong> Estimated to be millions of tons on the Moon's surface.</li>
+                <li><strong>Use:</strong> Potential fuel for nuclear fusion.</li>
+                <li><strong>Location:</strong> Deposited in the lunar regolith by solar winds.</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Water Ice</h3>
+            <ul>
+                <li><strong>Amount:</strong> Estimates suggest billions of metric tons in permanently shadowed craters near the poles.</li>
+                <li><strong>Use:</strong> Essential for life support and producing rocket fuel (hydrogen and oxygen).</li>
+                <li><strong>Location:</strong> Found in permanently shadowed craters near the lunar poles.</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Metals (Iron, Titanium, Aluminum)</h3>
+            <ul>
+                <li><strong>Amount:</strong> Abundant in the lunar regolith, specific estimates vary.</li>
+                <li><strong>Use:</strong> Construction materials and manufacturing.</li>
+                <li><strong>Location:</strong> Spread throughout the lunar regolith.</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Rare Earth Elements</h3>
+            <ul>
+                <li><strong>Amount:</strong> Concentrated in specific lunar regions, exact quantities less certain.</li>
+                <li><strong>Use:</strong> Critical for advanced technologies on Earth.</li>
+                <li><strong>Location:</strong> Found in various lunar terrains, specific concentrations being studied.</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Regolith (Lunar Soil)</h3>
+            <ul>
+                <li><strong>Amount:</strong> Abundant across the lunar surface.</li>
+                <li><strong>Use:</strong> Source of minerals and elements for various applications, including construction.</li>
+                <li><strong>Location:</strong> Covers the entire lunar surface, accessible for mining and resource extraction.</li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+		
+		
 </body>
 </html>

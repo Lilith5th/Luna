@@ -8,11 +8,11 @@
         <!-- body { -->
             <!-- font-family: Arial, sans-serif; -->
             <!-- line-height: 1.6; -->
-            <!-- max-width: 600px; -->
+            <!-- max-width: 800px; -->
             <!-- margin: 0 auto; -->
             <!-- padding: 20px; -->
         <!-- } -->
-        <!-- h1 { -->
+        <!-- h1, h2 { -->
             <!-- text-align: center; -->
             <!-- color: #333; -->
         <!-- } -->
@@ -21,51 +21,102 @@
             border-collapse: collapse;
             margin-bottom: 20px;
         }
-        table, th, td {
-            border: 1px solid #ccc;
-        }
         th, td {
+            border: 1px solid #ccc;
             padding: 10px;
             text-align: left;
+        }
+        .collapsible {
+            margin-bottom: 12px;
+            background-color: #333;
+            border-radius: 4px;
+        }
+        .collapsible-header {
+            background-color: #555;
+            padding: 12px 20px;
+            cursor: pointer;
+            color: #fff;
+            font-weight: bold;
+        }
+        .collapsible-content {
+            display: none;
+            padding: 0 20px 10px 20px;
+            color: #fff;
+            background-color: #333;
+        }
+        .collapsible.active .collapsible-content {
+            display: block;
         }
     </style>
 </head>
 <body>
     <h1>Artificial Gravity on the Moon</h1>
-    <p>Artificial gravity can be achieved on the moon using centrifugal force by rotating at different speeds depending on the radius of rotation. Below are the details for achieving artificial gravity equal to that on Earth at different radii:</p>
-
+    <p>Artificial gravity on the moon is paramount for long-term exposure to its inhospitable environment. Establishing sustainable artificial gravity modules is essential to mitigate the adverse effects of low gravity on human health. To achieve this, we must plan artificial gravity modules and investigate the minimum daily exposure to Earth-like gravity required to achieve physiological homeostasis.</p>
+    
     <table>
-        <caption>Summary</caption>
+        <caption>Artificial Gravity Details</caption>
         <thead>
             <tr>
                 <th>Radius (meters)</th>
+                <th>Rotation Interval (seconds)</th>
                 <th>RPM</th>
-                <th>Speed (km/h)</th>
-                <th>Angle relative to Moon Surface (degrees)</th>
+                <th>Speed of Rotation (m/s)</th>
+                <th>Angle to Surface (degrees)</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>5</td>
-                <td>6.11</td>
-                <td>11.6</td>
+                <td>4.48</td>
+                <td>13.39</td>
+                <td>7.00</td>
                 <td>63.4</td>
             </tr>
             <tr>
                 <td>15</td>
-                <td>3.83</td>
-                <td>21.7</td>
+                <td>9.43</td>
+                <td>6.36</td>
+                <td>12.53</td>
                 <td>36.4</td>
             </tr>
             <tr>
                 <td>35</td>
-                <td>2.61</td>
-                <td>34.4</td>
+                <td>11.21</td>
+                <td>5.35</td>
+                <td>18.69</td>
                 <td>29.1</td>
+            </tr>
+            <tr>
+                <td>70</td>
+                <td>16.74</td>
+                <td>3.58</td>
+                <td>26.45</td>
+                <td>20.0</td>
             </tr>
         </tbody>
     </table>
 
-    <p>These values represent the rotational speed in revolutions per minute (RPM), the corresponding speed in kilometers per hour (km/h), and the angle relative to the moon's surface required to simulate gravity equal to that on Earth at each specified radius on the moon.</p>
+    <div class="collapsible">
+        <div class="collapsible-header">Common Health Issues Related to Low Gravity Exposure</div>
+        <div class="collapsible-content">
+            <h2>Common Health Issues Related to Low Gravity Exposure</h2>
+            <ul>
+                <li><strong>Muscle Atrophy and Weakness:</strong> Reduced gravity leads to decreased muscle use, causing muscle atrophy and weakness. Astronauts may experience difficulty with movement and tasks upon return to Earth's gravity.</li>
+    
+                <li><strong>Bone Density Loss:</strong> Low gravity reduces the load on bones, leading to accelerated bone density loss. This condition, known as spaceflight osteopenia, increases the risk of fractures and skeletal problems.</li>
+    
+                <li><strong>Cardiovascular Deconditioning:</strong> In microgravity, the heart doesn't have to work as hard to pump blood. This can lead to cardiovascular deconditioning, including a decrease in blood volume and changes in blood circulation.</li>
+    
+                <li><strong>Fluid Redistribution:</strong> Fluids shift upwards in microgravity, causing facial puffiness and congestion while reducing leg fluid volume. This redistribution can affect vision and kidney function.</li>
+    
+                <li><strong>Balance and Coordination Issues:</strong> Adaptation to low gravity alters sensory inputs, affecting balance and coordination. Astronauts often experience difficulties with spatial orientation and motion sickness.</li>
+    
+                <li><strong>Immune System Suppression:</strong> Space travel may suppress the immune system, making astronauts more susceptible to infections and illnesses.</li>
+            </ul>
+        </div>
+    </div>
+
+    <p>The estimate of how long humans would need to be in artificial gravity modules to mitigate the effects of low gravity environments like the Moon is a topic of ongoing scientific research. Factors such as individual health, age, fitness, and adaptation over time influence this. Understanding long-term physiological effects informs the design of effective systems for sustained human presence in space.</p>
+
 </body>
 </html>
