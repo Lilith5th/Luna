@@ -263,6 +263,19 @@
         // Event listener when DOM is fully loaded
         document.addEventListener('DOMContentLoaded', () => {
             const dropdownContent = document.querySelector('.dropdown-content');
+            const dropbtn = document.querySelector('.dropbtn');
+
+            // Toggle dropdown visibility
+            dropbtn.addEventListener('click', () => {
+                dropdownContent.classList.toggle('show');
+            });
+
+            // Close dropdown when clicking outside of it
+            document.addEventListener('click', (event) => {
+                if (!dropdownContent.contains(event.target) && !dropbtn.contains(event.target)) {
+                    dropdownContent.classList.remove('show');
+                }
+            });
 
             // Generate dropdown menu links
             files.forEach((item, index) => {
@@ -350,7 +363,7 @@
         </div>
         <div class="dropdown">
             <button class="dropbtn" aria-label="Open dropdown menu"></button>
-            <div class="dropdown-content">
+            <div class="dropdown-content" id="dropdown-content">
                 <!-- Links generated from file list will be inserted here -->
             </div>
         </div>
