@@ -68,6 +68,11 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+        .dropdown-content hr {
+            border: none;
+            border-top: 1px solid #555;
+            margin: 8px 0;
+        }
 
         /* Styling for the main content section */
         .content {
@@ -161,6 +166,7 @@
             { title: "Economical Factors", file: "content/introduction_economical_factors.html" },
             { title: "Goals", file: "content/goals.html" },
             { title: "Population Size", file: "content/population_size.html" },
+            { title: "", file: "" }, // Empty entry
             { title: "Civilian Research", file: "content/use_cases_civilian-research.html" },
             { title: "Civilian Resources", file: "content/use_cases_civilian-resources.html" },
             { title: "Civilian Health Tourism", file: "content/use_cases_civilian-health_tourism.html" },
@@ -197,20 +203,32 @@
 
         // Function to fetch and load content from a specific index in files array
         function loadContentFromFile(index) {
-            fetch(files[index].file)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    loadContent(data, index);
-                })
-                .catch(error => {
-                    console.error('Error loading content:', error);
-                    alert('An error occurred while loading the content. Please try again later.');
-                });
+            // Skip empty entries by adjusting the index
+            while (index >= 0 && index < files.length) {
+                if (files[index].file !== "" && files[index].title !== "") {
+                    fetch(files[index].file)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok ' + response.statusText);
+                            }
+                            return response.text();
+                        })
+                        .then(data => {
+                            loadContent(data, index);
+                        })
+                        .catch(error => {
+                            console.error('Error loading content:', error);
+                            alert('An error occurred while loading the content. Please try again later.');
+                        });
+                    break; // Exit loop once valid file is found and loaded
+                }
+                // Increment or decrement index based on direction of navigation
+                if (index > currentIndex) {
+                    index++;
+                } else {
+                    index--;
+                }
+            }
         }
 
         // Function to initialize collapsible sections after content is loaded
@@ -256,8 +274,8 @@
             };
 
             // Disable buttons if at the start or end of the list
-            prevButton.disabled = currentIndex === 0 || files[currentIndex - 1].file === "" || files[currentIndex - 1].title === "";
-            nextButton.disabled = currentIndex === files.length - 1 || files[currentIndex + 1].file === "" || files[currentIndex + 1].title === "";
+            prevButton.disabled = currentIndex === 0 ;
+            nextButton.disabled = currentIndex === files.length - 1 ;
         }
 
         // Event listener when DOM is fully loaded
@@ -279,39 +297,34 @@
 
             // Generate dropdown menu links
             files.forEach((item, index) => {
-                const link = document.createElement('a');
-                link.href = '#';
-                link.textContent = item.title;
-                link.setAttribute('aria-label', item.title);
-                link.onclick = () => {
-                    // Check if the file path is empty
-                    if (item.file === "") {
-                        return false; // Do nothing if the link is empty
-                    }
+                if (item.title !== "" && item.file !== "") {
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.textContent = item.title;
+                    link.setAttribute('aria-label', item.title);
+                    link.onclick = () => {
+                        // Fetch and load the content when a link is clicked
+                        fetch(item.file)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok ' + response.statusText);
+                                }
+                                return response.text();
+                            })
+                            .then(data => {
+                                loadContent(data, index);
+                            })
+                            .catch(error => {
+                                console.error('Error loading content:', error);
+                                alert('An error occurred while loading the content. Please try again later.');
+                            });
 
-                    // Fetch and load the content when a link is clicked
-                    fetch(item.file)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok ' + response.statusText);
-                            }
-                            return response.text();
-                        })
-                        .then(data => {
-                            loadContent(data, index);
-                        })
-                        .catch(error => {
-                            console.error('Error loading content:', error);
-                            alert('An error occurred while loading the content. Please try again later.');
-                        });
+                        return false; // Prevent default link behavior
+                    };
 
-                    return false; // Prevent default link behavior
-                };
-
-                dropdownContent.appendChild(link);
-
-                // Add horizontal lines between certain sections
-                if (index === 3 || index === 8 || index === 13 || index === 18) {
+                    dropdownContent.appendChild(link);
+                } else {
+                    // If title or file is empty, add a horizontal line
                     const hr = document.createElement('hr');
                     dropdownContent.appendChild(hr);
                 }
@@ -364,7 +377,7 @@
         <div class="dropdown">
             <button class="dropbtn" aria-label="Open dropdown menu"></button>
             <div class="dropdown-content" id="dropdown-content">
-                <!-- Links generated from file list will be inserted here -->
+                <!-- Links and horizontal lines generated from file list will be inserted here -->
             </div>
         </div>
     </div>
