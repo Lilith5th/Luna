@@ -232,6 +232,19 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const dropdownContent = document.querySelector('.dropdown-content');
+            const dropbtn = document.querySelector('.dropbtn');
+
+            // Toggle dropdown visibility
+            dropbtn.addEventListener('click', () => {
+                dropdownContent.classList.toggle('show');
+            });
+
+            // Close dropdown when clicking outside of it
+            document.addEventListener('click', (event) => {
+                if (!dropdownContent.contains(event.target) && !dropbtn.contains(event.target)) {
+                    dropdownContent.classList.remove('show');
+                }
+            });
 
             // Generate dropdown menu links
             files.forEach((item, index) => {
@@ -267,7 +280,7 @@
                 dropdownContent.appendChild(link);
 
                 // Add a horizontal line after certain sections
-                if (index === 3 || index === 10|| index === 14) {
+                if (index === 3 || index === 10 || index === 14) {
                     const hr = document.createElement('hr');
                     dropdownContent.appendChild(hr);
                 }
