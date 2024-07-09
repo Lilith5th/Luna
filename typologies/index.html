@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Loading with Image Expansion</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #hexagonalContainer {
+            text-align: center;
+        }
+        .image-wrapper {
+            display: inline-block;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .image-wrapper img {
+            max-width: 100%;
+            max-height: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .image-wrapper img:hover {
+            transform: scale(1.1);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+        .close {
+            color: #fff;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 35px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .modal-buttons {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            z-index: 1000;
+        }
+        .modal-button {
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s ease;
+        }
+        .modal-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div id="hexagonalContainer">
+        <!-- Content from hexagonal_structures.html will be loaded here -->
+    </div>
+
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="expandedImg" class="modal-content">
+        <div class="modal-buttons">
+            <span class="modal-button" onclick="changeImage(-1)">&#10094;</span>
+            <span class="modal-button" onclick="changeImage(1)">&#10095;</span>
+        </div>
+    </div>
+
+    <script>
+        let images = [];
+        let currentImageIndex = 0;
+
+        // Function to load external HTML file
+        function loadHexagonalStructures() {
+            fetch('hexagonal_structures.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('hexagonalContainer').innerHTML = html;
+                    // Extract and store all images
+                    images = Array.from(document.querySelectorAll('#hexagonalContainer img'));
+                    // Add click listeners to images after loading content
+                    setupImageClickListeners();
+                })
+                .catch(error => {
+                    console.error('Error loading hexagonal_structures.html:', error);
+                });
+        }
+
+        // Function to setup click listeners for images
+        function setupImageClickListeners() {
+            images.forEach((img, index) => {
+                img.addEventListener('click', function() {
+                    openModal(index);
+                });
+            });
+        }
+
+        // Function to open the modal with clicked image
+        function openModal(index) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('expandedImg');
+            if (images[index]) {
+                modal.style.display = 'block';
+                currentImageIndex = index;
+                modalImg.src = images[currentImageIndex].src;
+                toggleModalButtons();
+            }
+        }
+
+        // Function to show the image based on index
+        function showImage(index) {
+            const modalImg = document.getElementById('expandedImg');
+            if (images[index]) {
+                modalImg.src = images[index].src;
+                currentImageIndex = index;
+                toggleModalButtons();
+            }
+        }
+
+        // Function to change image based on arrow click
+        function changeImage(n) {
+            let newIndex = currentImageIndex + n;
+            if (newIndex >= images.length) {
+                newIndex = 0;
+            }
+            if (newIndex < 0) {
+                newIndex = images.length - 1;
+            }
+            showImage(newIndex);
+        }
+
+        // Function to toggle modal buttons visibility
+        function toggleModalButtons() {
+            const modalButtons = document.querySelector('.modal-buttons');
+            if (images.length > 1) {
+                modalButtons.style.display = 'flex';
+            } else {
+                modalButtons.style.display = 'none';
+            }
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Close modal if clicked outside of image content
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Call the function to load hexagonal_structures.html
+        window.onload = function() {
+            loadHexagonalStructures();
+        };
+    </script>
+</body>
+</html>
