@@ -160,18 +160,18 @@
 
     <!-- JavaScript for handling content loading and navigation -->
     <script>
-        // List of files with titles and corresponding file paths
-        const files = [
+        // List of files with titles and corresponding file paths for first dropdown
+        const files1 = [
             { title: "Introduction", file: "content/introduction.html" },
             { title: "Economical Factors", file: "content/introduction_economical_factors.html" },
             { title: "Goals", file: "content/goals.html" },
             { title: "Population Size", file: "content/population_size.html" },
             { title: "", file: "" }, // Empty entry
             
-            { title: "Research", file: "content/use_cases_civilian-research.html" },
-            { title: "Resources", file: "content/use_cases_civilian-resources.html" },
-            { title: "Health Tourism", file: "content/use_cases_civilian-health_tourism.html" },
-            { title: "Stepping Stone", file: "content/use_cases_civilian-stepping_stone.html" },
+            { title: "Civilian Research", file: "content/use_cases_civilian-research.html" },
+            { title: "Civilian Resources", file: "content/use_cases_civilian-resources.html" },
+            { title: "Civilian Health Tourism", file: "content/use_cases_civilian-health_tourism.html" },
+            { title: "Civilian Stepping Stone", file: "content/use_cases_civilian-stepping_stone.html" },
             { title: "Defence", file: "content/use_cases_defence.html" },
             { title: "", file: "" }, // Empty entry
             
@@ -196,21 +196,55 @@
             { title: "Summary", file: "content/summary.html" }
         ];
 
+        // List of files with titles and corresponding file paths for second dropdown
+        const files2 = [
+            { title: "Introduction", file: "typologies/introduction.html" },
+            { title: "Function", file: "typologies/typologies_function.html" },
+            { title: "Form", file: "typologies/typologies_form.html" },
+			{ title: "Method", file: "typologies/typologies_method.html" }, //deployable
+            
+            { title: "", file: "" },
+            { title: "Hexagonal structures", file: "typologies/hexagonal_structures.html" },
+			{ title: "In situ", file: "typologies/in_situ.html" },
+            { title: "3D Printing", file: "typologies/3d_printed.html" },
+            { title: "3D Printing Speed", file: "typologies/3d_printed_speed.html" },
+            { title: "Steel mills", file: "typologies/steel_mills.html" },
+            { title: "Inflatable Surface", file: "typologies/inflatable_surface.html" },
+            { title: "Inflatable Underground", file: "typologies/inflatable_underground.html" },
+            { title: "Mobile Facilities", file: "typologies/mobile_facilities.html" },
+            
+            { title: "", file: "" },
+			{ title: "Artificial gravity", file: "typologies/artificial_gravity.html" },
+            { title: "Centrifugal 1", file: "typologies/centrifugal_small.html" },
+            { title: "Centrifugal 2", file: "typologies/centrifugal_mid.html" },
+            { title: "Centrifugal 3", file: "typologies/centrifugal_large.html" },
+
+            { title: "", file: "" },
+            { title: "Custom built", file: "typologies/custom_built.html" }, //infrastructure, railguns, centrifugal launchers, telescopes, landing pads
+            { title: "Surface infrastructure", file: "typologies/surface_requirements.html" },//surface infrastructure
+            { title: "Summary", file: "typologies/summary.html" }
+        ];
+
         let currentIndex = 0; // Track the current index of loaded content
+        let currentDropdown = 1; // Track the current dropdown being used
 
         // Function to load content into the page
-        function loadContent(contentHTML, index) {
+        function loadContent(contentHTML, index, dropdown) {
             document.getElementById('content').innerHTML = contentHTML;
             document.title = 'Lunar Base Framework';
             currentIndex = index; // Update current index
+            currentDropdown = dropdown; // Update current dropdown
             localStorage.setItem('lastViewedIndex', index); // Save index to localStorage
+            localStorage.setItem('lastDropdown', dropdown); // Save dropdown to localStorage
             window.scrollTo(0, 0); // Scroll to the top of the page
             initializeCollapsibles(); // Initialize collapsible sections after content load
-            updateFooterLinks(index); // Update footer navigation buttons
+            updateFooterLinks(index, dropdown); // Update footer navigation buttons
         }
 
-        // Function to fetch and load content from a specific index in files array
-        function loadContentFromFile(index) {
+        // Function to fetch and load content from a specific index in the specified files array
+        function loadContentFromFile(index, dropdown) {
+            const files = dropdown === 1 ? files1 : files2;
+
             // Skip empty entries by adjusting the index
             while (index >= 0 && index < files.length) {
                 if (files[index].file !== "" && files[index].title !== "") {
@@ -222,7 +256,7 @@
                             return response.text();
                         })
                         .then(data => {
-                            loadContent(data, index);
+                            loadContent(data, index, dropdown);
                         })
                         .catch(error => {
                             console.error('Error loading content:', error);
@@ -253,7 +287,8 @@
         }
 
         // Function to update the state of the footer navigation buttons
-        function updateFooterLinks(currentIndex) {
+        function updateFooterLinks(currentIndex, dropdown) {
+            const files = dropdown === 1 ? files1 : files2;
             const prevButton = document.getElementById('prev-chapter');
             const nextButton = document.getElementById('next-chapter');
 
@@ -262,7 +297,7 @@
                 let newIndex = currentIndex - 1;
                 while (newIndex >= 0) {
                     if (files[newIndex].file !== "" && files[newIndex].title !== "") {
-                        loadContentFromFile(newIndex);
+                        loadContentFromFile(newIndex, dropdown);
                         break;
                     }
                     newIndex--;
@@ -274,7 +309,7 @@
                 let newIndex = currentIndex + 1;
                 while (newIndex < files.length) {
                     if (files[newIndex].file !== "" && files[newIndex].title !== "") {
-                        loadContentFromFile(newIndex);
+                        loadContentFromFile(newIndex, dropdown);
                         break;
                     }
                     newIndex++;
@@ -288,23 +323,35 @@
 
         // Event listener when DOM is fully loaded
         document.addEventListener('DOMContentLoaded', () => {
-            const dropdownContent = document.querySelector('.dropdown-content');
-            const dropbtn = document.querySelector('.dropbtn');
+            const dropdownContent1 = document.getElementById('dropdown-content1');
+            const dropdownContent2 = document.getElementById('dropdown-content2');
+            const dropbtn1 = document.getElementById('dropbtn1');
+            const dropbtn2 = document.getElementById('dropbtn2');
 
-            // Toggle dropdown visibility
-            dropbtn.addEventListener('click', () => {
-                dropdownContent.classList.toggle('show');
+            // Toggle dropdown visibility for first dropdown
+            dropbtn1.addEventListener('click', () => {
+                dropdownContent1.classList.toggle('show');
+                dropdownContent2.classList.remove('show');
             });
 
-            // Close dropdown when clicking outside of it
+            // Toggle dropdown visibility for second dropdown
+            dropbtn2.addEventListener('click', () => {
+                dropdownContent2.classList.toggle('show');
+                dropdownContent1.classList.remove('show');
+            });
+
+            // Close dropdowns when clicking outside of them
             document.addEventListener('click', (event) => {
-                if (!dropdownContent.contains(event.target) && !dropbtn.contains(event.target)) {
-                    dropdownContent.classList.remove('show');
+                if (!dropdownContent1.contains(event.target) && !dropbtn1.contains(event.target)) {
+                    dropdownContent1.classList.remove('show');
+                }
+                if (!dropdownContent2.contains(event.target) && !dropbtn2.contains(event.target)) {
+                    dropdownContent2.classList.remove('show');
                 }
             });
 
-            // Generate dropdown menu links
-            files.forEach((item, index) => {
+            // Generate dropdown menu links for first dropdown
+            files1.forEach((item, index) => {
                 if (item.title !== "" && item.file !== "") {
                     const link = document.createElement('a');
                     link.href = '#';
@@ -320,7 +367,7 @@
                                 return response.text();
                             })
                             .then(data => {
-                                loadContent(data, index);
+                                loadContent(data, index, 1);
                             })
                             .catch(error => {
                                 console.error('Error loading content:', error);
@@ -330,20 +377,57 @@
                         return false; // Prevent default link behavior
                     };
 
-                    dropdownContent.appendChild(link);
+                    dropdownContent1.appendChild(link);
                 } else {
                     // If title or file is empty, add a horizontal line
                     const hr = document.createElement('hr');
-                    dropdownContent.appendChild(hr);
+                    dropdownContent1.appendChild(hr);
+                }
+            });
+
+            // Generate dropdown menu links for second dropdown
+            files2.forEach((item, index) => {
+                if (item.title !== "" && item.file !== "") {
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.textContent = item.title;
+                    link.setAttribute('aria-label', item.title);
+                    link.onclick = () => {
+                        // Fetch and load the content when a link is clicked
+                        fetch(item.file)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok ' + response.statusText);
+                                }
+                                return response.text();
+                            })
+                            .then(data => {
+                                loadContent(data, index, 2);
+                            })
+                            .catch(error => {
+                                console.error('Error loading content:', error);
+                                alert('An error occurred while loading the content. Please try again later.');
+                            });
+
+                        return false; // Prevent default link behavior
+                    };
+
+                    dropdownContent2.appendChild(link);
+                } else {
+                    // If title or file is empty, add a horizontal line
+                    const hr = document.createElement('hr');
+                    dropdownContent2.appendChild(hr);
                 }
             });
 
             // Load the last viewed content on page load
             const savedIndex = parseInt(localStorage.getItem('lastViewedIndex'), 10);
-            if (!isNaN(savedIndex) && savedIndex >= 0 && savedIndex < files.length) {
-                loadContentFromFile(savedIndex);
+            const savedDropdown = parseInt(localStorage.getItem('lastDropdown'), 10);
+
+            if (!isNaN(savedIndex) && !isNaN(savedDropdown) && savedIndex >= 0 && (savedDropdown === 1 || savedDropdown === 2)) {
+                loadContentFromFile(savedIndex, savedDropdown);
             } else {
-                loadContentFromFile(0); // Default to loading the first content
+                loadContentFromFile(0, 1); // Default to loading the first content of the first dropdown
             }
 
             // Swipe detection for touch devices
@@ -368,12 +452,12 @@
                     if (differenceX > 0) {
                         // Swiped right
                         if (currentIndex > 0) {
-                            loadContentFromFile(currentIndex - 1);
+                            loadContentFromFile(currentIndex - 1, currentDropdown);
                         }
                     } else {
                         // Swiped left
-                        if (currentIndex < files.length - 1) {
-                            loadContentFromFile(currentIndex + 1);
+                        if (currentIndex < (currentDropdown === 1 ? files1.length : files2.length) - 1) {
+                            loadContentFromFile(currentIndex + 1, currentDropdown);
                         }
                     }
                 }
@@ -390,9 +474,15 @@
             </a>
         </div>
         <div class="dropdown">
-            <button class="dropbtn" aria-label="Open dropdown menu"></button>
-            <div class="dropdown-content" id="dropdown-content">
+            <button class="dropbtn" id="dropbtn1" aria-label="Open dropdown menu"></button>
+            <div class="dropdown-content" id="dropdown-content1">
                 <!-- Links and horizontal lines generated from file list will be inserted here -->
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn" id="dropbtn2" aria-label="Open second dropdown menu"></button>
+            <div class="dropdown-content" id="dropdown-content2">
+                <!-- Links and horizontal lines generated from second file list will be inserted here -->
             </div>
         </div>
     </div>

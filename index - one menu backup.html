@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lunar Base Framework</title>
     <style>
+        /* Base styles for the entire document */
         body {
             display: flex;
             flex-direction: column;
@@ -15,6 +16,8 @@
             margin: 0;
             padding: 0;
         }
+
+        /* Styling for the banner section */
         .banner {
             background-color: #333;
             padding: 0;
@@ -33,10 +36,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-left: 20px; /* Add padding to the left */
         }
+
+        /* Styling for the dropdown menu */
         .dropdown {
             position: relative;
             display: inline-block;
+            margin-right: 20px; /* Move the dropdown button 10 pixels to the left */
         }
         .dropdown-content {
             display: none;
@@ -61,6 +68,13 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+        .dropdown-content hr {
+            border: none;
+            border-top: 1px solid #555;
+            margin: 8px 0;
+        }
+
+        /* Styling for the main content section */
         .content {
             padding: 20px;
             background-color: #222;
@@ -69,11 +83,14 @@
             margin: 120px auto 20px auto;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            padding-bottom: 80px; /* Add padding to the bottom */
         }
         .content img {
             width: 100%;
             height: auto;
         }
+
+        /* Styling for the dropdown button */
         .dropbtn {
             background: url('dropdown.png') no-repeat center;
             background-size: contain;
@@ -83,11 +100,14 @@
             width: 40px;
             aria-label: "Dropdown menu button";
         }
+
+        /* Styling for the footer section */
         .footer {
             background-color: #333;
             padding: 0; /* Remove padding to reduce unnecessary space */
             width: 100%;
-            margin-top: auto; /* Push footer to the bottom */
+            position: fixed;
+            bottom: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -114,12 +134,31 @@
             text-align: center; /* Ensure proper alignment of footer signature */
             margin-top: 5px; /* Adjust top margin if needed */
         }
-        .divider {
-            height: 1px;
-            background-color: #555;
+        hr {
+            border: none;
+            border-top: 1px solid #555;
             margin: 8px 0;
         }
+
+        /* Media query to hide arrows on mobile devices */
+        @media (max-width: 768px) {
+            .footer-top {
+                display: none;
+            }
+        }
     </style>
+
+    <!-- Google Analytics Script (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5TDQ0YG5K5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5TDQ0YG5K5');
+    </script>
+
+    <!-- JavaScript for handling content loading and navigation -->
     <script>
         // List of files with titles and corresponding file paths
         const files = [
@@ -127,24 +166,32 @@
             { title: "Economical Factors", file: "content/introduction_economical_factors.html" },
             { title: "Goals", file: "content/goals.html" },
             { title: "Population Size", file: "content/population_size.html" },
-            { title: "Civilian Research", file: "content/use_cases_civilian-research.html" },
-            { title: "Civilian Resources", file: "content/use_cases_civilian-resources.html" },
-            { title: "Civilian Health Tourism", file: "content/use_cases_civilian-health_tourism.html" },
-            { title: "Civilian Stepping Stone", file: "content/use_cases_civilian-stepping_stone.html" },
+            { title: "", file: "" }, // Empty entry
+            
+            { title: "Research", file: "content/use_cases_civilian-research.html" },
+            { title: "Resources", file: "content/use_cases_civilian-resources.html" },
+            { title: "Health Tourism", file: "content/use_cases_civilian-health_tourism.html" },
+            { title: "Stepping Stone", file: "content/use_cases_civilian-stepping_stone.html" },
             { title: "Defence", file: "content/use_cases_defence.html" },
+            { title: "", file: "" }, // Empty entry
+            
             { title: "Architectural Concept", file: "content/architectural_concept.html" },
-            { title: "General Layout", file: "content/habitat_layout.html" },
-            { title: "Modules", file: "content/habitat_modules.html" },
-            { title: "Materials", file: "content/habitat_materials.html" },
+            { title: "Layout", file: "content/base_layout.html" },
+            { title: "Modules", file: "content/base_modules.html" },
+            { title: "Materials", file: "content/base_materials.html" },
             { title: "Inflatable Habitat", file: "content/inflatable_habitat.html" },
+
+            { title: "", file: "" }, // Empty entry
             { title: "Water Storage and Treatment", file: "content/water_storage_treatment.html" },
             { title: "Control and Monitoring", file: "content/control_monitoring.html" },
             { title: "Surface Supply Logistics", file: "content/surface_supply_logistics.html" },
             { title: "Mental Health and Wellbeing", file: "content/mental_health_wellbeing.html" },
             { title: "Long Term Self Sufficiency", file: "content/long_term_self_sufficiency.html" },
-            { title: "Governance and Management", file: "content/governance_management.html" },
-            { title: "Safety and Redundancy", file: "content/safety_redundancy.html" },
-            { title: "Environmental Control", file: "content/environmental_control.html" },
+            //{ title: "Governance and Management", file: "content/governance_management.html" },
+            //{ title: "Safety and Redundancy", file: "content/safety_redundancy.html" },
+            //{ title: "Environmental Control", file: "content/environmental_control.html" },
+
+            { title: "", file: "" }, // Empty entry
             { title: "List of Disruptive Technologies", file: "content/list_of_disruptive_technologies.html" },
             { title: "Summary", file: "content/summary.html" }
         ];
@@ -156,6 +203,7 @@
             document.getElementById('content').innerHTML = contentHTML;
             document.title = 'Lunar Base Framework';
             currentIndex = index; // Update current index
+            localStorage.setItem('lastViewedIndex', index); // Save index to localStorage
             window.scrollTo(0, 0); // Scroll to the top of the page
             initializeCollapsibles(); // Initialize collapsible sections after content load
             updateFooterLinks(index); // Update footer navigation buttons
@@ -163,20 +211,32 @@
 
         // Function to fetch and load content from a specific index in files array
         function loadContentFromFile(index) {
-            fetch(files[index].file)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    loadContent(data, index);
-                })
-                .catch(error => {
-                    console.error('Error loading content:', error);
-                    alert('An error occurred while loading the content. Please try again later.');
-                });
+            // Skip empty entries by adjusting the index
+            while (index >= 0 && index < files.length) {
+                if (files[index].file !== "" && files[index].title !== "") {
+                    fetch(files[index].file)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok ' + response.statusText);
+                            }
+                            return response.text();
+                        })
+                        .then(data => {
+                            loadContent(data, index);
+                        })
+                        .catch(error => {
+                            console.error('Error loading content:', error);
+                            alert('An error occurred while loading the content. Please try again later.');
+                        });
+                    break; // Exit loop once valid file is found and loaded
+                }
+                // Increment or decrement index based on direction of navigation
+                if (index > currentIndex) {
+                    index++;
+                } else {
+                    index--;
+                }
+            }
         }
 
         // Function to initialize collapsible sections after content is loaded
@@ -222,61 +282,75 @@
             };
 
             // Disable buttons if at the start or end of the list
-            prevButton.disabled = currentIndex === 0 || files[currentIndex - 1].file === "" || files[currentIndex - 1].title === "";
-            nextButton.disabled = currentIndex === files.length - 1 || files[currentIndex + 1].file === "" || files[currentIndex + 1].title === "";
+            prevButton.disabled = currentIndex === 0;
+            nextButton.disabled = currentIndex === files.length - 1;
         }
 
+        // Event listener when DOM is fully loaded
         document.addEventListener('DOMContentLoaded', () => {
             const dropdownContent = document.querySelector('.dropdown-content');
+            const dropbtn = document.querySelector('.dropbtn');
 
-            // Generate dropdown menu links
-            files.forEach((item, index) => {
-                const link = document.createElement('a');
-                link.href = '#';
-                link.textContent = item.title;
-                link.setAttribute('aria-label', item.title);
-                link.onclick = () => {
-                    // Check if the file path is empty
-                    if (item.file === "") {
-                        return false; // Do nothing if the link is empty
-                    }
+            // Toggle dropdown visibility
+            dropbtn.addEventListener('click', () => {
+                dropdownContent.classList.toggle('show');
+            });
 
-                    // Fetch and load the content when a link is clicked
-                    fetch(item.file)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok ' + response.statusText);
-                            }
-                            return response.text();
-                        })
-                        .then(data => {
-                            loadContent(data, index);
-                        })
-                        .catch(error => {
-                            console.error('Error loading content:', error);
-                            alert('An error occurred while loading the content. Please try again later.');
-                        });
-
-                    return false; // Prevent default link behavior
-                };
-
-                dropdownContent.appendChild(link);
-
-                // Add dividers between certain sections
-                if (index === 3 || index === 8 || index === 13 || index === 21) {
-                    const divider = document.createElement('div');
-                    divider.className = 'divider';
-                    dropdownContent.appendChild(divider);
+            // Close dropdown when clicking outside of it
+            document.addEventListener('click', (event) => {
+                if (!dropdownContent.contains(event.target) && !dropbtn.contains(event.target)) {
+                    dropdownContent.classList.remove('show');
                 }
             });
 
-            // Load Introduction by default on page load
-            loadContentFromFile(0);
+            // Generate dropdown menu links
+            files.forEach((item, index) => {
+                if (item.title !== "" && item.file !== "") {
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.textContent = item.title;
+                    link.setAttribute('aria-label', item.title);
+                    link.onclick = () => {
+                        // Fetch and load the content when a link is clicked
+                        fetch(item.file)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok ' + response.statusText);
+                                }
+                                return response.text();
+                            })
+                            .then(data => {
+                                loadContent(data, index);
+                            })
+                            .catch(error => {
+                                console.error('Error loading content:', error);
+                                alert('An error occurred while loading the content. Please try again later.');
+                            });
+
+                        return false; // Prevent default link behavior
+                    };
+
+                    dropdownContent.appendChild(link);
+                } else {
+                    // If title or file is empty, add a horizontal line
+                    const hr = document.createElement('hr');
+                    dropdownContent.appendChild(hr);
+                }
+            });
+
+            // Load the last viewed content on page load
+            const savedIndex = parseInt(localStorage.getItem('lastViewedIndex'), 10);
+            if (!isNaN(savedIndex) && savedIndex >= 0 && savedIndex < files.length) {
+                loadContentFromFile(savedIndex);
+            } else {
+                loadContentFromFile(0); // Default to loading the first content
+            }
 
             // Swipe detection for touch devices
             const contentArea = document.getElementById('content');
             let touchstartX = 0;
             let touchendX = 0;
+            const swipeThreshold = 50; // Adjust this value as needed
 
             contentArea.addEventListener('touchstart', function(event) {
                 touchstartX = event.changedTouches[0].screenX;
@@ -288,17 +362,19 @@
             }, false);
 
             function handleGesture() {
-                if (touchendX < touchstartX) {
-                    // Swiped left
-                    if (currentIndex < files.length - 1) {
-                        loadContentFromFile(currentIndex + 1);
-                    }
-                }
-
-                if (touchendX > touchstartX) {
-                    // Swiped right
-                    if (currentIndex > 0) {
-                        loadContentFromFile(currentIndex - 1);
+                const differenceX = touchendX - touchstartX;
+                
+                if (Math.abs(differenceX) >= swipeThreshold) {
+                    if (differenceX > 0) {
+                        // Swiped right
+                        if (currentIndex > 0) {
+                            loadContentFromFile(currentIndex - 1);
+                        }
+                    } else {
+                        // Swiped left
+                        if (currentIndex < files.length - 1) {
+                            loadContentFromFile(currentIndex + 1);
+                        }
                     }
                 }
             }
@@ -309,12 +385,14 @@
     <!-- Banner section -->
     <div class="banner">
         <div class="banner-content">
-            <h1>Lunar Base Framework</h1>
+            <a href="#" onclick="window.location.reload(); return false;" style="color: white; text-decoration: none;">
+                <h1>Lunar Base Framework</h1>
+            </a>
         </div>
         <div class="dropdown">
             <button class="dropbtn" aria-label="Open dropdown menu"></button>
-            <div class="dropdown-content">
-                <!-- Links generated from file list will be inserted here -->
+            <div class="dropdown-content" id="dropdown-content">
+                <!-- Links and horizontal lines generated from file list will be inserted here -->
             </div>
         </div>
     </div>
@@ -332,7 +410,7 @@
             <button id="next-chapter" aria-label="Next chapter">>>></button>
         </div>
         <div class="footer-bottom">
-            <p>Lucano Deskovic 2024 lucano.deskovic@gmail.com</p>
+            <p>&copy;Lucano Deskovic 2024 lucano.deskovic@gmail.com +385 98 170 25 24</p>
         </div>
     </div>
 </body>
