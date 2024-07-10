@@ -203,6 +203,7 @@
             document.getElementById('content').innerHTML = contentHTML;
             document.title = 'Lunar Base Framework';
             currentIndex = index; // Update current index
+            localStorage.setItem('lastViewedIndex', index); // Save index to localStorage
             window.scrollTo(0, 0); // Scroll to the top of the page
             initializeCollapsibles(); // Initialize collapsible sections after content load
             updateFooterLinks(index); // Update footer navigation buttons
@@ -281,8 +282,8 @@
             };
 
             // Disable buttons if at the start or end of the list
-            prevButton.disabled = currentIndex === 0 ;
-            nextButton.disabled = currentIndex === files.length - 1 ;
+            prevButton.disabled = currentIndex === 0;
+            nextButton.disabled = currentIndex === files.length - 1;
         }
 
         // Event listener when DOM is fully loaded
@@ -337,8 +338,13 @@
                 }
             });
 
-            // Load Introduction by default on page load
-            loadContentFromFile(0);
+            // Load the last viewed content on page load
+            const savedIndex = parseInt(localStorage.getItem('lastViewedIndex'), 10);
+            if (!isNaN(savedIndex) && savedIndex >= 0 && savedIndex < files.length) {
+                loadContentFromFile(savedIndex);
+            } else {
+                loadContentFromFile(0); // Default to loading the first content
+            }
 
             // Swipe detection for touch devices
             const contentArea = document.getElementById('content');
