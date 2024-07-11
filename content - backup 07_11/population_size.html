@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Page with Collapsible Sections</title>
+    <style>
+        /* General styles for collapsible sections */
+        .collapsible {
+            margin-bottom: 12px;
+            background-color: #333;
+            border-radius: 4px;
+        }
+        .collapsible-header {
+            background-color: #555;
+            padding: 12px 20px;
+            cursor: pointer;
+        }
+        .collapsible-content {
+            display: none;
+            padding: 0 20px 10px 20px;
+            color: #fff;
+            background-color: #333;
+        }
+        .collapsible.active .collapsible-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Population</h1>
+    </header>
+    <div class="container">
+        <h2>Population estimates and planning</h2>
+        <img src="MidjourneyPNG_07_01/amundsen-scott-base.jpg" alt="Visual Representation for Strategic Growth">
+        <figcaption>Amundsen-Scott South Pole Station dome (1975-2010)</figcaption>		
+        
+        <p>Defining initial population sizes is essential for the lunar base's sustainability and operational success. A well-calculated population will bolster the base’s functionality, expansion capabilities, and societal structure. The proposed growth phases include:</p>
+        <ul>
+            <li>
+                <div class="collapsible">
+                    <div class="collapsible-header">Initial Phase: 30-50 residents focused on establishing and commencing operations.</div>
+                    <div class="collapsible-content">
+                        <p><strong>Objective:</strong> Establishing and commencing operations.</p>
+                        <p><strong>Key Focus:</strong> Setting up essential infrastructure, testing systems, and initial resource utilization. This phase is crucial for laying the foundation and ensuring basic functionality for the base.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible">
+                    <div class="collapsible-header">Expansion Phase: 100-200 residents aimed at achieving a self-sustaining status.</div>
+                    <div class="collapsible-content">
+                        <p><strong>Objective:</strong> Achieving self-sustaining status.</p>
+                        <p><strong>Key Focus:</strong> Scaling up operations to support a larger population and increasing resource production. This phase involves enhancing life support systems, food production, and energy generation to reduce reliance on Earth.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible">
+                    <div class="collapsible-header">Long-Term Phase: 500-1000 residents to maintain a stable, self-reliant community that supports diverse roles and ensures redundancy.</div>
+                    <div class="collapsible-content">
+                        <p><strong>Objective:</strong> Maintaining a stable, self-reliant community.</p>
+                        <p><strong>Key Focus:</strong> Supporting diverse roles and ensuring redundancy in critical systems. This phase aims for a fully developed lunar community capable of sustaining itself independently for extended periods. It involves developing advanced infrastructure, fostering economic activities, and accommodating a larger and more varied population.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible">
+                    <div class="collapsible-header">Precedents</div>
+                    <div class="collapsible-content">
+                        <p>Examining similar isolated communities offers valuable insights for lunar base planning:</p>
+                        <ul>
+                            <li><strong>Amundsen-Scott South Pole Station:</strong> Extreme isolation in Antarctica, supporting self-sufficient scientific research in harsh conditions. Population: Approximately 150 in summer, 50 in winter. Diameter: 50m. Average surface area: approx. 2,000 sqm.</li>
+                            <li><strong>Submarines:</strong> Extended missions under the sea, entirely self-contained with recycled life support systems. Population: Ranges from 15 to over 150 crew members, depending on the type of submarine. Average length: 70m for nuclear submarines.</li>
+                            <li><strong>Aircraft Carriers:</strong> Floating cities with their own infrastructure, hosting thousands for months at sea. Population: Typically up to 5,000 personnel including naval and air crew. Average length: 333m for Nimitz-class carriers.</li>
+                            <li><strong>International Space Station (ISS):</strong> Direct analog for space habitats, international crews living and working in space. Population: Usually 6 astronauts, up to 10 during crew changeovers. Total length: approx. 72.8m; habitable volume: approx. 388 cubic meters.</li>
+                            <li><strong>Antarctic Research Stations:</strong> Other year-round stations providing data on living in extreme cold and isolation. Population: McMurdo Station can host over 1,000 personnel during peak summer season. Average surface area: approx. 1,500 sqm.</li>
+                            <li><strong>Biosphere 2:</strong> Closed ecological systems on Earth to test space colonization technologies. Population: Supported 8 researchers when fully operational. Surface area: approx. 12,700 sqm.</li>
+                            <li><strong>Offshore Oil Platforms:</strong> Remote, self-sufficient communities working on resource extraction in isolation. Population: Varies widely, from dozens to over 200 people depending on the platform size and function. Average surface area: approx. 5,000 sqm for larger platforms.</li>
+                        </ul>
+                        <p>Each example provides valuable lessons in managing small, isolated communities which are directly applicable to lunar base planning.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible">
+                    <div class="collapsible-header">Population Composition for Small Lunar Base</div>
+                    <div class="collapsible-content">
+                        <!-- Composition details -->
+                    </div>
+                </div>
+            </li>
+            <!-- Additional collapsible sections as needed -->
+        </ul>
+    </div>
+    <script>
+        // JavaScript to handle collapsible sections
+        document.addEventListener('DOMContentLoaded', function () {
+            const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
+            
+            collapsibleHeaders.forEach(header => {
+                header.addEventListener('click', function () {
+                    this.parentElement.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
